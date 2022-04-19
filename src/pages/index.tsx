@@ -10,6 +10,19 @@ export default function Home() {
       <Box>
         <NextLink href="/community">Go to community</NextLink>
       </Box>
+      <Box>
+        <NextLink href="/volunteer">Go to volunteer</NextLink>
+      </Box>
+      <Box>
+        <NextLink href="/community/profile/123">
+          Go to community profile page
+        </NextLink>
+      </Box>
+      <Box>
+        <NextLink href="/volunteer/profile/1234">
+          Go to volunteer profile page
+        </NextLink>
+      </Box>
     </Box>
   )
 }
