@@ -18,34 +18,36 @@ export const NavBar: React.FC = () => {
     return pathname.includes('community')
   }, [pathname])
   return (
-    <Flex justifyContent="space-between" my="5">
-      <Box cursor="pointer">
-        <NextLink href="/" passHref>
-          <Image
-            src="/images/logo.png"
-            alt="Orgo_Earth"
-            height="50px"
-            width="120px"
-          />
-        </NextLink>
-      </Box>
-      {showUserAvatar && (
-        <>
-          <Avatar
-            name="Dan Abrahmov"
-            ref={drawerRef}
-            cursor="pointer"
-            src="https://bit.ly/dan-abramov"
-            onClick={onOpen}
-          />
-          <DrawerMenu
-            finalFocusRef={drawerRef}
-            isAdmin={isAdmin}
-            isOpen={isOpen}
-            onClose={onClose}
-          />
-        </>
-      )}
-    </Flex>
+    <Box>
+      <Flex justifyContent="space-between" my="5">
+        <Box cursor="pointer">
+          <NextLink href="/" passHref>
+            <Image
+              src="/images/logo.png"
+              alt="Orgo_Earth"
+              height="50px"
+              width="120px"
+            />
+          </NextLink>
+        </Box>
+        {showUserAvatar && (
+          <>
+            <Avatar
+              name="Dan Abrahmov"
+              ref={drawerRef}
+              cursor="pointer"
+              src="https://bit.ly/dan-abramov"
+              onClick={onOpen}
+            />
+            <DrawerMenu
+              finalFocusRef={drawerRef}
+              isAdmin={isAdmin}
+              isOpen={isOpen}
+              onClose={onClose}
+            />
+          </>
+        )}
+      </Flex>
+    </Box>
   )
 }

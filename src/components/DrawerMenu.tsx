@@ -58,12 +58,13 @@ export const DrawerMenu: React.FC<DrawerMenuProps> = ({
         <DrawerBody>
           {isAdmin
             ? AdminMenus.map((menu) => {
-                return <DrawerMenuLinkItem key={menu.path} {...menu} />
+                return <DrawerMenuLinkItem onClose={onClose} key={menu.path} {...menu} />
               })
             : VolunteerMenus.map((menu) => {
-                return <DrawerMenuLinkItem key={menu.path} {...menu} />
+                return <DrawerMenuLinkItem onClose={onClose} key={menu.path} {...menu} />
               })}
           <DrawerMenuLinkItem
+            onClose={onClose}
             icon={AiOutlineLogout}
             name="Logout"
             path="/logout"
@@ -78,14 +79,17 @@ export interface DrawerMenuLinkItemProps {
   icon: IconType
   name: string
   path: string
+  onClose: () => void
 }
 
 export const DrawerMenuLinkItem: React.FC<DrawerMenuLinkItemProps> = ({
   icon: Icon,
   name,
   path,
+  onClose
 }) => {
   return (
+    <Box onClick={onClose}>
     <NextLink href={path} passHref>
       <Flex cursor="pointer" my="6" alignItems="center">
         <Icon size={30} />
@@ -94,5 +98,6 @@ export const DrawerMenuLinkItem: React.FC<DrawerMenuLinkItemProps> = ({
         </Text>
       </Flex>
     </NextLink>
+    </Box>
   )
 }

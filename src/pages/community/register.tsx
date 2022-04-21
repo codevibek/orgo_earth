@@ -12,7 +12,7 @@ import {
 import React from 'react'
 import NextLink from 'next/link'
 
-function register() {
+function Register() {
   return (
     <Box>
       <Flex
@@ -56,4 +56,4 @@ function register() {
   )
 }
 
-export default register
+export default Register

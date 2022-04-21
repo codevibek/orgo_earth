@@ -12,7 +12,7 @@ import {
 import React from 'react'
 import NextLink from 'next/link'
 
-function login() {
+function Login() {
   return (
     <Box>
       <Flex
@@ -49,4 +49,4 @@ function login() {
   )
 }
 
-export default login
+export default Login

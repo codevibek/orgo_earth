@@ -41,9 +41,9 @@ export const AdminMenus: Menu[] = [
     path: '/create-task',
   },
   {
-    name: 'View All Tasks',
-    icon: BiTask,
-    path: '/tasks',
+    name: 'Dashboard',
+    icon: AiOutlineDashboard,
+    path: '/community/dashboard',
   },
   {
     name: 'Recent Activities',
