@@ -48,6 +48,21 @@ export const EditProfileDrawer: React.FC<EditProfileDrawer> = ({
             <FormLabel htmlFor="location">Location</FormLabel>
             <Input variant="filled" id="location" type="Location" />
           </FormControl>
+          <FormControl my="3">
+            <FormLabel htmlFor="facebook">Facebook</FormLabel>
+            <Input variant="filled" id="facebook" type="text" />
+            <FormHelperText>Your profile Link</FormHelperText>
+          </FormControl>
+          <FormControl my="3">
+            <FormLabel htmlFor="instagram">Instagram</FormLabel>
+            <Input variant="filled" id="instagram" type="text" />
+            <FormHelperText>Your profile Link</FormHelperText>
+          </FormControl>
+          <FormControl my="3">
+            <FormLabel htmlFor="twitter">Twitter</FormLabel>
+            <Input variant="filled" id="twitter" type="twitter" />
+            <FormHelperText>Your profile Link</FormHelperText>
+          </FormControl>
         </DrawerBody>
 
         <DrawerFooter>

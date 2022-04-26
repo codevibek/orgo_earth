@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Text } from '@chakra-ui/react'
+import { Avatar, Box, Button, Flex, HStack, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 
 const TaskDetail = () => {
@@ -28,14 +28,25 @@ const TaskDetail = () => {
         <Text mb="2" fontWeight="semibold">
           Location: Butwal-11,Devinagar
         </Text>
-        <Text fontWeight="semibold">Deadline: 2022,14th May</Text>
+      </Box>
+
+      <Box my="6">
+        <Text fontSize="xl" my="2">
+          Task Creator
+        </Text>
+        <Flex>
+          <Avatar src="https://bit.ly/prosper-baba" size="lg" name="John Doe" />
+          <Text fontWeight="semibold" mx="4" fontSize="lg">
+            Apple
+          </Text>
+        </Flex>
       </Box>
 
       <HStack spacing="5" my="5">
         <Button onClick={() => router.push('/community/task/edit/123')}>
           Edit Task
         </Button>
-        <Button>Claim This Task</Button>
+        <Button>Submit Evidence</Button>
       </HStack>
     </Box>
   )

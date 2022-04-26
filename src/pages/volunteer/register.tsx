@@ -31,6 +31,11 @@ function Register() {
           <Input variant="filled" id="fullName" type="text" />
         </FormControl>
         <FormControl my="3">
+          <FormLabel htmlFor="userName">Username</FormLabel>
+          <Input variant="filled" id="userName" type="text" />
+          <FormHelperText>This needs to unique</FormHelperText>
+        </FormControl>
+        <FormControl my="3">
           <FormLabel htmlFor="email">Email address</FormLabel>
           <Input variant="filled" id="email" type="email" />
           <FormHelperText>Well never share your email.</FormHelperText>

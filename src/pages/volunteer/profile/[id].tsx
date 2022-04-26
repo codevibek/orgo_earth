@@ -2,11 +2,17 @@ import {
   Avatar,
   Box,
   Button,
+  HStack,
   Text,
   useDisclosure,
   VStack,
 } from '@chakra-ui/react'
 import React from 'react'
+import {
+  AiFillFacebook,
+  AiFillInstagram,
+  AiFillTwitterCircle,
+} from 'react-icons/ai'
 import { EditProfileDrawer } from '../../../components/EditProfileDrawer'
 
 function Profile() {
@@ -21,8 +27,13 @@ function Profile() {
         src="https://bit.ly/dan-abramov"
       />
       <Text fontWeight="bold" fontSize="xl">
-        Apple Foundation
+        Dan Abromov
       </Text>
+      <HStack>
+        <AiFillFacebook size={20} />
+        <AiFillInstagram size={20} />
+        <AiFillTwitterCircle size={20} />
+      </HStack>
       <Button onClick={onOpen}>Edit Profile</Button>
 
       <Box bg="gray.300" p="8" borderRadius="10px">
