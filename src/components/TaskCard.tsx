@@ -4,23 +4,20 @@ import React from 'react'
 
 export interface TaskCardProps {
   title: string
-  status: 'active' | 'completed' | 'inReview' | 'inProgress'
+  status: 'active' | 'inactive'
   deadline: string
   location: string
+  isEvidence?: boolean
 }
 
 const TaskStatusToBGColor = {
   active: 'green.300',
-  completed: 'blue.300',
-  inReview: '#17A2B8',
-  inProgress: 'yellow.300',
+  inactive: 'gray.300',
 }
 
 const TaskStatusToLabel = {
   active: 'Active',
-  completed: 'Completed',
-  inReview: 'In Review',
-  inProgress: 'In Progress',
+  inactive: 'In Active',
 }
 
 export const TaskCard: React.FC<TaskCardProps> = ({
@@ -28,6 +25,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   location,
   status,
   title,
+  isEvidence = false,
 }) => {
   const router = useRouter()
   return (
@@ -47,7 +45,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
         </Text>
       </Box>
       <Button onClick={() => router.push('/task/123')} variant="ghost">
-        See details
+        See {isEvidence ? 'evidence' : 'details'}
       </Button>
     </Box>
   )

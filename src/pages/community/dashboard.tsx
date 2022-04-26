@@ -25,19 +25,13 @@ function Dashboard() {
           title="Complete Apple Assignment"
           deadline="2022, 15th May"
           location="Butwal-11, Devinagar"
-          status="inReview"
+          status="inactive"
         />
         <TaskCard
           title="Complete Apple Assignment"
           deadline="2022, 15th May"
           location="Butwal-11, Devinagar"
-          status="inProgress"
-        />
-        <TaskCard
-          title="Complete Apple Assignment"
-          deadline="2022, 15th May"
-          location="Butwal-11, Devinagar"
-          status="completed"
+          status="inactive"
         />
       </Box>
     </Box>
