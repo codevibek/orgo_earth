@@ -23,6 +23,29 @@ export default function Home() {
           Go to volunteer profile page
         </NextLink>
       </Box>
+      <Box>
+        <NextLink href="/task/123">Go to task detail page</NextLink>
+      </Box>
+      <Box>
+        <NextLink href="/community/evidence/summary">
+          Go to task evidence summary page for community
+        </NextLink>
+      </Box>
+      <Box>
+        <NextLink href="/community/evidence/details/12">
+          Go to task evidence details page for community
+        </NextLink>
+      </Box>
+      <Box>
+        <NextLink href="/community/task/new">
+          Go to create new task page
+        </NextLink>
+      </Box>
+      <Box>
+        <NextLink href="/community/notifications">
+          Go to community notifications page
+        </NextLink>
+      </Box>
     </Box>
   )
 }

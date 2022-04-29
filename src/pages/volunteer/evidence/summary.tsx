@@ -17,17 +17,19 @@ function EvidenceReview() {
           To Be Reviewed:
         </Text>
         <TaskCard
+          creator="John Doe"
+          priority="high"
           isEvidence
           title="Complete Apple Assignment"
-          deadline="2022, 15th May"
           location="Butwal-11, Devinagar"
           status="active"
         />
 
         <TaskCard
+          creator="John Doe"
+          priority="high"
           isEvidence
           title="Complete Apple Assignment"
-          deadline="2022, 15th May"
           location="Butwal-11, Devinagar"
           status="active"
         />
@@ -38,17 +40,19 @@ function EvidenceReview() {
           Reviewed:
         </Text>
         <TaskCard
+          creator="John Doe"
+          priority="high"
           isEvidence
           title="Complete Apple Assignment"
-          deadline="2022, 15th May"
           location="Butwal-11, Devinagar"
           status="inactive"
         />
 
         <TaskCard
+          creator="John Doe"
+          priority="high"
           isEvidence
           title="Complete Apple Assignment"
-          deadline="2022, 15th May"
           location="Butwal-11, Devinagar"
           status="inactive"
         />
