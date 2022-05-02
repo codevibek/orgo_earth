@@ -1,7 +1,10 @@
 import { Box, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
+import { useRedirectToDashboard } from '../data/hooks/useUser'
 
 export default function Home() {
+  // if already authenticated then redirect to dashboard
+  useRedirectToDashboard()
   return (
     <Box>
       <Text fontWeight="extrabold" fontSize="2xl">

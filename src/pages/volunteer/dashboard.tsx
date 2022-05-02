@@ -1,21 +1,17 @@
-import { Box, Button, Text } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
+import { Box, Text } from '@chakra-ui/react'
 import React from 'react'
 import { TaskCard } from '../../components/TaskCard'
 import { useUser } from '../../data/hooks/useUser'
 
 // TODO: the ability to filter them with their status and location
 function Dashboard() {
-  const router = useRouter()
-  useUser({ redirectTo: '/community/login' })
+  useUser({ redirectTo: '/volunteer/login' })
   return (
     <Box>
       <Text fontSize="2xl" fontWeight="bold">
-        Welcome to Community Dashboard
+        Welcome to Volunteer Dashboard
       </Text>
-      <Button my="2" onClick={() => router.push('/community/task/new')}>
-        Create A New Task
-      </Button>
+
       <Box>
         <TaskCard
           priority="low"

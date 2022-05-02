@@ -5,8 +5,7 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 import { Layout } from '../components/Layout'
 import { theme } from '../theme'
 import '../styles/globals.css'
-import '@fontsource/poppins' 
-
+import '@fontsource/poppins'
 
 const queryClient = new QueryClient()
 

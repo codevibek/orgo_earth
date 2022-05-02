@@ -1,0 +1,75 @@
+Users:
+
+POST /api/users/login
+Input:
+{phone,email,password}
+Body:
+phone:required
+password:requied
+
+output:
+{
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      type: user.type,
+      token: generateToken(user._id),
+    }
+
+GET  /api/users/me //me api
+-headers=>{Bearer token}
+input:none
+output:{ ...req.user, token } //just log it its same as output from login
+if token expired: "Session expired please log in"
+
+POST /api/users/register
+input:{ name, email, password, phone, type }
+
+name:required
+email:
+password:required
+phone:required
+type:required //default volunteer xa
+
+output: res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      type: user.type,
+      phone: user.phone,
+      token: generateToken(user._id),
+    });
+
+
+PUT /api/users/profile    //update user
+-headers=>{Bearer token}
+input:{email or phone} //things to update
+email:required
+
+output:{
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      phone: updatedUser.phone,
+      type: updatedUser.type,
+      token: generateToken(updatedUser._id),
+    }
+
+
+GET /api/users/profile/:id
+-headers=>{Bearer token}
+input: id in parameter
+output:  res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      phone: user.phone,
+    });
+
+DELETE /api/users/:id  
+-headers=>{Bearer token}
+input: {phone}
+body
+email or phoone
