@@ -15,15 +15,15 @@ import {
   AiFillTwitterCircle,
 } from 'react-icons/ai'
 import { EditProfileDrawer } from '../../../components/EditProfileDrawer'
-import { useGetUserProfile } from '../../../data/hooks/query/useGetUserProfile'
+// import { useGetUserProfile } from '../../../data/hooks/query/useGetUserProfile'
 import { useIsMe } from '../../../data/hooks/useIsMe'
-import { useStore } from '../../../data/store'
+// import { useStore } from '../../../data/store'
 
 function Profile() {
   const { onOpen, isOpen, onClose } = useDisclosure()
   const router = useRouter()
   const profileUserId = router.query.id as string
-  const { isLoading, data } = useGetUserProfile(profileUserId)
+  // const { isLoading, data } = useGetUserProfile(profileUserId)
 
   const isMe = useIsMe(profileUserId)
 
