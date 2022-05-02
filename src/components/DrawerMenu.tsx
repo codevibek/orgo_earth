@@ -15,6 +15,8 @@ import React from 'react'
 import { AdminMenus, VolunteerMenus } from '../data/utils/DrawerMenuConstants'
 import NextLink from 'next/link'
 import { IconType } from 'react-icons/lib'
+import { useRouter } from 'next/router'
+import { useMe } from '../data/hooks/useUser'
 
 export interface DrawerMenuProps {
   isAdmin: boolean
@@ -29,6 +31,13 @@ export const DrawerMenu: React.FC<DrawerMenuProps> = ({
   isOpen,
   onClose,
 }) => {
+  const router = useRouter()
+  const handleLogout = () => {
+    localStorage.removeItem('userData')
+    router.push('/')
+  }
+  const { data } = useMe()
+
   return (
     <Drawer
       isOpen={isOpen}
@@ -58,16 +67,42 @@ export const DrawerMenu: React.FC<DrawerMenuProps> = ({
         <DrawerBody>
           {isAdmin
             ? AdminMenus.map((menu) => {
-                return <DrawerMenuLinkItem onClose={onClose} key={menu.path} {...menu} />
+                return (
+                  <DrawerMenuLinkItem
+                    onClose={onClose}
+                    key={menu.path}
+                    name={menu.name}
+                    path={
+                      menu.path === '/profile'
+                        ? `/community/profile/${data?._id}`
+                        : menu.path
+                    }
+                    icon={menu.icon}
+                  />
+                )
               })
             : VolunteerMenus.map((menu) => {
-                return <DrawerMenuLinkItem onClose={onClose} key={menu.path} {...menu} />
+                return (
+                  <DrawerMenuLinkItem
+                    onClose={onClose}
+                    key={menu.path}
+                    name={menu.name}
+                    path={
+                      menu.path === '/profile'
+                        ? `/volunteer/profile/${data?._id}`
+                        : menu.path
+                    }
+                    icon={menu.icon}
+                  />
+                )
               })}
           <DrawerMenuLinkItem
-            onClose={onClose}
+            onClose={() => {
+              handleLogout()
+              onClose()
+            }}
             icon={AiOutlineLogout}
             name="Logout"
-            path="/logout"
           />
         </DrawerBody>
       </DrawerContent>
@@ -78,7 +113,7 @@ export const DrawerMenu: React.FC<DrawerMenuProps> = ({
 export interface DrawerMenuLinkItemProps {
   icon: IconType
   name: string
-  path: string
+  path?: string
   onClose: () => void
 }
 
@@ -86,18 +121,18 @@ export const DrawerMenuLinkItem: React.FC<DrawerMenuLinkItemProps> = ({
   icon: Icon,
   name,
   path,
-  onClose
+  onClose,
 }) => {
   return (
     <Box onClick={onClose}>
-    <NextLink href={path} passHref>
-      <Flex cursor="pointer" my="6" alignItems="center">
-        <Icon size={30} />
-        <Text mx="6" fontSize="xl" fontWeight="bold">
-          {name}
-        </Text>
-      </Flex>
-    </NextLink>
+      <NextLink href={path ? path : '/'} passHref>
+        <Flex cursor="pointer" my="6" alignItems="center">
+          <Icon size={30} />
+          <Text mx="6" fontSize="xl" fontWeight="bold">
+            {name}
+          </Text>
+        </Flex>
+      </NextLink>
     </Box>
   )
 }

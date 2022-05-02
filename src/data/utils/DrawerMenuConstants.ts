@@ -4,7 +4,7 @@ import {
   AiOutlineDashboard,
   AiOutlinePlus,
 } from 'react-icons/ai'
-import { BiTask } from 'react-icons/bi'
+// import { BiTask } from 'react-icons/bi'
 import { MdRateReview } from 'react-icons/md'
 import { IconType } from 'react-icons/lib'
 
@@ -63,15 +63,15 @@ export const VolunteerMenus: Menu[] = [
     icon: CgProfile,
     path: '/profile',
   },
-  {
-    name: 'View All Active Tasks',
-    icon: BiTask,
-    path: '/tasks',
-  },
+  // {
+  //   name: 'View All Active Tasks',
+  //   icon: BiTask,
+  //   path: '/tasks',
+  // },
   {
     name: 'DashBoard',
     icon: AiOutlineDashboard,
-    path: '/dashboard',
+    path: '/volunteer/dashboard',
   },
   {
     name: 'Review Tasks Evidence Status',

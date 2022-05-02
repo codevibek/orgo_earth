@@ -7,6 +7,7 @@ import {
   useDisclosure,
   VStack,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import React from 'react'
 import {
   AiFillFacebook,
@@ -14,9 +15,19 @@ import {
   AiFillTwitterCircle,
 } from 'react-icons/ai'
 import { EditProfileDrawer } from '../../../components/EditProfileDrawer'
+import { useGetUserProfile } from '../../../data/hooks/query/useGetUserProfile'
+import { useIsMe } from '../../../data/hooks/useIsMe'
+import { useStore } from '../../../data/store'
 
 function Profile() {
   const { onOpen, isOpen, onClose } = useDisclosure()
+  const router = useRouter()
+  const profileUserId = router.query.id as string
+  const { isLoading, data } = useGetUserProfile(profileUserId)
+
+  const isMe = useIsMe(profileUserId)
+
+  console.log(isMe)
 
   return (
     <VStack spacing="4">

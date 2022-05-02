@@ -9,7 +9,7 @@ import { useRedirectToDashboard } from '../../data/hooks/useUser'
 
 function Login() {
   const { isLoading, mutate } = useLogin({
-    successRedirectionPath: '/volunteer/dashboard',
+    successRedirectionPath: '/community/dashboard',
   })
   useRedirectToDashboard()
   const formik = useFormik({
