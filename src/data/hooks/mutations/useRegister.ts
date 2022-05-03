@@ -20,7 +20,7 @@ export interface RegisterUserInput {
   password: string
   type?: string
   phone?: number
-  userName?: string
+  username?: string
 }
 
 function registerUser(input: RegisterUserInput): Promise<User> {

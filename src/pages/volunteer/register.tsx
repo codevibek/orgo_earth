@@ -54,7 +54,7 @@ function Register() {
         name,
         password,
         type,
-        userName: username,
+        username,
       })
     },
   })
