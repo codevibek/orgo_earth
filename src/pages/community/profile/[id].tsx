@@ -23,6 +23,7 @@ function Profile() {
   const router = useRouter()
   const profileUserId = router.query.id as string
   const { isLoading, data } = useGetUserProfile(profileUserId)
+  console.log(isLoading, data)
 
   const isMe = useIsMe(profileUserId)
 
