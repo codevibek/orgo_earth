@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { apiBaseUrl } from '../utils/constants'
 import { User } from './mutations/useRegister'
 import { useQuery } from 'react-query'
+import { useEffect } from 'react'
 
 function getUserData(token: string): Promise<User> {
   return axios
@@ -24,12 +25,12 @@ export function useUser({ redirectTo }: UseUserProps) {
   //   router.push(redirectTo)
   // }
   // return userData
-  const userData = localStorage.getItem('userData')
-  if (!userData) {
-    return router.push(redirectTo)
-  }
-  const parsedData: User = JSON.parse(userData)
-  return parsedData
+  useEffect(() => {
+    const userData = localStorage.getItem('userData')
+    if (!userData) {
+      router.push(redirectTo)
+    }
+  }, [redirectTo, router])
 }
 
 export function useMe() {
