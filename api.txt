@@ -73,3 +73,50 @@ DELETE /api/users/:id
 input: {phone}
 body
 email or phoone
+
+////////////task
+
+API:  /api/tasks/create  //A community can create a task
+params:
+body: name,
+    description,
+    address,
+    hours,
+    people,
+    startDate,
+    rewards,
+    evidence,
+query:
+header : bearer token
+
+
+
+API:  /api/tasks    //List all the available tasks
+params:
+body:
+query:status
+
+API:  /api/tasks/community/:id  //List all the tasks of a community
+params: userId
+body:
+query:
+header : bearer token
+
+API:  /api/tasks/task/:id //A community can update a task
+params: 
+body: ... things to update
+query: userId
+header : bearer token
+
+API:  /api/tasks/task/:id   //A community can fetch a task data
+params: taskId
+body:
+query:
+header : bearer token
+
+
+API:  /api/tasks/task/:id
+params:taskId
+body:
+query:
+header : bearer token

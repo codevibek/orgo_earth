@@ -9,6 +9,7 @@ export interface TaskCardProps {
   location: string
   isEvidence?: boolean
   creator: string
+  id: string
 }
 
 const TaskStatusToBGColor = {
@@ -40,6 +41,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   isEvidence = false,
   priority,
   creator,
+  id,
 }) => {
   const router = useRouter()
   return (
@@ -68,7 +70,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
           Task created by {creator}
         </Link>
       </Box>
-      <Button onClick={() => router.push('/task/123')} variant="ghost">
+      <Button onClick={() => router.push(`/task/${id}`)} variant="ghost">
         See {isEvidence ? 'evidence' : 'details'}
       </Button>
     </Box>

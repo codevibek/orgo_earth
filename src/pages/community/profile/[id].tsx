@@ -15,15 +15,14 @@ import {
   AiFillTwitterCircle,
 } from 'react-icons/ai'
 import { EditProfileDrawer } from '../../../components/EditProfileDrawer'
-// import { useGetUserProfile } from '../../../data/hooks/query/useGetUserProfile'
+import { useGetUserProfile } from '../../../data/hooks/query/useGetUserProfile'
 import { useIsMe } from '../../../data/hooks/useIsMe'
-// import { useStore } from '../../../data/store'
 
 function Profile() {
   const { onOpen, isOpen, onClose } = useDisclosure()
   const router = useRouter()
   const profileUserId = router.query.id as string
-  // const { isLoading, data } = useGetUserProfile(profileUserId)
+  const { isLoading, data } = useGetUserProfile(profileUserId)
 
   const isMe = useIsMe(profileUserId)
 
@@ -47,7 +46,7 @@ function Profile() {
         <AiFillInstagram size={20} />
         <AiFillTwitterCircle size={20} />
       </HStack>
-      <Button onClick={onOpen}>Edit Profile</Button>
+      {isMe && <Button onClick={onOpen}>Edit Profile</Button>}
 
       <Box bg="gray.300" p="8" borderRadius="10px">
         <Text>
