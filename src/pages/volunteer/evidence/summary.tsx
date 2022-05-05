@@ -17,7 +17,7 @@ function EvidenceReview() {
           To Be Reviewed:
         </Text>
         <TaskCard
-          creator="John Doe"
+          creatorCommunityName="John Doe"
           priority="high"
           isEvidence
           title="Complete Apple Assignment"
@@ -27,7 +27,7 @@ function EvidenceReview() {
         />
 
         <TaskCard
-          creator="John Doe"
+          creatorCommunityName="John Doe"
           priority="high"
           isEvidence
           title="Complete Apple Assignment"
@@ -42,7 +42,7 @@ function EvidenceReview() {
           Reviewed:
         </Text>
         <TaskCard
-          creator="John Doe"
+          creatorCommunityName="John Doe"
           priority="high"
           isEvidence
           title="Complete Apple Assignment"
@@ -52,7 +52,7 @@ function EvidenceReview() {
         />
 
         <TaskCard
-          creator="John Doe"
+          creatorCommunityName="John Doe"
           priority="high"
           isEvidence
           title="Complete Apple Assignment"
