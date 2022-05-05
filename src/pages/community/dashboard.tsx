@@ -1,22 +1,16 @@
 import { Box, Button, Skeleton, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import React, { useMemo } from 'react'
+import React from 'react'
 import { TaskCard } from '../../components/TaskCard'
-import { User } from '../../data/hooks/mutations/useRegister'
 import { useGetCommunityTasks } from '../../data/hooks/query/useGetCommunityTasks'
 import { useUser } from '../../data/hooks/useUser'
-import { isServer } from '../../data/utils/isServer'
+import { useUserData } from '../../data/hooks/useUserData'
 
 // TODO: the ability to filter them with their status and location
 function Dashboard() {
   const router = useRouter()
   useUser({ redirectTo: '/community/login' })
-
-  const userData: User = useMemo(() => {
-    if (isServer) return null
-    return JSON.parse(localStorage.getItem('userData'))
-  }, [])
-
+  const userData = useUserData()
   const { data: Tasks, isLoading } = useGetCommunityTasks(userData?._id)
 
   return (
@@ -39,7 +33,7 @@ function Dashboard() {
               return (
                 <TaskCard
                   key={task?._id}
-                  creator={task?.creater}
+                  creatorCommunityName={task?.creatorCommunityName}
                   location={task?.address}
                   priority={task?.priority ?? 'medium'}
                   status={task?.status ?? 'active'}

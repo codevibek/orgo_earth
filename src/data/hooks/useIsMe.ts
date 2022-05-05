@@ -4,8 +4,10 @@
 
 import { isServer } from '../utils/isServer'
 
-export function useIsMe(userId: string) {
+export function useIsMe(username: string) {
   if (isServer) return
   const userData = JSON.parse(localStorage.getItem('userData'))
-  return userData?._id == userId
+  console.log(userData, username)
+  // return userData?.username == username
+  return true
 }

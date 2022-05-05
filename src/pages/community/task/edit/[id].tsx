@@ -1,14 +1,16 @@
 import { Box, Text } from '@chakra-ui/react'
-import { TaskForm } from '../../../../components/TaskForm'
+import { useRouter } from 'next/router'
+import { EditTaskForm } from '../../../../components/EditTaskForm'
 
 const EditTask = () => {
-  // TODO: Prepopulate the task data
+  const router = useRouter()
+  const taskId = router.query.id as string
   return (
     <Box>
       <Text fontSize="xl" fontWeight="bold">
         Edit A Task
       </Text>
-      <TaskForm />
+      <EditTaskForm taskId={taskId} />
     </Box>
   )
 }

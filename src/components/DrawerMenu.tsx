@@ -8,6 +8,7 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Flex,
+  Skeleton,
   Text,
 } from '@chakra-ui/react'
 import { AiOutlineLogout } from 'react-icons/ai'
@@ -36,7 +37,7 @@ export const DrawerMenu: React.FC<DrawerMenuProps> = ({
     localStorage.removeItem('userData')
     router.push('/')
   }
-  const { data } = useMe()
+  const { isLoading, data } = useMe()
 
   return (
     <Drawer
@@ -47,65 +48,68 @@ export const DrawerMenu: React.FC<DrawerMenuProps> = ({
       finalFocusRef={finalFocusRef}
     >
       <DrawerOverlay />
-      <DrawerContent>
-        <DrawerCloseButton />
-        <DrawerHeader>
-          <Flex mt="16" mb="5">
-            <Avatar
-              name="Dan Abrahmov"
-              size="lg"
-              cursor="pointer"
-              src="https://bit.ly/dan-abramov"
-            />
-            <Box mx="4">
-              <Text>Dan Abrahmov</Text>
-              <Text fontSize="xs">I'm the don</Text>
-            </Box>
-          </Flex>
-        </DrawerHeader>
+      <Skeleton isLoaded={!isLoading}>
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>
+            <Flex mt="16" mb="5">
+              <Avatar
+                name="Dan Abrahmov"
+                size="lg"
+                cursor="pointer"
+                src="https://bit.ly/dan-abramov"
+              />
+              <Box mx="4">
+                <Text>Dan Abrahmov</Text>
+                <Text fontSize="xs">I'm the don</Text>
+              </Box>
+            </Flex>
+          </DrawerHeader>
 
-        <DrawerBody>
-          {isAdmin
-            ? AdminMenus.map((menu) => {
-                return (
-                  <DrawerMenuLinkItem
-                    onClose={onClose}
-                    key={menu.path}
-                    name={menu.name}
-                    path={
-                      menu.path === '/profile'
-                        ? `/community/profile/${data?._id}`
-                        : menu.path
-                    }
-                    icon={menu.icon}
-                  />
-                )
-              })
-            : VolunteerMenus.map((menu) => {
-                return (
-                  <DrawerMenuLinkItem
-                    onClose={onClose}
-                    key={menu.path}
-                    name={menu.name}
-                    path={
-                      menu.path === '/profile'
-                        ? `/volunteer/profile/${data?._id}`
-                        : menu.path
-                    }
-                    icon={menu.icon}
-                  />
-                )
-              })}
-          <DrawerMenuLinkItem
-            onClose={() => {
-              handleLogout()
-              onClose()
-            }}
-            icon={AiOutlineLogout}
-            name="Logout"
-          />
-        </DrawerBody>
-      </DrawerContent>
+          <DrawerBody>
+            {!isLoading && isAdmin
+              ? AdminMenus.map((menu) => {
+                  return (
+                    <DrawerMenuLinkItem
+                      onClose={onClose}
+                      key={menu.path}
+                      name={menu.name}
+                      path={
+                        menu.path === '/profile'
+                          ? `/community/profile/${data?.username}`
+                          : menu.path
+                      }
+                      icon={menu.icon}
+                    />
+                  )
+                })
+              : !isLoading &&
+                VolunteerMenus.map((menu) => {
+                  return (
+                    <DrawerMenuLinkItem
+                      onClose={onClose}
+                      key={menu.path}
+                      name={menu.name}
+                      path={
+                        menu.path === '/profile'
+                          ? `/volunteer/profile/${data?.username}`
+                          : menu.path
+                      }
+                      icon={menu.icon}
+                    />
+                  )
+                })}
+            <DrawerMenuLinkItem
+              onClose={() => {
+                handleLogout()
+                onClose()
+              }}
+              icon={AiOutlineLogout}
+              name="Logout"
+            />
+          </DrawerBody>
+        </DrawerContent>
+      </Skeleton>
     </Drawer>
   )
 }

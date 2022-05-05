@@ -46,11 +46,7 @@ const TaskDetail = () => {
 
       <HStack spacing="5" my="5">
         {isCommunity ? (
-          <Button
-            onClick={() =>
-              router.push(`/community/task/edit/${TaskDetails._id}`)
-            }
-          >
+          <Button onClick={() => router.push(`/community/task/edit/${taskId}`)}>
             Edit Task
           </Button>
         ) : (

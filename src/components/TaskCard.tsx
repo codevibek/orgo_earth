@@ -1,5 +1,6 @@
 import { Badge, Box, Button, Flex, Text, Tooltip, Link } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
+import NextLink from 'next/link'
 import React from 'react'
 
 export interface TaskCardProps {
@@ -8,7 +9,7 @@ export interface TaskCardProps {
   priority: 'low' | 'medium' | 'high'
   location: string
   isEvidence?: boolean
-  creator: string
+  creatorCommunityName: string
   id: string
 }
 
@@ -40,7 +41,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   title,
   isEvidence = false,
   priority,
-  creator,
+  creatorCommunityName,
   id,
 }) => {
   const router = useRouter()
@@ -66,9 +67,11 @@ export const TaskCard: React.FC<TaskCardProps> = ({
         </Flex>
         <Text fontSize="sm">{location}</Text>
 
-        <Link fontSize="sm" color="gray.500">
-          Task created by {creator}
-        </Link>
+        <NextLink href={`/community/profile/${creatorCommunityName}`} passHref>
+          <Link fontSize="sm" color="gray.500">
+            Task created by {creatorCommunityName}
+          </Link>
+        </NextLink>
       </Box>
       <Button onClick={() => router.push(`/task/${id}`)} variant="ghost">
         See {isEvidence ? 'evidence' : 'details'}

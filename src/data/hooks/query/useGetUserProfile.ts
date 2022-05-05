@@ -3,14 +3,14 @@ import { useQuery } from 'react-query'
 import { apiBaseUrl } from '../../utils/constants'
 import { User } from '../mutations/useRegister'
 
-function getUserProfile(userId: string): Promise<User> {
+function getUserProfile(username: string): Promise<User> {
   return axios
-    .get(`${apiBaseUrl}/api/users/profile/${userId}`)
+    .get(`${apiBaseUrl}/api/users/profile/${username}`)
     .then((res) => res.data)
 }
 
-export function useGetUserProfile(profileId: string) {
-  return useQuery(['profiles', profileId], () => {
-    return getUserProfile(profileId)
+export function useGetUserProfile(username: string) {
+  return useQuery(['profiles', username], () => {
+    return getUserProfile(username)
   })
 }

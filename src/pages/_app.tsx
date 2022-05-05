@@ -7,7 +7,7 @@ import { theme } from '../theme'
 import '../styles/globals.css'
 import '@fontsource/poppins'
 
-const queryClient = new QueryClient()
+export const queryClient = new QueryClient()
 
 function MyApp({ Component, pageProps }) {
   return (

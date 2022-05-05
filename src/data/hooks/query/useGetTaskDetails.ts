@@ -4,8 +4,14 @@ import { apiBaseUrl } from '../../utils/constants'
 import { Task } from './useGetCommunityTasks'
 
 function getTaskDetails(taskId: string): Promise<Task> {
+  const token = JSON.parse(localStorage.getItem('userData')).token
+
   return axios
-    .get(`${apiBaseUrl}/api/tasks/task/${taskId}`, {})
+    .get(`${apiBaseUrl}/api/tasks/task/${taskId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     .then((res) => res.data)
 }
 

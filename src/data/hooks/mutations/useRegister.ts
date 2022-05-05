@@ -12,6 +12,12 @@ export interface User {
   type: string
   phone: string
   token: string
+  username: string
+  address?: string
+  facebookLink?: string
+  twitterLink?: string
+  instagramLink?: string
+  bio?: string
 }
 
 export interface RegisterUserInput {

@@ -6,72 +6,133 @@ import {
   DrawerCloseButton,
   DrawerHeader,
   DrawerBody,
-  Input,
   DrawerFooter,
-  FormControl,
-  FormHelperText,
-  FormLabel,
-  Textarea,
 } from '@chakra-ui/react'
+import { useFormik } from 'formik'
+import { useEffect } from 'react'
+import * as Yup from 'yup'
+import { useEditProfile } from '../data/hooks/mutations/useEditProfile'
+import { User } from '../data/hooks/mutations/useRegister'
+import { CustomTextAreaInput, CustomTextInput } from './CustomInput'
 
 export interface EditProfileDrawer {
   isOpen: boolean
   onClose: () => void
+  initialData: User
 }
 
 export const EditProfileDrawer: React.FC<EditProfileDrawer> = ({
   isOpen,
   onClose,
+  initialData,
 }) => {
+  const { isLoading, mutate: editProfile, isSuccess } = useEditProfile()
+  const formik = useFormik({
+    initialValues: {
+      name: initialData?.name,
+      bio: initialData?.bio,
+      address: initialData?.address,
+      facebookLink: initialData?.facebookLink,
+      instagramLink: initialData?.instagramLink,
+      twitterLink: initialData?.twitterLink,
+    },
+    validationSchema: Yup.object({
+      name: Yup.string()
+        .min(3, 'Name must be at least 5 characters long')
+        .required('Name is required'),
+      bio: Yup.string().min(5, 'Bio must be at least 5 characters long'),
+      address: Yup.string(),
+      facebookLink: Yup.string().url('Facebook URL is not valid'),
+      instagramLink: Yup.string().url('Instagram URL is not valid'),
+      twitterLink: Yup.string().url('Twitter URL is not valid'),
+    }),
+    onSubmit: (value) => {
+      editProfile(value)
+    },
+  })
+
+  useEffect(() => {
+    if (isSuccess) {
+      onClose()
+    }
+  }, [isSuccess, onClose])
   return (
     <Drawer size="md" isOpen={isOpen} placement="right" onClose={onClose}>
       <DrawerOverlay />
-      <DrawerContent>
-        <DrawerCloseButton />
-        <DrawerHeader>Edit Your Profile</DrawerHeader>
+      <form onSubmit={formik.handleSubmit}>
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Edit Your Profile</DrawerHeader>
 
-        <DrawerBody>
-          <FormControl my="3">
-            <FormLabel htmlFor="CommunityName">Community Name</FormLabel>
-            <Input variant="filled" id="CommunityName" type="text" />
-          </FormControl>
-          <FormControl my="3">
-            <FormLabel htmlFor="bio">Bio</FormLabel>
-            <Textarea id="bio" variant="filled" />
-          </FormControl>
-          <FormControl my="3">
-            <FormLabel htmlFor="email">Email address</FormLabel>
-            <Input variant="filled" id="email" type="email" />
-            <FormHelperText>We'll never share your email.</FormHelperText>
-          </FormControl>
-          <FormControl my="3">
-            <FormLabel htmlFor="location">Location</FormLabel>
-            <Input variant="filled" id="location" type="Location" />
-          </FormControl>
-          <FormControl my="3">
-            <FormLabel htmlFor="facebook">Facebook</FormLabel>
-            <Input variant="filled" id="facebook" type="text" />
-            <FormHelperText>Your profile Link</FormHelperText>
-          </FormControl>
-          <FormControl my="3">
-            <FormLabel htmlFor="instagram">Instagram</FormLabel>
-            <Input variant="filled" id="instagram" type="text" />
-            <FormHelperText>Your profile Link</FormHelperText>
-          </FormControl>
-          <FormControl my="3">
-            <FormLabel htmlFor="twitter">Twitter</FormLabel>
-            <Input variant="filled" id="twitter" type="twitter" />
-            <FormHelperText>Your profile Link</FormHelperText>
-          </FormControl>
-        </DrawerBody>
+          <DrawerBody>
+            <CustomTextInput
+              isTouched={formik.touched.name}
+              isInvalid={!!formik.errors.name}
+              errorMessage={formik.errors.name}
+              name="name"
+              formik={formik}
+              label="Name"
+            />
 
-        <DrawerFooter>
-          <Button variant="outline" mr={3} onClick={onClose}>
-            Cancel
-          </Button>
-          <Button colorScheme="blue">Save</Button>
-        </DrawerFooter>
-      </DrawerContent>
+            <CustomTextAreaInput
+              isTouched={formik.touched.bio}
+              isInvalid={!!formik.errors.bio}
+              errorMessage={formik.errors.bio}
+              name="bio"
+              formik={formik}
+              label="Bio"
+            />
+
+            <CustomTextInput
+              isTouched={formik.touched.address}
+              isInvalid={!!formik.errors.address}
+              errorMessage={formik.errors.address}
+              name="address"
+              formik={formik}
+              label="Address"
+            />
+
+            <CustomTextInput
+              isTouched={formik.touched.facebookLink}
+              isInvalid={!!formik.errors.facebookLink}
+              errorMessage={formik.errors.facebookLink}
+              name="facebookLink"
+              formik={formik}
+              label="Facebook"
+              helperText="Link to your profile"
+            />
+
+            <CustomTextInput
+              isTouched={formik.touched.instagramLink}
+              isInvalid={!!formik.errors.instagramLink}
+              errorMessage={formik.errors.instagramLink}
+              name="instagramLink"
+              formik={formik}
+              label="Instagram"
+              helperText="Link to your profile"
+            />
+
+            <CustomTextInput
+              isTouched={formik.touched.twitterLink}
+              isInvalid={!!formik.errors.twitterLink}
+              errorMessage={formik.errors.twitterLink}
+              name="twitterLink"
+              formik={formik}
+              label="Twitter"
+              helperText="Link to your profile"
+            />
+          </DrawerBody>
+
+          <DrawerFooter>
+            <Button variant="outline" mr={3} onClick={onClose}>
+              Cancel
+            </Button>
+            <Button isLoading={isLoading} type="submit" colorScheme="blue">
+              Save
+            </Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </form>
     </Drawer>
   )
 }

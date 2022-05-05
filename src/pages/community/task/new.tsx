@@ -1,6 +1,6 @@
 import { Box, Text } from '@chakra-ui/react'
 import React from 'react'
-import { TaskForm } from '../../../components/TaskForm'
+import { CreateTaskForm } from '../../../components/CreateTaskForm'
 
 function NewTask() {
   return (
@@ -8,7 +8,7 @@ function NewTask() {
       <Text fontSize="xl" fontWeight="bold">
         Create A New Task
       </Text>
-      <TaskForm />
+      <CreateTaskForm />
     </Box>
   )
 }

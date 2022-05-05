@@ -1,32 +1,27 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  FormHelperText,
-  FormLabel,
-  Select,
-} from '@chakra-ui/react'
+import { Box, Button } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { useCreateTask } from '../data/hooks/mutations/useCreateTask'
+import { useEditTask } from '../data/hooks/mutations/useEditTask'
+import { useGetTaskDetails } from '../data/hooks/query/useGetTaskDetails'
 import {
   CustomSelectInput,
   CustomTextAreaInput,
   CustomTextInput,
 } from './CustomInput'
 
-export const TaskForm = () => {
-  const { isLoading, mutate: createTask } = useCreateTask()
+export const EditTaskForm = ({ taskId }: { taskId: string }) => {
+  const { isLoading: taskEditLoading, mutate: editTask } = useEditTask()
+  const { data: initialTaskData } = useGetTaskDetails(taskId)
   const formik = useFormik({
     initialValues: {
-      name: '',
-      description: '',
-      status: '',
-      priority: '',
-      address: '',
-      hours: '',
-      evidence: '',
-      rewards: '',
+      name: initialTaskData?.name,
+      description: initialTaskData?.description,
+      status: initialTaskData?.status,
+      priority: initialTaskData?.priority,
+      address: initialTaskData?.address,
+      hours: initialTaskData?.hours,
+      evidence: initialTaskData?.evidence,
+      rewards: initialTaskData?.rewards,
     },
     validationSchema: Yup.object({
       name: Yup.string()
@@ -42,26 +37,13 @@ export const TaskForm = () => {
       priority: Yup.string().required('Priority is required'),
       rewards: Yup.string().required('Rewards is required'),
     }),
-    onSubmit: (value) => {
-      createTask(value)
+    onSubmit: (values) => {
+      editTask({ ...values, taskId })
     },
   })
   return (
     <Box my="5" bg="gray.200" borderRadius="5px" p="4">
       <form onSubmit={formik.handleSubmit}>
-        <FormControl my="6">
-          <FormLabel htmlFor="template">Select a template</FormLabel>
-          <Select
-            id="template"
-            bg="whiteAlpha.600"
-            placeholder="Use previous task as template"
-          >
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-          </Select>
-          <FormHelperText>Use previous tasks as starter</FormHelperText>
-        </FormControl>
         <CustomTextInput
           isTouched={formik.touched.name}
           isInvalid={!!formik.errors.name}
@@ -141,8 +123,8 @@ export const TaskForm = () => {
           <option value="inactive">In Active</option>
         </CustomSelectInput>
 
-        <Button isLoading={isLoading} type="submit">
-          Create Task
+        <Button isLoading={taskEditLoading} type="submit">
+          Edit Task
         </Button>
       </form>
     </Box>

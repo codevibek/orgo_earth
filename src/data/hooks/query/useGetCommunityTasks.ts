@@ -12,9 +12,11 @@ export interface Task {
   priority: 'high' | 'medium' | 'low'
   createdAt: string
   updatedAt: string
-  creater: string
+  creatorId: string
   _id: string
   enrolledPeople: string[]
+  rewards: string
+  creatorCommunityName: string
 }
 
 function getCommunityTasks(communityId: string): Promise<Task[]> {
