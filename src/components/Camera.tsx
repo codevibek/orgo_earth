@@ -1,21 +1,52 @@
 import { Box, Button, Divider, VStack } from '@chakra-ui/react'
+import axios from 'axios'
 import { useRef, useState, useCallback, useMemo } from 'react'
 import Webcam from 'react-webcam'
+import {
+  cloudinaryCloudName,
+  cloudinaryUploadPreset,
+} from '../data/utils/constants'
 
 interface CameraProps {
   urls: string[]
   setUrls: React.Dispatch<React.SetStateAction<string[]>>
+  images: string[]
+  setImages: React.Dispatch<React.SetStateAction<string[]>>
 }
 
-export const Camera: React.FC<CameraProps> = ({ setUrls, urls }) => {
+export const Camera: React.FC<CameraProps> = ({
+  setUrls,
+  urls,
+  images,
+  setImages,
+}) => {
   const [isCaptureEnable, setCaptureEnable] = useState<boolean>(false)
   const webcamRef = useRef<Webcam>(null)
   const [cameraSide, setCameraSide] = useState<'front' | 'back'>('front')
+
+  console.log(images)
+
+  const uploadFileHandler = async (url) => {
+    const formData = new FormData()
+    formData.append('file', url)
+    formData.append('upload_preset', cloudinaryUploadPreset)
+
+    axios
+      .post(
+        `https://api.cloudinary.com/v1_1/${cloudinaryCloudName}/image/upload`,
+        formData
+      )
+      .then((res) => {
+        setImages([...images, res.data.url])
+      })
+  }
+
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current?.getScreenshot()
     if (imageSrc) {
-      setUrls([...(urls || []), imageSrc])
+      setUrls([...urls, imageSrc])
     }
+    uploadFileHandler(imageSrc)
   }, [webcamRef, urls, setUrls])
 
   const videoConstraints = useMemo(() => {

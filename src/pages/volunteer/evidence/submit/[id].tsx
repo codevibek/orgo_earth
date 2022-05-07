@@ -49,7 +49,7 @@ function EvidenceSubmitPage() {
   const [urls, setUrls] = useState<string[]>([])
   const [images, setImages] = useState<string[]>([])
 
-  console.log(images)
+  // as soon as the image is captured it is uploaded to cloudinary and the url is stored in the state
 
   const uploadFileHandler = async (url) => {
     const formData = new FormData()
@@ -180,7 +180,12 @@ function EvidenceSubmitPage() {
               </Box>
             </Box>
 
-            <Camera urls={urls} setUrls={setUrls} />
+            <Camera
+              images={images}
+              setImages={setImages}
+              urls={urls}
+              setUrls={setUrls}
+            />
           </Box>
 
           <Box my="4">

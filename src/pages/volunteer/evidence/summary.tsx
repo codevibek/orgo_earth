@@ -19,7 +19,6 @@ function EvidenceReview() {
         <TaskCard
           creatorCommunityName="John Doe"
           priority="high"
-          isEvidence
           title="Complete Apple Assignment"
           location="Butwal-11, Devinagar"
           status="active"
@@ -29,7 +28,6 @@ function EvidenceReview() {
         <TaskCard
           creatorCommunityName="John Doe"
           priority="high"
-          isEvidence
           title="Complete Apple Assignment"
           location="Butwal-11, Devinagar"
           status="active"
@@ -44,7 +42,6 @@ function EvidenceReview() {
         <TaskCard
           creatorCommunityName="John Doe"
           priority="high"
-          isEvidence
           title="Complete Apple Assignment"
           location="Butwal-11, Devinagar"
           status="inactive"
@@ -54,7 +51,6 @@ function EvidenceReview() {
         <TaskCard
           creatorCommunityName="John Doe"
           priority="high"
-          isEvidence
           title="Complete Apple Assignment"
           location="Butwal-11, Devinagar"
           status="inactive"
