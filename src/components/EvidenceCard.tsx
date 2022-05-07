@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import React from 'react'
 
-export interface TaskCardProps {
+export interface EvidenceCardProps {
   title: string
   status: 'active' | 'inactive'
   priority: 'low' | 'medium' | 'high'
@@ -12,29 +12,29 @@ export interface TaskCardProps {
   id: string
 }
 
-const TaskStatusToBGColor = {
+const EvidenceStatusToBGColor = {
   active: 'green.300',
   inactive: 'gray.300',
 }
 
-const TaskPriorityToColor = {
+const EvidencePriorityToColor = {
   low: 'gray.300',
   medium: 'yellow.300',
   high: 'red.400',
 }
 
-const TaskStatusToLabel = {
+const EvidenceStatusToLabel = {
   active: 'Active',
   inactive: 'In Active',
 }
 
-const TaskPriorityToLabel = {
+const EvidencePriorityToLabel = {
   low: 'Low',
   medium: 'Medium',
   high: 'High',
 }
 
-export const TaskCard: React.FC<TaskCardProps> = ({
+export const EvidenceCard: React.FC<EvidenceCardProps> = ({
   location,
   status,
   title,
@@ -51,28 +51,31 @@ export const TaskCard: React.FC<TaskCardProps> = ({
             {title}
           </Text>
           <Box>
-            <Tooltip label="Task Status">
-              <Badge mr="2" bg={TaskStatusToBGColor[status]}>
-                {TaskStatusToLabel[status]}
+            <Tooltip label="Evidence Status">
+              <Badge mr="2" bg={EvidenceStatusToBGColor[status]}>
+                {EvidenceStatusToLabel[status]}
               </Badge>
             </Tooltip>
-            <Tooltip label="Task Priority">
-              <Badge bg={TaskPriorityToColor[priority]}>
-                {TaskPriorityToLabel[priority]}
+            <Tooltip label="Evidence Priority">
+              <Badge bg={EvidencePriorityToColor[priority]}>
+                {EvidencePriorityToLabel[priority]}
               </Badge>
             </Tooltip>
           </Box>
         </Flex>
-        <Text fontSize="sm">{location}</Text>
+        <Text fontSize="sm">Location: {location}</Text>
 
         <NextLink href={`/community/profile/${creatorCommunityName}`} passHref>
           <Link fontSize="sm" color="gray.500">
-            Task created by {creatorCommunityName}
+            Evidence Created By {creatorCommunityName}
           </Link>
         </NextLink>
       </Box>
-      <Button onClick={() => router.push(`/task/${id}`)} variant="ghost">
-        See details
+      <Button
+        onClick={() => router.push(`/community/evidence/details/${id}`)}
+        variant="ghost"
+      >
+        See evidence detail
       </Button>
     </Box>
   )

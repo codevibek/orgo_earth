@@ -6,49 +6,60 @@ import {
   Flex,
   HStack,
   Input,
+  Skeleton,
   Text,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import React from 'react'
+import { useGetEvidenceById } from '../../../../data/hooks/query/useGetEvidenceById'
+import { useUserData } from '../../../../data/hooks/useUserData'
 
 //TODO: When clicked on user avatar should open user profile
 //TODO: We might use the carousel to show the evidence images
+
+// using the id evidence id get the details about the evidence
 function EvidenceDetails() {
+  const router = useRouter()
+  const userData = useUserData()
+  const evidenceId = router.query.id as string
+
+  const { data, isLoading } = useGetEvidenceById(userData?._id, evidenceId)
+
+  if (isLoading) {
+    return <Skeleton height="400px" />
+  }
+
   return (
     <Box>
       <Text fontWeight="bold">Evidence For:</Text>
       <Text mb="4" fontSize="2xl" fontWeight="extrabold">
-        Complete the ball assignment
+        {data?.taskId.name}
       </Text>
-      <Text color="gray.500">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quos voluptas
-        amet neque autem, modi, sed perspiciatis quia magni reiciendis molestiae
-        corrupti adipisci est repudiandae sequi, numquam odit minima
-        consequatur? Voluptate expedita quis sequi laboriosam autem saepe amet
-        dolor eum error iste iusto voluptates quos inventore officiis
-        perferendis aperiam earum architecto rerum, recusandae aspernatur. Odit
-        cumque adipisci neque nostrum quae deserunt consequatur dolores dicta,
-        officia in repellendus quis pariatur harum nam mollitia. Voluptatibus
-        iusto culpa, voluptatum temporibus a aliquid quos, ratione tempora
-        beatae excepturi aperiam sunt nulla unde fugiat cum labore ut, sint
-        dolores quasi. Quaerat consequuntur corrupti assumenda porro
-        dignissimos?
-      </Text>
+      <Text color="gray.500">{data?.evidenceDetails}</Text>
 
-      <Box my="4" p="4" height="500px" bg="gray.400">
-        Geo-Tagged Image here
+      <Box my="6">
+        <Text>Attached Images</Text>
+        {data?.evidenceImages.length === 0 && (
+          <Box my="4" borderRadius="5px" p="4" bg="gray.400">
+            <Text>No images attached</Text>
+          </Box>
+        )}
+        {data?.evidenceImages.map((image) => (
+          <img key={image} src={image} />
+        ))}
       </Box>
 
       <Box my="6">
         <Text fontWeight="bold">Evidence Submitted By: </Text>
         <Flex my="4">
           <Avatar
-            name="Dan Abrahmov"
+            name={data?.userId.username}
             size="lg"
             cursor="pointer"
             src="https://bit.ly/dan-abramov"
           />
           <Text mx="4" fontWeight="semibold">
-            Dan Abrohmov
+            {data?.userId.username}
           </Text>
         </Flex>
         <Box>

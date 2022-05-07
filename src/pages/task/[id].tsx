@@ -50,7 +50,11 @@ const TaskDetail = () => {
             Edit Task
           </Button>
         ) : (
-          <Button>Submit Evidence</Button>
+          <Button
+            onClick={() => router.push(`/volunteer/evidence/submit/${taskId}`)}
+          >
+            Submit Evidence
+          </Button>
         )}
       </HStack>
     </Box>
