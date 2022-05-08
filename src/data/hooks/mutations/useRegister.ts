@@ -18,6 +18,7 @@ export interface User {
   twitterLink?: string
   instagramLink?: string
   bio?: string
+  avatar?: string
 }
 
 export interface RegisterUserInput {

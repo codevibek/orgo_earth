@@ -54,14 +54,14 @@ export const DrawerMenu: React.FC<DrawerMenuProps> = ({
           <DrawerHeader>
             <Flex mt="16" mb="5">
               <Avatar
-                name="Dan Abrahmov"
+                name={data?.name}
                 size="lg"
                 cursor="pointer"
-                src="https://bit.ly/dan-abramov"
+                src={data?.avatar}
               />
               <Box mx="4">
-                <Text>Dan Abrahmov</Text>
-                <Text fontSize="xs">I'm the don</Text>
+                <Text>{data?.name}</Text>
+                <Text fontSize="xs">{data?.bio}</Text>
               </Box>
             </Flex>
           </DrawerHeader>

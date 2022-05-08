@@ -56,7 +56,7 @@ function EvidenceDetails() {
             name={data?.userId.username}
             size="lg"
             cursor="pointer"
-            src="https://bit.ly/dan-abramov"
+            src={data.userId.avatar}
           />
           <Text mx="4" fontWeight="semibold">
             {data?.userId.username}

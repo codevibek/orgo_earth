@@ -13,6 +13,7 @@ export interface EditProfileInput {
   twitter?: string
   instagram?: string
   bio?: string
+  avatar?: string
 }
 
 function editProfile(input: EditProfileInput): Promise<User> {

@@ -1,8 +1,10 @@
 import {
   Avatar,
+  AvatarBadge,
   Box,
   Button,
   HStack,
+  IconButton,
   Skeleton,
   Text,
   useDisclosure,
@@ -12,6 +14,7 @@ import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import React from 'react'
 import {
+  AiFillCamera,
   AiFillFacebook,
   AiFillInstagram,
   AiFillTwitterCircle,
@@ -19,9 +22,15 @@ import {
 import { EditProfileDrawer } from '../../../components/EditProfileDrawer'
 import { useGetUserProfile } from '../../../data/hooks/query/useGetUserProfile'
 import { useIsMe } from '../../../data/hooks/useIsMe'
+import { EditProfilePictureModal } from '../../../components/EditProfilePictureModal'
 
 function Profile() {
   const { onOpen, isOpen, onClose } = useDisclosure()
+  const {
+    onOpen: onOpenProfileModal,
+    isOpen: isOpenProfileModal,
+    onClose: onCloseProfileModal,
+  } = useDisclosure()
 
   const router = useRouter()
   const username = router.query.username as string
@@ -35,12 +44,30 @@ function Profile() {
   return (
     <VStack spacing="4">
       <EditProfileDrawer initialData={data} isOpen={isOpen} onClose={onClose} />
-      <Avatar
-        name={data.name}
-        size="2xl"
-        cursor="pointer"
-        src="https://bit.ly/dan-abramov"
-      />
+
+      <Avatar name={data.name} size="2xl" cursor="pointer" src={data.avatar}>
+        {isMe && (
+          <AvatarBadge boxSize="1.3em" border="none">
+            <IconButton
+              rounded="xl"
+              bg="gray.600"
+              aria-label="button"
+              onClick={onOpenProfileModal}
+              _hover={{ bg: 'black' }}
+              icon={<AiFillCamera color="white" size={25} />}
+            />
+          </AvatarBadge>
+        )}
+      </Avatar>
+
+      {isMe && (
+        <EditProfilePictureModal
+          userData={data}
+          isOpen={isOpenProfileModal}
+          onClose={onCloseProfileModal}
+        />
+      )}
+
       <Text fontWeight="bold" fontSize="xl">
         {data.name}
       </Text>

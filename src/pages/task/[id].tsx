@@ -39,7 +39,7 @@ const TaskDetail = () => {
         <Flex>
           <Avatar src="https://bit.ly/prosper-baba" size="lg" name="John Doe" />
           <Text fontWeight="semibold" mx="4" fontSize="lg">
-            Apple
+            {TaskDetails?.creatorCommunityName}
           </Text>
         </Flex>
       </Box>
