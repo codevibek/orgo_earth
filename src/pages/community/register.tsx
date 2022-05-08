@@ -65,8 +65,9 @@ function Register() {
         bg="gray.300"
         alignItems="center"
         borderRadius="10px"
-        my="40px"
-        p={{ sm: '15px', md: '30px' }}
+        mt="40px"
+        mb="20px"
+        p={{ base: '10px', sm: '15px', md: '30px' }}
         flexDirection="column"
         width="100%"
       >
@@ -136,6 +137,11 @@ function Register() {
           </Link>
         </NextLink>
       </Box>
+      <NextLink href="/volunteer/login" passHref>
+        <Link fontWeight="semibold" my="4">
+          Switch to Volunteer Account Login
+        </Link>
+      </NextLink>
     </Box>
   )
 }

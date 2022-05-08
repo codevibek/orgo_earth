@@ -35,8 +35,9 @@ function Login() {
         bg="gray.300"
         alignItems="center"
         borderRadius="10px"
-        my="40px"
-        p={{ sm: '15px', md: '30px' }}
+        mt="40px"
+        mb="20px"
+        p={{ base: '10px', sm: '15px', md: '30px' }}
         flexDirection="column"
       >
         <Text alignSelf="self-start" my="10px" fontSize="2xl" fontWeight="bold">
@@ -80,6 +81,12 @@ function Login() {
           </Link>
         </NextLink>
       </Box>
+
+      <NextLink href="/community/login" passHref>
+        <Link fontWeight="semibold" my="4">
+          Switch to Community Account Login
+        </Link>
+      </NextLink>
     </Box>
   )
 }
