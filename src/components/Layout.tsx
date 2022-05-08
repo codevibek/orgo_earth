@@ -1,14 +1,20 @@
-import { Container } from '@chakra-ui/react'
+import { Box, Container } from '@chakra-ui/react'
 import React from 'react'
+import { useUserData } from '../data/hooks/useUserData'
 import FooterMenu from './FooterMenu'
 import { NavBar } from './NavBar'
 
 export const Layout: React.FC = ({ children }) => {
+  const userData = useUserData()
+
+  console.log('userData', userData)
   return (
-    <Container>
+    <Box>
       <NavBar />
-      {children}
-      <FooterMenu />
-    </Container>
+      <Container>
+        {children}
+        {userData && <FooterMenu />}
+      </Container>
+    </Box>
   )
 }
