@@ -1,4 +1,5 @@
-import { Avatar, Flex, useDisclosure, Box } from '@chakra-ui/react'
+import { HamburgerIcon } from '@chakra-ui/icons'
+import { Flex, useDisclosure, Box } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { useMemo, useRef } from 'react'
@@ -18,7 +19,7 @@ export const NavBar: React.FC = () => {
   }, [pathname])
   return (
     <Box>
-      <Flex justifyContent="space-between" my="5">
+      <Flex alignItems="center" justifyContent="space-between" my="5">
         <Box cursor="pointer">
           <NextLink href="/" passHref>
             <img src="/images/logo.png" alt="Orgo_Earth" />
@@ -26,12 +27,12 @@ export const NavBar: React.FC = () => {
         </Box>
         {showUserAvatar && (
           <>
-            <Avatar
-              name="Dan Abrahmov"
+            <HamburgerIcon
+              h="8"
+              w="8"
               ref={drawerRef}
-              cursor="pointer"
-              src="https://bit.ly/dan-abramov"
               onClick={onOpen}
+              cursor="pointer"
             />
             <DrawerMenu
               finalFocusRef={drawerRef}
