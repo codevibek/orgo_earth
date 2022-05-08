@@ -23,7 +23,12 @@ function about() {
 
       <VideoPlayer videoId="7tQIJMXIG1Q" />
 
-      <Flex flexDirection="column">
+      <Flex
+        my="6"
+        alignItems="center"
+        justifyContent="center"
+        flexDirection="column"
+      >
         <Button my="4">Create volunteer account</Button>
         <Button colorScheme="blue">Create community account</Button>
       </Flex>
