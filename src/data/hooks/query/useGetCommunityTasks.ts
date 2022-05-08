@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useQuery } from 'react-query'
 import { apiBaseUrl } from '../../utils/constants'
+import { User } from '../mutations/useRegister'
 
 export interface Task {
   name: string
@@ -13,6 +14,7 @@ export interface Task {
   createdAt: string
   updatedAt: string
   creatorId: string
+  creator: User
   _id: string
   enrolledPeople: string[]
   rewards: string

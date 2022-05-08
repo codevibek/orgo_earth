@@ -1,10 +1,5 @@
 import { CgProfile } from 'react-icons/cg'
-import {
-  AiOutlineClockCircle,
-  AiOutlineDashboard,
-  AiOutlinePlus,
-} from 'react-icons/ai'
-// import { BiTask } from 'react-icons/bi'
+import { AiOutlineDashboard, AiOutlinePlus } from 'react-icons/ai'
 import { MdRateReview } from 'react-icons/md'
 import { IconType } from 'react-icons/lib'
 
@@ -13,21 +8,6 @@ export interface Menu {
   path: string
   icon: IconType
 }
-
-/////// Admin menus
-
-// View Profile
-// Create A Task
-// View All Tasks
-// Recent Activities
-// Review Tasks Evidence
-
-/////// Volunteer menus
-
-// View Profile
-// View All Active Tasks
-// DashBoard (Show Tasks Claimed)
-// Review Tasks Evidence status
 
 export const AdminMenus: Menu[] = [
   {
@@ -38,22 +18,22 @@ export const AdminMenus: Menu[] = [
   {
     name: 'Create A Task',
     icon: AiOutlinePlus,
-    path: '/create-task',
+    path: '/community/task/new',
   },
   {
     name: 'Dashboard',
     icon: AiOutlineDashboard,
     path: '/community/dashboard',
   },
-  {
-    name: 'Recent Activities',
-    icon: AiOutlineClockCircle,
-    path: '/recent-activities',
-  },
+  // {
+  //   name: 'Recent Activities',
+  //   icon: AiOutlineClockCircle,
+  //   path: '/',
+  // },
   {
     name: 'Review Tasks Evidence',
     icon: MdRateReview,
-    path: '/review-evidence',
+    path: '/community/evidence/summary',
   },
 ]
 
@@ -63,11 +43,7 @@ export const VolunteerMenus: Menu[] = [
     icon: CgProfile,
     path: '/profile',
   },
-  // {
-  //   name: 'View All Active Tasks',
-  //   icon: BiTask,
-  //   path: '/tasks',
-  // },
+
   {
     name: 'DashBoard',
     icon: AiOutlineDashboard,
@@ -76,6 +52,6 @@ export const VolunteerMenus: Menu[] = [
   {
     name: 'Review Tasks Evidence Status',
     icon: MdRateReview,
-    path: '/review-evidence-status',
+    path: '/volunteer/evidence/summary',
   },
 ]

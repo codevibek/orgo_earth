@@ -12,7 +12,6 @@ import {
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useGetEvidenceById } from '../../../../data/hooks/query/useGetEvidenceById'
-import { useUserData } from '../../../../data/hooks/useUserData'
 
 //TODO: When clicked on user avatar should open user profile
 //TODO: We might use the carousel to show the evidence images
@@ -20,10 +19,9 @@ import { useUserData } from '../../../../data/hooks/useUserData'
 // using the id evidence id get the details about the evidence
 function EvidenceDetails() {
   const router = useRouter()
-  const userData = useUserData()
   const evidenceId = router.query.id as string
 
-  const { data, isLoading } = useGetEvidenceById(userData?._id, evidenceId)
+  const { data, isLoading } = useGetEvidenceById(evidenceId)
 
   if (isLoading) {
     return <Skeleton height="400px" />

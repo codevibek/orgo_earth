@@ -142,6 +142,7 @@ function EvidenceSubmitPage() {
                           setTaggedVolunteers((prev) => [...prev, user])
                         }}
                         username={user.username}
+                        avatar={user.avatar}
                         key={user._id}
                       />
                     ))}
@@ -161,7 +162,7 @@ function EvidenceSubmitPage() {
                         <Avatar
                           size="lg"
                           name={user.username}
-                          src="https://bit.ly/sage-adebayo"
+                          src={user.avatar}
                           position="relative"
                         />
                         <CloseIcon
@@ -202,9 +203,14 @@ function EvidenceSubmitPage() {
 export interface UserCardProps {
   username: string
   onAdd: () => void
+  avatar: string
 }
 
-export const UserCard: React.FC<UserCardProps> = ({ username, onAdd }) => {
+export const UserCard: React.FC<UserCardProps> = ({
+  username,
+  onAdd,
+  avatar,
+}) => {
   return (
     <Flex
       alignItems="center"
@@ -215,7 +221,7 @@ export const UserCard: React.FC<UserCardProps> = ({ username, onAdd }) => {
       justifyContent="space-between"
     >
       <Flex alignItems="center">
-        <Avatar name={username} src="https://bit.ly/sage-adebayo" />
+        <Avatar name={username} src={avatar} />
         <Text ml="4">{username}</Text>
       </Flex>
       <Button onClick={onAdd}>add</Button>

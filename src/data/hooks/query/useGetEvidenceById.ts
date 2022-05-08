@@ -17,29 +17,20 @@ export interface CommunityEvidence {
   comments: string[]
 }
 
-function getCommunityEvidences(
-  communityId: string,
-  evidenceId: string,
-  status = 'To be approved'
-): Promise<CommunityEvidence> {
+function getCommunityEvidences(evidenceId: string): Promise<CommunityEvidence> {
   const token = JSON.parse(localStorage.getItem('userData'))
 
   return axios
-    .get(
-      `${apiBaseUrl}/api/evidences/community/${communityId}?status=${status}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-    .then(
-      (res) => res.data.filter((evidence) => evidence._id === evidenceId)[0]
-    )
+    .get(`${apiBaseUrl}/api/evidences/evidence/${evidenceId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => res.data)
 }
 
-export function useGetEvidenceById(communityId: string, evidenceId: string) {
-  return useQuery(['evidence', communityId, evidenceId], () => {
-    return getCommunityEvidences(communityId, evidenceId)
+export function useGetEvidenceById(evidenceId: string) {
+  return useQuery(['evidence', evidenceId], () => {
+    return getCommunityEvidences(evidenceId)
   })
 }

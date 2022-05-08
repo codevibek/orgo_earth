@@ -37,7 +37,11 @@ const TaskDetail = () => {
           Task Creator
         </Text>
         <Flex>
-          <Avatar src="https://bit.ly/prosper-baba" size="lg" name="John Doe" />
+          <Avatar
+            src={TaskDetails?.creator.avatar}
+            size="lg"
+            name={TaskDetails?.creatorCommunityName}
+          />
           <Text fontWeight="semibold" mx="4" fontSize="lg">
             {TaskDetails?.creatorCommunityName}
           </Text>

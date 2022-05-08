@@ -7,8 +7,11 @@ import {
   Select,
 } from '@chakra-ui/react'
 import { useFormik } from 'formik'
+import { useEffect, useMemo, useState } from 'react'
 import * as Yup from 'yup'
 import { useCreateTask } from '../data/hooks/mutations/useCreateTask'
+import { useGetCommunityTasks } from '../data/hooks/query/useGetCommunityTasks'
+import { useUserData } from '../data/hooks/useUserData'
 import {
   CustomSelectInput,
   CustomTextAreaInput,
@@ -17,6 +20,19 @@ import {
 
 export const CreateTaskForm = () => {
   const { isLoading, mutate: createTask } = useCreateTask()
+  const userData = useUserData()
+  const { data: templateTaskData, isLoading: templateLoading } =
+    useGetCommunityTasks(userData?._id)
+
+  const [templateTaskId, setTemplateTaskId] = useState()
+
+  const selectedTemplateTaskData = useMemo(() => {
+    if (templateTaskData && templateTaskId) {
+      return templateTaskData.find((task) => task._id === templateTaskId)
+    }
+    return null
+  }, [templateTaskData, templateTaskId])
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -46,6 +62,13 @@ export const CreateTaskForm = () => {
       createTask(value)
     },
   })
+
+  useEffect(() => {
+    if (selectedTemplateTaskData) {
+      formik.setValues(selectedTemplateTaskData)
+    }
+  }, [selectedTemplateTaskData])
+
   return (
     <Box my="5" bg="gray.200" borderRadius="5px" p="4">
       <form onSubmit={formik.handleSubmit}>
@@ -53,12 +76,19 @@ export const CreateTaskForm = () => {
           <FormLabel htmlFor="template">Select a template</FormLabel>
           <Select
             id="template"
+            value={templateTaskId}
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-ignore
+            onChange={(e) => setTemplateTaskId(e.target.value)}
             bg="whiteAlpha.600"
             placeholder="Use previous task as template"
           >
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
+            {!templateLoading &&
+              templateTaskData.map((task) => (
+                <option value={task._id} key={task._id}>
+                  {task.name}
+                </option>
+              ))}
           </Select>
           <FormHelperText>Use previous tasks as starter</FormHelperText>
         </FormControl>
