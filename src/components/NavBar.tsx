@@ -1,5 +1,4 @@
 import { Avatar, Flex, useDisclosure, Box } from '@chakra-ui/react'
-import Image from 'next/image'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { useMemo, useRef } from 'react'
@@ -22,12 +21,7 @@ export const NavBar: React.FC = () => {
       <Flex justifyContent="space-between" my="5">
         <Box cursor="pointer">
           <NextLink href="/" passHref>
-            <Image
-              src="/images/logo.png"
-              alt="Orgo_Earth"
-              height="50px"
-              width="120px"
-            />
+            <img src="/images/logo.png" alt="Orgo_Earth" />
           </NextLink>
         </Box>
         {showUserAvatar && (
