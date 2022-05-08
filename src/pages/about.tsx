@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
-import YouTube, { YouTubeProps } from 'react-youtube'
+import { VideoPlayer } from '../components/VideoPlayer'
 
 function about() {
   return (
@@ -21,7 +21,7 @@ function about() {
         Watch the video tutorial
       </Text>
 
-      <VideoPlayer />
+      <VideoPlayer videoId="7tQIJMXIG1Q" />
 
       <Flex flexDirection="column">
         <Button my="4">Create volunteer account</Button>
@@ -29,25 +29,6 @@ function about() {
       </Flex>
     </Box>
   )
-}
-
-// TODO: make it responsive
-export const VideoPlayer = () => {
-  const onPlayerReady: YouTubeProps['onReady'] = (event) => {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo()
-  }
-
-  const opts: YouTubeProps['opts'] = {
-    // height: '390',
-    // width: '640',
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
-    },
-  }
-
-  return <YouTube videoId="h1Pa2QW2VyU" opts={opts} onReady={onPlayerReady} />
 }
 
 export default about
