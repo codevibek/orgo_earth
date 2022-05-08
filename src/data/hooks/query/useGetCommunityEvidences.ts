@@ -4,7 +4,7 @@ import { apiBaseUrl } from '../../utils/constants'
 import { Task } from '../mutations/useEditTask'
 import { User } from '../mutations/useRegister'
 
-export interface CommunityEvidence {
+export interface Evidence {
   _id: string
   status: string
   evidenceImages: string[]
@@ -20,7 +20,7 @@ export interface CommunityEvidence {
 function getCommunityEvidences(
   communityId: string,
   status = 'To be approved'
-): Promise<CommunityEvidence[]> {
+): Promise<Evidence[]> {
   const token = JSON.parse(localStorage.getItem('userData'))
 
   return axios

@@ -10,7 +10,6 @@ function EvidenceReview() {
   const { data, isLoading } = useGetToBeReviewedCommunityEvidences(
     userData?._id
   )
-  console.log(data)
   return (
     <Box>
       <Text fontSize="3xl" fontWeight="extrabold">
