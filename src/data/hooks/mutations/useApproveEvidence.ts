@@ -11,7 +11,6 @@ export interface ApproveEvidenceInput {
 function approveEvidence({ taskId, userId }: ApproveEvidenceInput) {
   const token = JSON.parse(localStorage.getItem('userData')).token
 
-  console.log(token)
   return axios
     .post(`${apiBaseUrl}/api/evidences/approve/${taskId}/${userId}`, {
       headers: {

@@ -24,8 +24,6 @@ export const Camera: React.FC<CameraProps> = ({
   const webcamRef = useRef<Webcam>(null)
   const [cameraSide, setCameraSide] = useState<'front' | 'back'>('front')
 
-  console.log(images)
-
   const uploadFileHandler = async (url) => {
     const formData = new FormData()
     formData.append('file', url)

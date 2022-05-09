@@ -7,7 +7,6 @@ import { NavBar } from './NavBar'
 export const Layout: React.FC = ({ children }) => {
   const userData = useUserData()
 
-  console.log('userData', userData)
   return (
     <Box>
       <NavBar />
