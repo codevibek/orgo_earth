@@ -10,7 +10,7 @@ function Dashboard() {
   const { isLoading, data: Tasks } = useGetAllTasks()
   return (
     <Box>
-      <Text fontSize="2xl" fontWeight="bold">
+      <Text fontSize={{ base: 'xl', sm: '2xl' }} fontWeight="bold">
         Welcome to Volunteer Dashboard
       </Text>
 

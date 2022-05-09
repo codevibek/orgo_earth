@@ -69,7 +69,12 @@ function Register() {
         p={{ base: '10px', sm: '15px', md: '30px' }}
         flexDirection="column"
       >
-        <Text alignSelf="self-start" my="10px" fontSize="2xl" fontWeight="bold">
+        <Text
+          alignSelf="self-start"
+          fontSize={{ base: 'lg', lg: '2xl' }}
+          my="10px"
+          fontWeight="bold"
+        >
           Volunteer Account Register
         </Text>
         <form onSubmit={formik.handleSubmit}>
@@ -128,14 +133,28 @@ function Register() {
         </form>
         <NextLink href="/volunteer/login" passHref>
           <Link fontWeight="semibold" my="4">
-            Already Have A Volunteer Account ? Login
+            <Text
+              my="2"
+              mx="1"
+              fontWeight="semibold"
+              fontSize={{ base: 'sm', lg: '2xl' }}
+            >
+              Already Have A Volunteer Account ? Login
+            </Text>
           </Link>
         </NextLink>
       </Box>
 
       <NextLink href="/community/register" passHref>
         <Link fontWeight="semibold" my="4">
-          Switch to Community Account Register
+          <Text
+            my="2"
+            mx="1"
+            fontWeight="semibold"
+            fontSize={{ base: 'sm', lg: '2xl' }}
+          >
+            Switch to Community Account Register
+          </Text>
         </Link>
       </NextLink>
     </Box>

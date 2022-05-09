@@ -15,7 +15,7 @@ function Dashboard() {
 
   return (
     <Box>
-      <Text fontSize="2xl" fontWeight="bold">
+      <Text fontSize={{ base: 'xl', sm: '2xl' }} fontWeight="bold">
         Welcome to Community Dashboard
       </Text>
       <Button my="2" onClick={() => router.push('/community/task/new')}>

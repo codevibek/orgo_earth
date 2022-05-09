@@ -28,6 +28,7 @@ import {
   cloudinaryCloudName,
   cloudinaryUploadPreset,
 } from '../../../../data/utils/constants'
+import GoBack from '../../../../components/GoBack'
 
 // TODO: Ask for location and camera permission before submitting
 function EvidenceSubmitPage() {
@@ -91,6 +92,7 @@ function EvidenceSubmitPage() {
 
   return (
     <Box>
+      <GoBack />
       <Text fontWeight="extrabold" mt="6" fontSize="xl">
         Submit your evidence for
       </Text>

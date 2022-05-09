@@ -8,20 +8,45 @@ import {
   Input,
   Skeleton,
   Text,
+  useToast,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useState } from 'react'
+import GoBack from '../../../../components/GoBack'
+import { useApproveEvidence } from '../../../../data/hooks/mutations/useApproveEvidence'
+import { useCommentOnEvidence } from '../../../../data/hooks/mutations/useCommentOnEvidence'
 import { useGetEvidenceById } from '../../../../data/hooks/query/useGetEvidenceById'
+import { useUserData } from '../../../../data/hooks/useUserData'
 
-//TODO: When clicked on user avatar should open user profile
-//TODO: We might use the carousel to show the evidence images
-
-// using the id evidence id get the details about the evidence
 function EvidenceDetails() {
   const router = useRouter()
-  const evidenceId = router.query.id as string
+  const toast = useToast()
 
+  const evidenceId = router.query.id as string
+  const userData = useUserData()
   const { data, isLoading } = useGetEvidenceById(evidenceId)
+  const [comment, setComment] = useState('')
+  const { mutate: commentOnEvidence, isLoading: commentAddLoading } =
+    useCommentOnEvidence()
+
+  const {
+    isLoading: approvingEvidence,
+    mutate: approveEvidence,
+    isSuccess,
+  } = useApproveEvidence()
+
+  const handleCommentSubmit = (e) => {
+    e.preventDefault()
+    if (comment && comment.length > 0) {
+      return commentOnEvidence({ evidenceId, message: comment.trim() })
+    }
+    return toast({
+      title: 'Comment is empty',
+      status: 'error',
+      duration: 8000,
+      isClosable: true,
+    })
+  }
 
   if (isLoading) {
     return <Skeleton height="400px" />
@@ -29,6 +54,7 @@ function EvidenceDetails() {
 
   return (
     <Box>
+      <GoBack />
       <Text fontWeight="bold">Evidence For:</Text>
       <Text mb="4" fontSize="2xl" fontWeight="extrabold">
         {data?.taskId.name}
@@ -46,6 +72,17 @@ function EvidenceDetails() {
           <img key={image} src={image} />
         ))}
       </Box>
+
+      <Button
+        colorScheme="green"
+        isLoading={approvingEvidence}
+        disabled={isSuccess}
+        onClick={() =>
+          approveEvidence({ taskId: data?.taskId._id, userId: userData?._id })
+        }
+      >
+        Approve Evidence
+      </Button>
 
       <Box my="6">
         <Text fontWeight="bold">Evidence Submitted By: </Text>
@@ -78,10 +115,19 @@ function EvidenceDetails() {
       </Box>
 
       <Box my="6">
-        <Flex>
-          <Input placeholder="Write your comments here" variant="filled" />
-          <Button mx="4">Post</Button>
-        </Flex>
+        <form onSubmit={handleCommentSubmit}>
+          <Flex>
+            <Input
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              placeholder="Write your comments here"
+              variant="filled"
+            />
+            <Button type="submit" isLoading={commentAddLoading} mx="4">
+              Post
+            </Button>
+          </Flex>
+        </form>
 
         <HStack my="4">
           <Text bg="gray.200" color="gray.500" w="80%" borderRadius="5px" p="2">

@@ -1,10 +1,11 @@
 import { Box, Button, Flex } from '@chakra-ui/react'
-import NextLink from 'next/link'
+import { useRouter } from 'next/router'
 import { useRedirectToDashboard } from '../data/hooks/useUser'
 
 function Home() {
   // if already authenticated then redirect to dashboard
   useRedirectToDashboard()
+  const router = useRouter()
   return (
     <Box>
       <Flex
@@ -20,13 +21,14 @@ function Home() {
         </Flex>
 
         <Flex flexDir="column" width="full">
-          <Button my="4">
-            <NextLink href="/about">Get Started</NextLink>
+          <Button my="4" onClick={() => router.push('/about')}>
+            Get Started
           </Button>
-          <Button colorScheme="blue">
-            <NextLink href="/community/login">
-              I already have an account
-            </NextLink>
+          <Button
+            colorScheme="blue"
+            onClick={() => router.push('/community/login')}
+          >
+            I already have an account
           </Button>
         </Flex>
       </Flex>

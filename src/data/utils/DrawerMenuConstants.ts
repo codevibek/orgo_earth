@@ -2,6 +2,8 @@ import { CgProfile } from 'react-icons/cg'
 import { AiOutlineDashboard, AiOutlinePlus } from 'react-icons/ai'
 import { MdRateReview } from 'react-icons/md'
 import { IconType } from 'react-icons/lib'
+import { GiTeacher } from 'react-icons/gi'
+import { GrInfo } from 'react-icons/gr'
 
 export interface Menu {
   name: string
@@ -35,6 +37,16 @@ export const AdminMenus: Menu[] = [
     icon: MdRateReview,
     path: '/community/evidence/summary',
   },
+  {
+    name: 'Tutorials',
+    icon: GiTeacher,
+    path: '/community/tutorials',
+  },
+  {
+    name: 'About Us',
+    icon: GrInfo,
+    path: '/about',
+  },
 ]
 
 export const VolunteerMenus: Menu[] = [
@@ -53,5 +65,15 @@ export const VolunteerMenus: Menu[] = [
     name: 'Review Tasks Evidence Status',
     icon: MdRateReview,
     path: '/volunteer/evidence/summary',
+  },
+  {
+    name: 'Tutorials',
+    icon: GiTeacher,
+    path: '/community/tutorials',
+  },
+  {
+    name: 'About Us',
+    icon: GrInfo,
+    path: '/about',
   },
 ]

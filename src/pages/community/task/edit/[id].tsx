@@ -1,12 +1,14 @@
 import { Box, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { EditTaskForm } from '../../../../components/EditTaskForm'
+import GoBack from '../../../../components/GoBack'
 
 const EditTask = () => {
   const router = useRouter()
   const taskId = router.query.id as string
   return (
     <Box>
+      <GoBack />
       <Text fontSize="xl" fontWeight="bold">
         Edit A Task
       </Text>

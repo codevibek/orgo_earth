@@ -8,6 +8,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
+import GoBack from '../../components/GoBack'
 import { useGetTaskDetails } from '../../data/hooks/query/useGetTaskDetails'
 import { useIsCommunity } from '../../data/hooks/useIsCommunity'
 
@@ -19,6 +20,7 @@ const TaskDetail = () => {
 
   return (
     <Box>
+      <GoBack />
       <Skeleton isLoaded={!isLoading}>
         <Text my="5" fontSize="3xl" fontWeight="bold">
           {TaskDetails?.name}

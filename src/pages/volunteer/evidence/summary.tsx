@@ -1,6 +1,7 @@
 import { Box, Skeleton, Text } from '@chakra-ui/react'
 import React from 'react'
 import { EvidenceCard } from '../../../components/EvidenceCard'
+import GoBack from '../../../components/GoBack'
 import { useGetEvidenceForVolunteer } from '../../../data/hooks/query/useGetEvidenceForVolunteer'
 import { useUserData } from '../../../data/hooks/useUserData'
 
@@ -9,12 +10,24 @@ function EvidenceReview() {
 
   const { data, isLoading } = useGetEvidenceForVolunteer(userData?._id)
 
+  if (isLoading) {
+    return <Skeleton isLoaded={!isLoading} height="200px" />
+  }
+
   return (
     <Box>
-      <Text fontSize="3xl" fontWeight="extrabold">
+      <GoBack />
+      <Text
+        mt="4"
+        fontSize={{ base: 'xl', sm: '2xl', lg: '3xl' }}
+        fontWeight="extrabold"
+      >
         These are the evidence that you submitted
       </Text>
-      <Text fontSize="2xl" fontWeight="extrabold">
+      <Text
+        fontSize={{ base: 'lg', sm: 'xl', lg: '2xl' }}
+        fontWeight="extrabold"
+      >
         you can check the complete status of them by clicking on see details:
       </Text>
 

@@ -40,7 +40,12 @@ function Login() {
         p={{ base: '10px', sm: '15px', md: '30px' }}
         flexDirection="column"
       >
-        <Text alignSelf="self-start" my="10px" fontSize="2xl" fontWeight="bold">
+        <Text
+          alignSelf="self-start"
+          my="10px"
+          fontSize={{ base: 'lg', lg: '2xl' }}
+          fontWeight="bold"
+        >
           Community Account Login
         </Text>
 
@@ -76,15 +81,29 @@ function Login() {
         </form>
 
         <NextLink href="/community/register" passHref>
-          <Link fontWeight="semibold" my="4">
-            Don't Have A Community Account ? Register
+          <Link>
+            <Text
+              my="2"
+              mx="1"
+              fontWeight="semibold"
+              fontSize={{ base: 'sm', lg: 'lg' }}
+            >
+              Don't Have A Community Account ? Register
+            </Text>
           </Link>
         </NextLink>
       </Box>
 
       <NextLink href="/community/register" passHref>
         <Link fontWeight="semibold" my="4">
-          Switch to Volunteer Account Register
+          <Text
+            my="2"
+            mx="1"
+            fontWeight="semibold"
+            fontSize={{ base: 'sm', lg: '2xl' }}
+          >
+            Switch to Volunteer Account Register
+          </Text>
         </Link>
       </NextLink>
     </Box>

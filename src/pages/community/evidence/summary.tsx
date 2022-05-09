@@ -1,6 +1,7 @@
 import { Box, Skeleton, Text } from '@chakra-ui/react'
 import React from 'react'
 import { EvidenceCard } from '../../../components/EvidenceCard'
+import GoBack from '../../../components/GoBack'
 import { useGetToBeReviewedCommunityEvidences } from '../../../data/hooks/query/useGetCommunityEvidences'
 import { useUserData } from '../../../data/hooks/useUserData'
 
@@ -10,12 +11,24 @@ function EvidenceReview() {
   const { data, isLoading } = useGetToBeReviewedCommunityEvidences(
     userData?._id
   )
+
+  if (isLoading) {
+    return <Skeleton isLoaded={!isLoading} height="200px" />
+  }
   return (
     <Box>
-      <Text fontSize="3xl" fontWeight="extrabold">
+      <GoBack />
+      <Text
+        mt="4"
+        fontSize={{ base: 'xl', sm: '2xl', lg: '3xl' }}
+        fontWeight="extrabold"
+      >
         These are the task that submitted evidence for
       </Text>
-      <Text fontSize="3xl" fontWeight="extrabold">
+      <Text
+        fontSize={{ base: 'lg', sm: 'xl', lg: '2xl' }}
+        fontWeight="extrabold"
+      >
         you can review them:
       </Text>
 

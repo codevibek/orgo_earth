@@ -71,7 +71,12 @@ function Register() {
         flexDirection="column"
         width="100%"
       >
-        <Text alignSelf="self-start" my="10px" fontSize="2xl" fontWeight="bold">
+        <Text
+          alignSelf="self-start"
+          my="10px"
+          fontSize={{ base: 'lg', lg: '2xl' }}
+          fontWeight="bold"
+        >
           Community Account Register
         </Text>
 
@@ -133,13 +138,27 @@ function Register() {
 
         <NextLink href="/community/login" passHref>
           <Link fontWeight="semibold" my="4">
-            Already Have A Community Account ? Login
+            <Text
+              my="2"
+              mx="1"
+              fontWeight="semibold"
+              fontSize={{ base: 'sm', lg: 'lg' }}
+            >
+              Already Have A Community Account ? Login
+            </Text>
           </Link>
         </NextLink>
       </Box>
       <NextLink href="/volunteer/login" passHref>
         <Link fontWeight="semibold" my="4">
-          Switch to Volunteer Account Login
+          <Text
+            my="2"
+            mx="1"
+            fontWeight="semibold"
+            fontSize={{ base: 'sm', lg: 'lg' }}
+          >
+            Switch to Volunteer Account Login
+          </Text>
         </Link>
       </NextLink>
     </Box>
