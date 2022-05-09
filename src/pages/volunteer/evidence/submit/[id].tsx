@@ -91,7 +91,7 @@ function EvidenceSubmitPage() {
   })
 
   return (
-    <Box>
+    <Box pb="44">
       <GoBack />
       <Text fontWeight="extrabold" mt="6" fontSize="xl">
         Submit your evidence for

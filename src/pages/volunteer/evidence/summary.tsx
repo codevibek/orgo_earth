@@ -15,7 +15,7 @@ function EvidenceReview() {
   }
 
   return (
-    <Box>
+    <Box pb="44">
       <GoBack />
       <Text
         mt="4"

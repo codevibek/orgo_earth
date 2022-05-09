@@ -2765,6 +2765,11 @@ react@18.0.0:
   dependencies:
     loose-envify "^1.1.0"
 
+reactjs-bottom-navigation@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/reactjs-bottom-navigation/-/reactjs-bottom-navigation-1.0.4.tgz#5f1f3a8dced94642af18f707e11831e5816b7d60"
+  integrity sha512-EMikvFFEly7YbLQXLn3VF4UDiHwAF5pKjUnTXBDrSacnwMnwzcXepCZGCLNYW1+ine6udmF/SPDX+hVxxOV95g==
+
 regenerator-runtime@^0.13.4:
   version "0.13.9"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz#8925742a98ffd90814988d7566ad30ca3b263b52"

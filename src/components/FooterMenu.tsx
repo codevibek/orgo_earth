@@ -1,85 +1,47 @@
-import { Flex, IconButton, Text } from '@chakra-ui/react'
-import React from 'react'
-import { CgProfile } from 'react-icons/cg'
-import { BiHistory, BiTask } from 'react-icons/bi'
-import { MdRateReview } from 'react-icons/md'
-import { IconType } from 'react-icons/lib'
-import { useUserData } from '../data/hooks/useUserData'
+import { Container } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
+import { BiTask } from 'react-icons/bi'
+import { CgProfile } from 'react-icons/cg'
+import { MdRateReview } from 'react-icons/md'
 
-const FooterMenu: React.FC = () => {
+import BottomNavigation from 'reactjs-bottom-navigation'
+import 'reactjs-bottom-navigation/dist/index.css'
+import { useUserData } from '../data/hooks/useUserData'
+
+export function FooterMenu() {
   const userData = useUserData()
   const router = useRouter()
+  const bottomNavItems = [
+    {
+      title: 'Profile',
+      icon: <CgProfile style={{ fontSize: '18px' }} />,
+      activeIcon: <CgProfile style={{ fontSize: '18px', color: '#fff' }} />,
+      onClick: () =>
+        router.push(`/${userData.type}/profile/${userData.username}`),
+    },
 
-  console.log(router.pathname)
+    {
+      title: 'Tasks',
+      icon: <BiTask style={{ fontSize: '18px' }} />,
+      activeIcon: <BiTask style={{ fontSize: '18px', color: '#fff' }} />,
+      onClick: () => router.push(`/${userData.type}/dashboard`),
+    },
+
+    {
+      title: 'Reviews',
+      icon: <MdRateReview style={{ fontSize: '18px' }} />,
+      activeIcon: <MdRateReview style={{ fontSize: '18px', color: '#fff' }} />,
+      onClick: () => router.push(`/${userData.type}/evidence/summary`),
+    },
+  ]
 
   return (
-    <Flex
-      bg="blue.200"
-      alignItems="center"
-      justifyContent="space-around"
-      p="4"
-      borderRadius="5px"
-      boxShadow="lg"
-      position="fixed"
-      bottom="4"
-      width={{ base: '400px', lg: '570px' }}
-    >
-      <FooterMenuItem
-        text="Profile"
-        icon={CgProfile}
-        isActive={router.pathname.includes('profile')}
-        onClick={() =>
-          router.push(`/${userData.type}/profile/${userData.username}`)
-        }
+    <Container>
+      <BottomNavigation
+        items={bottomNavItems}
+        onItemClick={(item) => console.log(item)}
       />
-      <FooterMenuItem
-        text="Tasks"
-        icon={BiTask}
-        isActive={router.pathname.includes('dashboard')}
-        onClick={() => router.push(`/${userData.type}/dashboard`)}
-      />
-      {userData.type === 'community' ? (
-        <FooterMenuItem
-          icon={MdRateReview}
-          text="Review"
-          isActive={router.pathname.includes('summary')}
-          onClick={() => router.push(`/${userData.type}/evidence/summary`)}
-        />
-      ) : (
-        <FooterMenuItem
-          icon={BiHistory}
-          text="History"
-          isActive={router.pathname.includes('summary')}
-          onClick={() => router.push(`/${userData.type}/evidence/summary`)}
-        />
-      )}
-    </Flex>
-  )
-}
-
-export interface FooterMenuItemProps {
-  text: string
-  icon: IconType
-  onClick?: () => void
-  isActive?: boolean
-}
-
-export const FooterMenuItem: React.FC<FooterMenuItemProps> = ({
-  icon: Icon,
-  text,
-  onClick,
-  isActive = false,
-}) => {
-  return (
-    <Flex onClick={onClick} alignItems="center" flexDirection="column">
-      <IconButton
-        bg={isActive ? 'blue.500' : 'blue.200'}
-        aria-label="Profile"
-        icon={<Icon size={30} />}
-      />
-      <Text my="2">{text}</Text>
-    </Flex>
+    </Container>
   )
 }
 
