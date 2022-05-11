@@ -12,11 +12,15 @@ function approveEvidence({ taskId, userId }: ApproveEvidenceInput) {
   const token = JSON.parse(localStorage.getItem('userData')).token
 
   return axios
-    .post(`${apiBaseUrl}/api/evidences/approve/${taskId}/${userId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    .post(
+      `${apiBaseUrl}/api/evidences/approve/${taskId}/${userId}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
     .then((res) => res.data)
 }
 

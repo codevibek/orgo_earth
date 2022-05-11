@@ -16,7 +16,7 @@ function Home() {
         flexDirection="column"
       >
         <Flex flexDir="column">
-          <img src="/images/circle.png" />
+          <img src="/images/circlehigh.png" />
           <img src="images//text.png" />
         </Flex>
 
