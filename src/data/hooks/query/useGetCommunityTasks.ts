@@ -22,19 +22,19 @@ export interface Task {
 }
 
 function getCommunityTasks(communityId: string): Promise<Task[]> {
-  const token = JSON.parse(localStorage.getItem('userData')).token
-
   return axios
-    .get(`${apiBaseUrl}/api/tasks/community/${communityId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    .get(`${apiBaseUrl}/api/tasks/community/${communityId}`)
     .then((res) => res.data.tasks)
 }
 
 export function useGetCommunityTasks(communityId: string) {
-  return useQuery(['tasks', communityId], () => {
-    return getCommunityTasks(communityId)
-  })
+  return useQuery(
+    ['tasks', communityId],
+    () => {
+      return getCommunityTasks(communityId)
+    },
+    {
+      enabled: communityId.length > 0,
+    }
+  )
 }
