@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { VideoPlayer } from '../components/VideoPlayer'
 
-function about() {
+function About() {
   const router = useRouter()
   return (
     <Box>
@@ -45,4 +45,4 @@ function about() {
   )
 }
 
-export default about
+export default About
