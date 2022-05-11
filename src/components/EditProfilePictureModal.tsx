@@ -8,7 +8,6 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  ModalOverlay,
   Alert,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
@@ -54,7 +53,6 @@ export const EditProfilePictureModal: React.FC<EditProfilePictureProps> = ({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
-      <ModalOverlay />
       <ModalContent>
         <ModalHeader>Edit Profile Picture</ModalHeader>
         <ModalCloseButton />
