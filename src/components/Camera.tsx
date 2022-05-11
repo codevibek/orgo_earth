@@ -64,7 +64,7 @@ export const Camera: React.FC<CameraProps> = ({
           setCameraSide((prev) => (prev === 'back' ? 'front' : 'back'))
         }
       >
-        Toggle Camera Side ({cameraSide})
+        Toggle Camera Side
       </Button>
       {isCaptureEnable || (
         <Button ml="4" onClick={() => setCaptureEnable(true)}>
