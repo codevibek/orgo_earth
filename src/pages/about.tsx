@@ -1,8 +1,10 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { VideoPlayer } from '../components/VideoPlayer'
 
 function about() {
+  const router = useRouter()
   return (
     <Box>
       <Text textAlign="center" my="4" fontWeight="bold" fontSize="2xl">
@@ -29,8 +31,15 @@ function about() {
         justifyContent="center"
         flexDirection="column"
       >
-        <Button my="4">Create volunteer account</Button>
-        <Button colorScheme="blue">Create community account</Button>
+        <Button my="4" onClick={() => router.push('/volunteer/register')}>
+          Create volunteer account
+        </Button>
+        <Button
+          onClick={() => router.push('/community/register')}
+          colorScheme="blue"
+        >
+          Create community account
+        </Button>
       </Flex>
     </Box>
   )
