@@ -44,7 +44,7 @@ function EvidenceDetails() {
   }
 
   return (
-    <Box>
+    <Box height="90vh" overflow="auto">
       <GoBack />
       <Text fontWeight="bold">Evidence For:</Text>
       <Text mb="4" fontSize="2xl" fontWeight="extrabold">

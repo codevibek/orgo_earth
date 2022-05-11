@@ -16,7 +16,7 @@ function EvidenceReview() {
     return <Skeleton isLoaded={!isLoading} height="200px" />
   }
   return (
-    <Box>
+    <Box height="90vh" overflow="auto">
       <GoBack />
       <Text
         mt="4"

@@ -91,7 +91,7 @@ function EvidenceSubmitPage() {
   })
 
   return (
-    <Box pb="44">
+    <Box height="90vh" overflow="auto" pb="44">
       <GoBack />
       <Text fontWeight="extrabold" mt="6" fontSize="xl">
         Submit your evidence for

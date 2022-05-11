@@ -10,9 +10,7 @@ export const Layout: React.FC = ({ children }) => {
   return (
     <Box>
       <NavBar />
-      <Container height="90vh" overflow="auto" pb="48">
-        {children}
-      </Container>
+      <Container pb="48">{children}</Container>
       {userData && <FooterMenu />}
     </Box>
   )

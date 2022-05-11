@@ -43,7 +43,7 @@ function Profile() {
   }
 
   return (
-    <Box>
+    <Box height="90vh" overflow="auto">
       <VStack spacing={4}>
         <EditProfileDrawer
           initialData={data}

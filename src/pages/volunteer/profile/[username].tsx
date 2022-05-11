@@ -42,7 +42,7 @@ function Profile() {
     return <Skeleton height="100px" isLoaded={!isLoading} />
   }
   return (
-    <Box>
+    <Box height="90vh" overflow="auto">
       <VStack spacing="4">
         <EditProfileDrawer
           initialData={data}

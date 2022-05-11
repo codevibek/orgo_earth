@@ -10,7 +10,7 @@ function Dashboard() {
   useUser({ redirectTo: '/volunteer/login' })
   const { isLoading, data: Tasks } = useGetAllTasks()
   return (
-    <Box pb="44">
+    <Box height="90vh" overflow="auto" pb="44">
       <Text fontSize={{ base: 'xl', sm: '2xl' }} fontWeight="bold">
         Welcome to Volunteer Dashboard
       </Text>
