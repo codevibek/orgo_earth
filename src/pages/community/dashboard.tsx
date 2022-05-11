@@ -14,7 +14,7 @@ function Dashboard() {
   const { data: Tasks, isLoading } = useGetCommunityTasks(userData?._id)
 
   return (
-    <Box pb="32">
+    <Box height="90vh" overflowY="auto">
       <Text fontSize={{ base: 'xl', sm: '2xl' }} fontWeight="bold">
         Welcome to Community Dashboard
       </Text>

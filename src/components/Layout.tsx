@@ -10,10 +10,8 @@ export const Layout: React.FC = ({ children }) => {
   return (
     <Box>
       <NavBar />
-      <Container>
-        {children}
-        {userData && <FooterMenu />}
-      </Container>
+      <Container pb="48">{children}</Container>
+      {userData && <FooterMenu />}
     </Box>
   )
 }

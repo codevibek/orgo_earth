@@ -1,4 +1,3 @@
-import { Container } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { BiTask } from 'react-icons/bi'
 import { CgProfile } from 'react-icons/cg'
@@ -35,14 +34,7 @@ export function FooterMenu() {
     },
   ]
 
-  return (
-    <Container>
-      <BottomNavigation
-        items={bottomNavItems}
-        onItemClick={(item) => console.log(item)}
-      />
-    </Container>
-  )
+  return <BottomNavigation items={bottomNavItems} />
 }
 
 export default FooterMenu
