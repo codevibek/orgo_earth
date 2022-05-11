@@ -9,6 +9,7 @@ import {
   Text,
   useDisclosure,
   VStack,
+  Badge,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
@@ -104,6 +105,11 @@ function Profile() {
         {isMe && <Button onClick={onOpen}>Edit Profile</Button>}
 
         <Box width="100%" bg="gray.300" p="8" borderRadius="10px">
+          <Badge>
+            {data.type === 'community'
+              ? 'Community Account'
+              : 'Volunteer Account'}
+          </Badge>
           <Text fontWeight="bold" fontSize="lg" mt="2">
             Bio
           </Text>

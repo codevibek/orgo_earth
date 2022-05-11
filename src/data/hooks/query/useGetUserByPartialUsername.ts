@@ -6,13 +6,16 @@ import { User } from '../mutations/useRegister'
 function getUserByPartialUsername(partialUsername: string): Promise<User[]> {
   const token = JSON.parse(localStorage.getItem('userData')).token
 
-  return axios
-    .get(`${apiBaseUrl}/api/users/user/${partialUsername}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((res) => res.data.users)
+  return (
+    axios
+      .get(`${apiBaseUrl}/api/users/user/${partialUsername}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      //only show the volunteer accounts here
+      .then((res) => res.data.users.filter((user) => user.type !== 'community'))
+  )
 }
 
 export function useGetUserByPartialUsername(partialUsername: string) {

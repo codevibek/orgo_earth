@@ -50,7 +50,12 @@ function Profile() {
           isOpen={isOpen}
           onClose={onClose}
         />
-        <Avatar name={data.name} size="2xl" cursor="pointer" src={data.avatar}>
+        <Avatar
+          name={data?.name}
+          size="2xl"
+          cursor="pointer"
+          src={data?.avatar}
+        >
           {isMe && (
             <AvatarBadge boxSize="1.3em" border="none">
               <IconButton
