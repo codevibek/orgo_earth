@@ -35,7 +35,7 @@ headers:Bearer token
 
 
 
-API:   GET /api/users/profile/:id  //get users detail
+API:   GET /api/users/profile/:username  //get users detail
 body:  
 params: username
 query
@@ -137,3 +137,6 @@ params:communityId:required
 
 
 
+TODO APIS
+get all the community accounts 
+get task by community account name no token should be required

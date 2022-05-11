@@ -1,6 +1,7 @@
 import {
   Avatar,
   AvatarBadge,
+  Badge,
   Box,
   Button,
   HStack,
@@ -104,16 +105,19 @@ function Profile() {
         {isMe && <Button onClick={onOpen}>Edit Profile</Button>}
 
         <Box width="100%" bg="gray.300" p="8" borderRadius="10px">
+          <Badge>
+            {data.type === 'community'
+              ? 'Community Account'
+              : 'Volunteer Account'}
+          </Badge>
           <Text fontWeight="bold" fontSize="lg" mt="2">
             Bio
           </Text>
           <Text>{data.bio ? data.bio : 'No Bio Provided'}</Text>
-
           <Text fontWeight="bold" fontSize="lg" mt="2">
             Address
           </Text>
           <Text>{data.address ? data.address : 'No address provided'}</Text>
-
           <Text fontWeight="bold" fontSize="lg" mt="2">
             Email Address
           </Text>

@@ -9,7 +9,7 @@ import { useRedirectToDashboard } from '../../data/hooks/useUser'
 
 function Register() {
   const { isLoading, mutate } = useRegister({
-    successRedirectionPath: '/community/dashboard',
+    isCommunity: true,
   })
   useRedirectToDashboard()
   const formik = useFormik({

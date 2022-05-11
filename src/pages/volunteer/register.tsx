@@ -9,7 +9,7 @@ import { CustomTextInput } from '../../components/CustomInput'
 
 function Register() {
   const { isLoading, mutate } = useRegister({
-    successRedirectionPath: '/volunteer/dashboard',
+    isCommunity: false,
   })
   useRedirectToDashboard()
   const formik = useFormik({

@@ -4,7 +4,6 @@ import { apiBaseUrl } from '../../utils/constants'
 import { useRouter } from 'next/router'
 import { useToast } from '@chakra-ui/react'
 import { User } from './useRegister'
-import { useStore } from '../../store'
 
 export interface LoginUserInput {
   email: string
@@ -18,20 +17,42 @@ function loginUser(input: LoginUserInput): Promise<User> {
 }
 
 interface UseLoginInputs {
-  successRedirectionPath: string
+  isCommunity: boolean
 }
 
-export function useLogin({ successRedirectionPath }: UseLoginInputs) {
+export function useLogin({ isCommunity }: UseLoginInputs) {
   const router = useRouter()
   const toast = useToast()
-  const setUserData = useStore((state) => state.setUserData)
 
   return useMutation(loginUser, {
     onSuccess: (data) => {
+      console.log(`isCommunity: ${isCommunity}, data.type: ${data.type}`)
+      if (isCommunity && data.type !== 'community') {
+        toast({
+          title: 'Invalid login',
+          description:
+            'Please switch to the volunteer page since this user is not a community user',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        })
+        return null
+      }
+
+      if (!isCommunity && data.type !== 'volunteer') {
+        toast({
+          title: 'Invalid login',
+          description:
+            'Please switch to the community page since this user is not a volunteer user',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        })
+        return null
+      }
       const userData = JSON.stringify(data)
       localStorage.setItem('userData', userData)
-      setUserData(data)
-      router.push(successRedirectionPath)
+      router.push(isCommunity ? `/community/dashboard` : `/volunteer/dashboard`)
       toast({
         title: 'Successfully Logged In',
         status: 'success',

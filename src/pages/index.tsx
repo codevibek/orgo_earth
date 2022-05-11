@@ -26,7 +26,7 @@ function Home() {
           </Button>
           <Button
             colorScheme="blue"
-            onClick={() => router.push('/community/login')}
+            onClick={() => router.push('/volunteer/login')}
           >
             I already have an account
           </Button>

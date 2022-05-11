@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Badge,
   Box,
   Drawer,
   DrawerBody,
@@ -59,11 +60,17 @@ export const DrawerMenu: React.FC<DrawerMenuProps> = ({
                 cursor="pointer"
                 src={data?.avatar}
               />
+
               <Box mx="4">
                 <Text>{data?.name}</Text>
                 <Text fontSize="xs">{data?.bio}</Text>
               </Box>
             </Flex>
+            <Badge>
+              {data?.type === 'community'
+                ? 'Community Account'
+                : 'Volunteer Account'}
+            </Badge>
           </DrawerHeader>
 
           <DrawerBody>

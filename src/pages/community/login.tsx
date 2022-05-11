@@ -9,7 +9,7 @@ import { useRedirectToDashboard } from '../../data/hooks/useUser'
 
 function Login() {
   const { isLoading, mutate } = useLogin({
-    successRedirectionPath: '/community/dashboard',
+    isCommunity: true,
   })
   useRedirectToDashboard()
   const formik = useFormik({
@@ -94,7 +94,7 @@ function Login() {
         </NextLink>
       </Box>
 
-      <NextLink href="/community/register" passHref>
+      <NextLink href="/volunteer/register" passHref>
         <Link fontWeight="semibold" my="4">
           <Text
             my="2"

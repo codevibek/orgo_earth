@@ -10,6 +10,8 @@ export interface TaskCardProps {
   location: string
   creatorCommunityName: string
   id: string
+  rewards: string
+  showStatus?: boolean
 }
 
 const TaskStatusToBGColor = {
@@ -41,6 +43,8 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   priority,
   creatorCommunityName,
   id,
+  rewards,
+  showStatus = true,
 }) => {
   const router = useRouter()
   return (
@@ -51,11 +55,13 @@ export const TaskCard: React.FC<TaskCardProps> = ({
             {title}
           </Text>
           <Box>
-            <Tooltip label="Task Status">
-              <Badge mr="2" bg={TaskStatusToBGColor[status]}>
-                {TaskStatusToLabel[status]}
-              </Badge>
-            </Tooltip>
+            {showStatus && (
+              <Tooltip label="Task Status">
+                <Badge mr="2" bg={TaskStatusToBGColor[status]}>
+                  {TaskStatusToLabel[status]}
+                </Badge>
+              </Tooltip>
+            )}
             <Tooltip label="Task Priority">
               <Badge bg={TaskPriorityToColor[priority]}>
                 {TaskPriorityToLabel[priority]}
@@ -64,6 +70,8 @@ export const TaskCard: React.FC<TaskCardProps> = ({
           </Box>
         </Flex>
         <Text fontSize="sm">{location}</Text>
+
+        <Text>Rewards: {rewards}</Text>
 
         <NextLink href={`/community/profile/${creatorCommunityName}`} passHref>
           <Link fontSize="sm" color="gray.500">

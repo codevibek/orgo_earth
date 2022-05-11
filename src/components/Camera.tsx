@@ -51,7 +51,8 @@ export const Camera: React.FC<CameraProps> = ({
     return {
       width: 720,
       height: 460,
-      facingMode: cameraSide === 'front' ? 'user' : { exact: 'user' },
+      facingMode:
+        cameraSide === 'front' ? { exact: 'user' } : { exact: 'environment' },
     }
   }, [cameraSide])
 

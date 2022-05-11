@@ -3,7 +3,6 @@ import axios from 'axios'
 import { apiBaseUrl } from '../../utils/constants'
 import { useRouter } from 'next/router'
 import { useToast } from '@chakra-ui/react'
-import { useStore } from '../../store'
 
 export interface User {
   _id: string
@@ -37,21 +36,40 @@ function registerUser(input: RegisterUserInput): Promise<User> {
 }
 
 interface UseRegisterInputs {
-  successRedirectionPath: string
+  isCommunity: boolean
 }
 
-export function useRegister({ successRedirectionPath }: UseRegisterInputs) {
+export function useRegister({ isCommunity }: UseRegisterInputs) {
   const router = useRouter()
   const toast = useToast()
-  const setUserData = useStore((state) => state.setUserData)
   return useMutation(registerUser, {
     onSuccess: (data) => {
-      // set the user data to localestorage
-      // route use to the dashboard
+      if (isCommunity && data.type !== 'community') {
+        toast({
+          title: 'Invalid login',
+          description:
+            'Please switch to the volunteer page since this user is not a community user',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        })
+        return null
+      }
+
+      if (!isCommunity && data.type !== 'volunteer') {
+        toast({
+          title: 'Invalid login',
+          description:
+            'Please switch to the community page since this user is not a volunteer user',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        })
+        return null
+      }
       const userData = JSON.stringify(data)
       localStorage.setItem('userData', userData)
-      setUserData(data)
-      router.push(successRedirectionPath)
+      router.push(isCommunity ? `/community/dashboard` : `/volunteer/dashboard`)
       toast({
         title: 'Account created.',
         description: "We've created your account for you.",

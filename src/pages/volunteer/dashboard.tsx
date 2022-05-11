@@ -5,6 +5,7 @@ import { useGetAllTasks } from '../../data/hooks/query/useGetAllTasks'
 import { useUser } from '../../data/hooks/useUser'
 
 // TODO: the ability to filter them with their status and location
+// get only the tasks after the user selects the community
 function Dashboard() {
   useUser({ redirectTo: '/volunteer/login' })
   const { isLoading, data: Tasks } = useGetAllTasks()
@@ -24,6 +25,7 @@ function Dashboard() {
           Tasks?.map((task) => {
             return (
               <TaskCard
+                rewards={task.rewards}
                 key={task?._id}
                 creatorCommunityName={task?.creatorCommunityName}
                 location={task?.address}
@@ -31,6 +33,7 @@ function Dashboard() {
                 status={task?.status ?? 'active'}
                 title={task?.name}
                 id={task?._id}
+                showStatus={false}
               />
             )
           })}

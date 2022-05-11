@@ -132,7 +132,7 @@ function EvidenceSubmitPage() {
                 <Box>
                   {foundUsers && foundUsers.length === 0 && (
                     <Text color="gray.500">
-                      Sorry didn't found any user with {debouncedUsername} as
+                      Sorry we can’t find any user with ‘{debouncedUsername}’ as
                       username
                     </Text>
                   )}
