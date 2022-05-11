@@ -4,17 +4,22 @@ import { apiBaseUrl } from '../../utils/constants'
 import { User } from '../mutations/useRegister'
 
 function getUserByPartialUsername(partialUsername: string): Promise<User[]> {
-  const token = JSON.parse(localStorage.getItem('userData')).token
+  const userData = JSON.parse(localStorage.getItem('userData'))
 
   return (
     axios
       .get(`${apiBaseUrl}/api/users/user/${partialUsername}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${userData.token}`,
         },
       })
       //only show the volunteer accounts here
-      .then((res) => res.data.users.filter((user) => user.type !== 'community'))
+      // also remove the current logged in user from the list
+      .then((res) =>
+        res.data.users.filter(
+          (user) => user.type !== 'community' && user._id !== userData._id
+        )
+      )
   )
 }
 

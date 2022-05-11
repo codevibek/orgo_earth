@@ -38,6 +38,7 @@ function EvidenceDetails() {
   const handleCommentSubmit = (e) => {
     e.preventDefault()
     if (comment && comment.length > 0) {
+      setComment('')
       return commentOnEvidence({ evidenceId, message: comment.trim() })
     }
     return toast({
@@ -102,14 +103,17 @@ function EvidenceDetails() {
             Tagged Volunteers
           </Text>
           <AvatarGroup size="md">
-            <Avatar name="Ryan Florence" src="https://bit.ly/ryan-florence" />
-            <Avatar name="Segun Adebayo" src="https://bit.ly/sage-adebayo" />
-            <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
-            <Avatar
-              name="Prosper Otemuyiwa"
-              src="https://bit.ly/prosper-baba"
-            />
-            <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
+            {data.helpers.map((helper) => (
+              <Avatar
+                cursor="pointer"
+                key={helper._id}
+                onClick={() =>
+                  router.push(`/volunteer/profile/${helper.id.username}`)
+                }
+                name={helper.id.name}
+                src={helper.id.avatar}
+              />
+            ))}
           </AvatarGroup>
         </Box>
       </Box>
@@ -129,30 +133,32 @@ function EvidenceDetails() {
           </Flex>
         </form>
 
-        <HStack my="4">
-          <Text bg="gray.200" color="gray.500" w="80%" borderRadius="5px" p="2">
-            Please update your description keep it short so that everyone can
-            understand it well
-          </Text>
-          <Avatar
-            name="Dan Abrahmov"
-            size="lg"
-            cursor="pointer"
-            src="https://bit.ly/dan-abramov"
-          />
-        </HStack>
-
-        <HStack my="4">
-          <Avatar
-            name="Ryan Florence"
-            size="lg"
-            src="https://bit.ly/ryan-florence"
-          />
-
-          <Text bg="gray.200" color="gray.500" w="80%" borderRadius="5px" p="2">
-            okay give me some time
-          </Text>
-        </HStack>
+        {data.comments.map((comment) => {
+          return (
+            <HStack my="4" key={comment._id}>
+              <Text
+                bg="gray.200"
+                color="gray.500"
+                w="80%"
+                borderRadius="5px"
+                p="2"
+              >
+                {comment.message}
+              </Text>
+              <Avatar
+                name={comment.sender.username}
+                size="lg"
+                cursor="pointer"
+                onClick={() =>
+                  router.push(
+                    `/${comment.sender.type}/profile/${comment.sender.username}`
+                  )
+                }
+                src={comment.sender.avatar}
+              />
+            </HStack>
+          )
+        })}
       </Box>
     </Box>
   )

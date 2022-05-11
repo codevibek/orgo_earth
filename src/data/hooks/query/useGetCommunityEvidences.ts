@@ -4,17 +4,30 @@ import { apiBaseUrl } from '../../utils/constants'
 import { Task } from '../mutations/useEditTask'
 import { User } from '../mutations/useRegister'
 
+export interface Comment {
+  _id: string
+  sender: User
+  message: string
+  createdAt: string
+  updatedAt: string
+}
+
+export interface Helper {
+  _id: string
+  id: User
+}
+
 export interface Evidence {
   _id: string
   status: string
   evidenceImages: string[]
-  helpers: string[]
+  helpers: Helper[]
   taskId: Task
   userId: User
   evidenceDetails: string
   createdAt: string
   updatedAt: string
-  comments: string[]
+  comments: Comment[]
 }
 
 function getCommunityEvidences(

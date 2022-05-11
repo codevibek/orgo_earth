@@ -2,6 +2,7 @@ import { useMutation } from 'react-query'
 import axios from 'axios'
 import { apiBaseUrl } from '../../utils/constants'
 import { useToast } from '@chakra-ui/react'
+import { queryClient } from '../../../pages/_app'
 
 export interface CreateCommentInput {
   message: string
@@ -28,6 +29,8 @@ export function useCommentOnEvidence() {
 
   return useMutation(createComment, {
     onSuccess: () => {
+      queryClient.invalidateQueries('evidence')
+
       toast({
         title: 'Comment successfully added',
         status: 'success',
