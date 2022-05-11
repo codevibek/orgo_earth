@@ -24,7 +24,6 @@ import { EditProfileDrawer } from '../../../components/EditProfileDrawer'
 import { useGetUserProfile } from '../../../data/hooks/query/useGetUserProfile'
 import { useIsMe } from '../../../data/hooks/useIsMe'
 import { EditProfilePictureModal } from '../../../components/EditProfilePictureModal'
-import GoBack from '../../../components/GoBack'
 
 function Profile() {
   const { onOpen, isOpen, onClose } = useDisclosure()
@@ -45,7 +44,6 @@ function Profile() {
 
   return (
     <Box>
-      <GoBack />
       <VStack spacing={4}>
         <EditProfileDrawer
           initialData={data}
