@@ -17,8 +17,7 @@ export function FooterMenu() {
       activeIcon: (
         <AiOutlineCompass style={{ fontSize: '18px', color: '#fff' }} />
       ),
-      onClick: () =>
-        router.push(`/${userData.type}/profile/${userData.username}`),
+      onClick: () => router.push(`/explore`),
     },
 
     {
