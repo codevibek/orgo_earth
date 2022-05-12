@@ -1,14 +1,7 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  Flex,
-  HStack,
-  Skeleton,
-  Text,
-} from '@chakra-ui/react'
+import { Box, Button, HStack, Skeleton, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import GoBack from '../../components/GoBack'
+import { TaskCard } from '../../components/TaskCard'
 import { useGetTaskDetails } from '../../data/hooks/query/useGetTaskDetails'
 import { useIsCommunity } from '../../data/hooks/useIsCommunity'
 
@@ -22,19 +15,34 @@ const TaskDetail = () => {
     <Box>
       <GoBack />
       <Skeleton isLoaded={!isLoading}>
-        <Text my="5" fontSize="3xl" fontWeight="bold">
-          {TaskDetails?.name}
-        </Text>
+        <TaskCard
+          creatorUsername={TaskDetails?.creator.username}
+          creatorCommunityName={TaskDetails?.creatorCommunityName}
+          id={TaskDetails?._id}
+          location={TaskDetails?.address}
+          priority={TaskDetails?.priority}
+          rewards={TaskDetails?.rewards}
+          title={TaskDetails?.name}
+          status={TaskDetails?.status}
+          showStatus={isCommunity}
+        />
+
         <Text my="2">{TaskDetails?.description}</Text>
 
-        <Box my="4">
+        <Text mt="6" fontSize="2xl" fontWeight="bold">
+          Submission Requirements
+        </Text>
+
+        <Text>{TaskDetails?.evidence}</Text>
+
+        {/* <Box my="4">
           <Text mb="2" fontWeight="semibold">
             Location: {TaskDetails?.address}
           </Text>
-        </Box>
+        </Box> */}
       </Skeleton>
 
-      <Box my="6">
+      {/* <Box my="6">
         <Text fontSize="xl" my="2">
           Task Creator
         </Text>
@@ -42,13 +50,19 @@ const TaskDetail = () => {
           <Avatar
             src={TaskDetails?.creator.avatar}
             size="lg"
+            cursor="pointer"
             name={TaskDetails?.creatorCommunityName}
+            onClick={() =>
+              router.push(
+                `/${TaskDetails?.creator.type}/profile/${TaskDetails?.creator.username}`
+              )
+            }
           />
           <Text fontWeight="semibold" mx="4" fontSize="lg">
             {TaskDetails?.creatorCommunityName}
           </Text>
         </Flex>
-      </Box>
+      </Box> */}
 
       <HStack spacing="5" my="5">
         {isCommunity ? (
@@ -57,9 +71,10 @@ const TaskDetail = () => {
           </Button>
         ) : (
           <Button
+            colorScheme="blue"
             onClick={() => router.push(`/volunteer/evidence/submit/${taskId}`)}
           >
-            Submit Evidence
+            Start this task
           </Button>
         )}
       </HStack>

@@ -6,6 +6,7 @@ import { useFormik } from 'formik'
 import { useRegister } from '../../data/hooks/mutations/useRegister'
 import { useRedirectToDashboard } from '../../data/hooks/useUser'
 import { CustomTextInput } from '../../components/CustomInput'
+import { SwitchButton } from '../../components/SwitchButton'
 
 function Register() {
   const { isLoading, mutate } = useRegister({
@@ -75,7 +76,7 @@ function Register() {
           my="10px"
           fontWeight="bold"
         >
-          Volunteer Account Register
+          Create a Volunteer Account
         </Text>
         <form onSubmit={formik.handleSubmit}>
           <CustomTextInput
@@ -102,7 +103,7 @@ function Register() {
             name="email"
             formik={formik}
             label="Email Address"
-            helperText="We'll never share your email"
+            helperText="Email address is case sensitive"
           />
           <CustomTextInput
             isTouched={formik.touched.password}
@@ -139,24 +140,16 @@ function Register() {
               fontWeight="semibold"
               fontSize={{ base: 'sm', lg: '2xl' }}
             >
-              Already Have A Volunteer Account ? Login
+              Already have an account? Log in
             </Text>
           </Link>
         </NextLink>
       </Box>
 
-      <NextLink href="/community/register" passHref>
-        <Link fontWeight="semibold" my="4">
-          <Text
-            my="2"
-            mx="1"
-            fontWeight="semibold"
-            fontSize={{ base: 'sm', lg: '2xl' }}
-          >
-            Switch to Community Account Register
-          </Text>
-        </Link>
-      </NextLink>
+      <SwitchButton
+        label="Switch to Community Account"
+        path="/community/register"
+      />
     </Box>
   )
 }

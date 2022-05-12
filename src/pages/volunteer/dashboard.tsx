@@ -7,22 +7,26 @@ import {
   Skeleton,
   Text,
 } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TaskCard } from '../../components/TaskCard'
 import { useGetAllCommunityAccounts } from '../../data/hooks/query/useGetAllCommunityAccounts'
 import { useGetCommunityTasks } from '../../data/hooks/query/useGetCommunityTasks'
 import { useUser } from '../../data/hooks/useUser'
 
-// TODO: the ability to filter them with their status and location
-// get only the tasks after the user selects the community
-
-// we need to show a selector that allows user to select a community and after that fetch the active tasks
-// from the community id api
 function Dashboard() {
   useUser({ redirectTo: '/volunteer/login' })
 
+  useEffect(() => {
+    setSelectedCommunityId(localStorage.getItem('selectedCommunityId') || '')
+  }, [])
+
   const [selectedCommunityId, setSelectedCommunityId] = useState('')
   const { isLoading, data: Tasks } = useGetCommunityTasks(selectedCommunityId)
+
+  const handleCommunityChange = (e) => {
+    setSelectedCommunityId(e.target.value)
+    localStorage.setItem('selectedCommunityId', e.target.value)
+  }
 
   const { data: communityAccounts, isLoading: communityAccountsLoading } =
     useGetAllCommunityAccounts()
@@ -38,7 +42,7 @@ function Dashboard() {
           value={selectedCommunityId}
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //@ts-ignore
-          onChange={(e) => setSelectedCommunityId(e.target.value)}
+          onChange={handleCommunityChange}
           bg="whiteAlpha.600"
           placeholder="Choose a community"
         >
@@ -74,6 +78,7 @@ function Dashboard() {
           Tasks?.map((task) => {
             return (
               <TaskCard
+                creatorUsername={task?.creator.username}
                 rewards={task.rewards}
                 key={task?._id}
                 creatorCommunityName={task?.creatorCommunityName}

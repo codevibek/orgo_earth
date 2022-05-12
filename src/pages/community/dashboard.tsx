@@ -32,6 +32,7 @@ function Dashboard() {
             Tasks?.map((task) => {
               return (
                 <TaskCard
+                  creatorUsername={task?.creator.username}
                   rewards={task.rewards}
                   key={task?._id}
                   creatorCommunityName={task?.creatorCommunityName}

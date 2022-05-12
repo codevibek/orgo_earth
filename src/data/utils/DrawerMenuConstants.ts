@@ -1,9 +1,10 @@
 import { CgProfile } from 'react-icons/cg'
-import { AiOutlineDashboard, AiOutlinePlus } from 'react-icons/ai'
+import { AiOutlinePlus } from 'react-icons/ai'
 import { MdRateReview } from 'react-icons/md'
 import { IconType } from 'react-icons/lib'
 import { GiTeacher } from 'react-icons/gi'
 import { GrInfo } from 'react-icons/gr'
+import { BiTask } from 'react-icons/bi'
 
 export interface Menu {
   name: string
@@ -13,18 +14,18 @@ export interface Menu {
 
 export const AdminMenus: Menu[] = [
   {
-    name: 'View Profile',
+    name: 'My Profile',
     icon: CgProfile,
     path: '/profile',
   },
   {
-    name: 'Create A Task',
+    name: 'Create New Task',
     icon: AiOutlinePlus,
     path: '/community/task/new',
   },
   {
-    name: 'Dashboard',
-    icon: AiOutlineDashboard,
+    name: 'My Tasks',
+    icon: BiTask,
     path: '/community/dashboard',
   },
   // {
@@ -33,7 +34,7 @@ export const AdminMenus: Menu[] = [
   //   path: '/',
   // },
   {
-    name: 'Review Tasks Evidence',
+    name: 'Review Submissions',
     icon: MdRateReview,
     path: '/community/evidence/summary',
   },
@@ -51,18 +52,18 @@ export const AdminMenus: Menu[] = [
 
 export const VolunteerMenus: Menu[] = [
   {
-    name: 'View Profile',
+    name: 'My Profile',
     icon: CgProfile,
     path: '/profile',
   },
 
   {
-    name: 'DashBoard',
-    icon: AiOutlineDashboard,
+    name: 'Available Tasks',
+    icon: BiTask,
     path: '/volunteer/dashboard',
   },
   {
-    name: 'Review Tasks Evidence Status',
+    name: 'My Submissions',
     icon: MdRateReview,
     path: '/volunteer/evidence/summary',
   },

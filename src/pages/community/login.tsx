@@ -6,6 +6,7 @@ import * as Yup from 'yup'
 import { useLogin } from '../../data/hooks/mutations/useLogin'
 import { CustomTextInput } from '../../components/CustomInput'
 import { useRedirectToDashboard } from '../../data/hooks/useUser'
+import { SwitchButton } from '../../components/SwitchButton'
 
 function Login() {
   const { isLoading, mutate } = useLogin({
@@ -46,7 +47,7 @@ function Login() {
           fontSize={{ base: 'lg', lg: '2xl' }}
           fontWeight="bold"
         >
-          Community Account Login
+          Login as Community
         </Text>
 
         <form onSubmit={formik.handleSubmit}>
@@ -57,7 +58,7 @@ function Login() {
             name="email"
             formik={formik}
             label="Email Address"
-            helperText="We'll never share your email"
+            helperText="Email address is case sensitive"
           />
 
           <CustomTextInput
@@ -88,24 +89,16 @@ function Login() {
               fontWeight="semibold"
               fontSize={{ base: 'sm', lg: 'lg' }}
             >
-              Don't Have A Community Account ? Register
+              Don't have an account yet? Sign up
             </Text>
           </Link>
         </NextLink>
       </Box>
 
-      <NextLink href="/volunteer/register" passHref>
-        <Link fontWeight="semibold" my="4">
-          <Text
-            my="2"
-            mx="1"
-            fontWeight="semibold"
-            fontSize={{ base: 'sm', lg: '2xl' }}
-          >
-            Switch to Volunteer Account Register
-          </Text>
-        </Link>
-      </NextLink>
+      <SwitchButton
+        label="Switch to Volunteer Account"
+        path="/volunteer/login"
+      />
     </Box>
   )
 }

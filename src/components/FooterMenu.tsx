@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
+import { AiOutlineCompass } from 'react-icons/ai'
 import { BiTask } from 'react-icons/bi'
-import { CgProfile } from 'react-icons/cg'
 import { MdRateReview } from 'react-icons/md'
 
 import BottomNavigation from 'reactjs-bottom-navigation'
@@ -12,9 +12,11 @@ export function FooterMenu() {
   const router = useRouter()
   const bottomNavItems = [
     {
-      title: 'Profile',
-      icon: <CgProfile style={{ fontSize: '18px' }} />,
-      activeIcon: <CgProfile style={{ fontSize: '18px', color: '#fff' }} />,
+      title: 'Explore',
+      icon: <AiOutlineCompass style={{ fontSize: '18px' }} />,
+      activeIcon: (
+        <AiOutlineCompass style={{ fontSize: '18px', color: '#fff' }} />
+      ),
       onClick: () =>
         router.push(`/${userData.type}/profile/${userData.username}`),
     },
@@ -27,7 +29,7 @@ export function FooterMenu() {
     },
 
     {
-      title: 'Reviews',
+      title: 'Submissions',
       icon: <MdRateReview style={{ fontSize: '18px' }} />,
       activeIcon: <MdRateReview style={{ fontSize: '18px', color: '#fff' }} />,
       onClick: () => router.push(`/${userData.type}/evidence/summary`),

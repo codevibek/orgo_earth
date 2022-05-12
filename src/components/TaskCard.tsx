@@ -9,6 +9,7 @@ export interface TaskCardProps {
   priority: 'low' | 'medium' | 'high'
   location: string
   creatorCommunityName: string
+  creatorUsername: string
   id: string
   rewards: string
   showStatus?: boolean
@@ -45,10 +46,18 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   id,
   rewards,
   showStatus = true,
+  creatorUsername,
 }) => {
   const router = useRouter()
   return (
-    <Box bg="gray.200" p="2" my="5" borderRadius="5px">
+    <Box
+      cursor="pointer"
+      onClick={() => router.push(`/task/${id}`)}
+      bg="gray.200"
+      p="2"
+      my="5"
+      borderRadius="5px"
+    >
       <Box mx="4">
         <Flex alignItems="center" my="1" justifyContent="space-between">
           <Text fontSize="lg" fontWeight="bold">
@@ -73,7 +82,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 
         <Text>Rewards: {rewards}</Text>
 
-        <NextLink href={`/community/profile/${creatorCommunityName}`} passHref>
+        <NextLink href={`/community/profile/${creatorUsername}`} passHref>
           <Link fontSize="sm" color="gray.500">
             Task created by {creatorCommunityName}
           </Link>
