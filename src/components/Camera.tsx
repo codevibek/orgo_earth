@@ -1,4 +1,4 @@
-import { Box, Button, Divider, VStack } from '@chakra-ui/react'
+import { Box, Button, Divider, Flex, HStack, VStack } from '@chakra-ui/react'
 import axios from 'axios'
 import { useRef, useState, useCallback, useMemo } from 'react'
 import Webcam from 'react-webcam'
@@ -57,20 +57,14 @@ export const Camera: React.FC<CameraProps> = ({
   }, [cameraSide])
 
   return (
-    <>
-      <Button
-        mr="4"
-        onClick={() =>
-          setCameraSide((prev) => (prev === 'back' ? 'front' : 'back'))
-        }
-      >
-        Toggle Camera Side
-      </Button>
-      {isCaptureEnable || (
-        <Button ml="4" onClick={() => setCaptureEnable(true)}>
-          Capture Image
-        </Button>
-      )}
+    <Box>
+      <Flex my="2">
+        {isCaptureEnable || (
+          <Button display="inline" onClick={() => setCaptureEnable(true)}>
+            Enable Camera
+          </Button>
+        )}
+      </Flex>
       {isCaptureEnable && (
         <>
           <Button my="4" onClick={() => setCaptureEnable(false)}>
@@ -84,9 +78,20 @@ export const Camera: React.FC<CameraProps> = ({
             screenshotFormat="image/jpeg"
             videoConstraints={videoConstraints}
           />
-          <Button my="4" onClick={capture}>
-            Capture Image
-          </Button>
+          <HStack spacing={4}>
+            <Button my="4" onClick={capture}>
+              Capture Image
+            </Button>
+
+            <Button
+              display="inline"
+              onClick={() =>
+                setCameraSide((prev) => (prev === 'back' ? 'front' : 'back'))
+              }
+            >
+              Toggle Camera Side
+            </Button>
+          </HStack>
         </>
       )}
       {urls && (
@@ -110,6 +115,6 @@ export const Camera: React.FC<CameraProps> = ({
           })}
         </VStack>
       )}
-    </>
+    </Box>
   )
 }

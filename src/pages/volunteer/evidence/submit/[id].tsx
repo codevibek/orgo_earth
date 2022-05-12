@@ -1,5 +1,4 @@
 import {
-  Badge,
   Box,
   Button,
   Flex,
@@ -29,6 +28,7 @@ import {
   cloudinaryUploadPreset,
 } from '../../../../data/utils/constants'
 import GoBack from '../../../../components/GoBack'
+import { TaskCard } from '../../../../components/TaskCard'
 
 // TODO: Ask for location and camera permission before submitting
 function EvidenceSubmitPage() {
@@ -93,11 +93,27 @@ function EvidenceSubmitPage() {
   return (
     <Box height="90vh" overflow="auto" pb="44">
       <GoBack />
-      <Text fontWeight="extrabold" mt="6" fontSize="xl">
-        Submit your evidence for
+      <TaskCard
+        creatorUsername={TaskDetails?.creator.username}
+        creatorCommunityName={TaskDetails?.creatorCommunityName}
+        id={TaskDetails?._id}
+        location={TaskDetails?.address}
+        priority={TaskDetails?.priority}
+        rewards={TaskDetails?.rewards}
+        title={TaskDetails?.name}
+        status={TaskDetails?.status}
+        showStatus={false}
+      />
+      <Text mt="6" fontSize="xl" fontWeight="bold">
+        Submission Requirements
       </Text>
+
+      <Text>{TaskDetails?.evidence}</Text>
+      {/* <Text fontWeight="extrabold" mt="6" fontSize="xl">
+        Submit your evidence for
+      </Text> */}
       <Skeleton isLoaded={!isLoading}>
-        <Text fontWeight="bold" fontSize="lg" color="gray.400">
+        {/* <Text fontWeight="bold" fontSize="lg" color="gray.400">
           {TaskDetails?.name}
         </Text>
         <Flex alignItems="center" my="2">
@@ -105,7 +121,7 @@ function EvidenceSubmitPage() {
             Task Created By :
           </Text>
           <Badge> {TaskDetails?.creatorCommunityName}</Badge>
-        </Flex>
+        </Flex> */}
         <form onSubmit={formik.handleSubmit}>
           <Box>
             <CustomTextAreaInput
@@ -114,18 +130,19 @@ function EvidenceSubmitPage() {
               errorMessage={formik.errors.evidenceDetails}
               name="evidenceDetails"
               formik={formik}
-              label="Evidence Description"
+              placeholder="Evidence description"
+              label="Task Evidence"
             />
 
             <Box my="4">
-              <FormLabel htmlFor="tags">Tag a volunteer</FormLabel>
+              <FormLabel htmlFor="tags">Who else worked on this?</FormLabel>
               <Input
                 id="tags"
                 name="tags"
                 value={searchUsername}
                 onChange={(e) => setSearchUsername(e.target.value)}
                 variant="filled"
-                placeholder="type username"
+                placeholder="tag who helped and split the rewards"
               />
               {userSearchLoading && <Skeleton my="2" p="4" height="20px" />}
               {!userSearchLoading && debouncedUsername && (
@@ -183,6 +200,8 @@ function EvidenceSubmitPage() {
               </Box>
             </Box>
 
+            <Text>Picture Evidence</Text>
+
             <Camera
               images={images}
               setImages={setImages}
@@ -192,8 +211,12 @@ function EvidenceSubmitPage() {
           </Box>
 
           <Box my="4">
-            <Button isLoading={submitEvidenceLoading} type="submit">
-              Submit Evidence
+            <Button
+              colorScheme="blue"
+              isLoading={submitEvidenceLoading}
+              type="submit"
+            >
+              Submit for review
             </Button>
           </Box>
         </form>

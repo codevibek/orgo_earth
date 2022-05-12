@@ -17,6 +17,7 @@ export interface CustomInputProps {
   isTouched?: boolean
   isInvalid?: boolean
   errorMessage?: string
+  placeholder?: string
 }
 
 export const CustomTextInput: React.FC<CustomInputProps> = ({
@@ -57,11 +58,13 @@ export const CustomTextAreaInput: React.FC<CustomInputProps> = ({
   isTouched,
   isInvalid,
   errorMessage,
+  placeholder,
 }) => {
   return (
     <FormControl isInvalid={isInvalid && isTouched} my="3">
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <Textarea
+        placeholder={placeholder}
         {...formik.getFieldProps(name)}
         variant="filled"
         id={name}
