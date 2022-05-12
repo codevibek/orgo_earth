@@ -33,10 +33,15 @@ function EvidenceReview() {
 
       <Box my="12">
         <Text fontWeight="medium" fontSize="xl">
-          To Be Reviewed:
+          Under review:
         </Text>
         <Skeleton isLoaded={!isLoading}>
-          {data && data.length === 0 && <Text>No Evidence to Review </Text>}
+          {data && data.length === 0 && (
+            <Text>
+              Sorry, we didn’t find anything. Make sure you submit evidence for
+              a task and then come back.
+            </Text>
+          )}
           {data &&
             data.map((evidence) => (
               <EvidenceCard

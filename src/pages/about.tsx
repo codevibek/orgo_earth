@@ -31,13 +31,14 @@ function About() {
         justifyContent="center"
         flexDirection="column"
       >
-        <Button my="4" onClick={() => router.push('/volunteer/register')}>
+        <Button
+          colorScheme="blue"
+          my="4"
+          onClick={() => router.push('/volunteer/register')}
+        >
           Create volunteer account
         </Button>
-        <Button
-          onClick={() => router.push('/community/register')}
-          colorScheme="blue"
-        >
+        <Button onClick={() => router.push('/community/register')}>
           Create community account
         </Button>
       </Flex>

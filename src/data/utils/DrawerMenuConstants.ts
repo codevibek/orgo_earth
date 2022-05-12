@@ -70,7 +70,7 @@ export const VolunteerMenus: Menu[] = [
   {
     name: 'Tutorials',
     icon: GiTeacher,
-    path: '/community/tutorials',
+    path: '/volunteer/tutorials',
   },
   {
     name: 'About Us',

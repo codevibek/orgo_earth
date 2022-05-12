@@ -25,17 +25,19 @@ export const EditTaskForm = ({ taskId }: { taskId: string }) => {
     },
     validationSchema: Yup.object({
       name: Yup.string()
-        .min(5, 'Name must be at least 5 characters long')
-        .required('Name is required'),
-      address: Yup.string().required('Location is required'),
+        .min(3, 'task name must be at least 3 characters long')
+        .required('Please enter a task name.'),
+      address: Yup.string().required('Please enter a location'),
       description: Yup.string()
         .min(5, 'Description must be at least 5 characters long')
-        .required('Description is required'),
-      hours: Yup.string().required('Hours is required'),
-      evidence: Yup.string().required('Evidence is required'),
-      status: Yup.string().required('Status is required'),
-      priority: Yup.string().required('Priority is required'),
-      rewards: Yup.string().required('Rewards is required'),
+        .required('Please enter a description'),
+      hours: Yup.string().required('Please enter an estimated time.'),
+      evidence: Yup.string().required(
+        'Please enter the submission requirements.'
+      ),
+      status: Yup.string().required('Please set the status.'),
+      priority: Yup.string().required('Please set a priority level'),
+      rewards: Yup.string().required('Please enter rewards offered'),
     }),
     onSubmit: (values) => {
       editTask({ ...values, taskId })
@@ -71,14 +73,22 @@ export const EditTaskForm = ({ taskId }: { taskId: string }) => {
           label="Description"
         />
 
-        <CustomTextInput
+        <CustomSelectInput
           isTouched={formik.touched.hours}
           isInvalid={!!formik.errors.hours}
           errorMessage={formik.errors.hours}
           name="hours"
           formik={formik}
-          label="Hours Required"
-        />
+          label="Estimated time"
+        >
+          <option value="5 minutes">5 minutes</option>
+          <option value="15 minutes">15 minutes</option>
+          <option value="30 minutes">30 minutes</option>
+          <option value="1 hour">1 hour</option>
+          <option value="2 hours">2 hours</option>
+          <option value="3 hours">3 hours</option>
+          <option value="3+ hours">3+ hours</option>
+        </CustomSelectInput>
 
         <CustomTextAreaInput
           isTouched={formik.touched.evidence}
@@ -86,7 +96,8 @@ export const EditTaskForm = ({ taskId }: { taskId: string }) => {
           errorMessage={formik.errors.evidence}
           name="evidence"
           formik={formik}
-          label="Evidence Needed"
+          placeholder="Example: Take before and after pictures from a height of 5 feet"
+          label="Submission requirements"
         />
 
         <CustomTextAreaInput
@@ -95,7 +106,8 @@ export const EditTaskForm = ({ taskId }: { taskId: string }) => {
           errorMessage={formik.errors.rewards}
           name="rewards"
           formik={formik}
-          label="Rewards"
+          label="Rewards Offered"
+          placeholder="Example: 10 ORGO Earth Points or $50 giftcard"
         />
 
         <CustomSelectInput
@@ -119,8 +131,8 @@ export const EditTaskForm = ({ taskId }: { taskId: string }) => {
           formik={formik}
           label="Status"
         >
-          <option value="active">Active</option>
-          <option value="inactive">In Active</option>
+          <option value="active">Make public (active)</option>
+          <option value="inactive">Hide from volunteers (inactive)</option>
         </CustomSelectInput>
 
         <Button isLoading={taskEditLoading} type="submit">

@@ -5,21 +5,21 @@ import { VideoPlayer } from '../../components/VideoPlayer'
 function about() {
   return (
     <Box>
-      <Box my="4">
+      <Box my="16">
         <Text textAlign="center" my="4" fontWeight="bold" fontSize="2xl">
           Create Task
         </Text>
         <VideoPlayer videoId="7tQIJMXIG1Q" />
       </Box>
 
-      <Box my="4">
+      <Box my="16">
         <Text textAlign="center" my="4" fontWeight="bold" fontSize="2xl">
           Review Evidence Submissions
         </Text>
         <VideoPlayer videoId="7tQIJMXIG1Q" />
       </Box>
 
-      <Box my="4">
+      <Box my="16">
         <Text textAlign="center" my="4" fontWeight="bold" fontSize="2xl">
           View Post Submissions
         </Text>
