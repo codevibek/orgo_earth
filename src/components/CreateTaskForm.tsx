@@ -86,7 +86,7 @@ export const CreateTaskForm = () => {
             placeholder="Use previous task as template"
           >
             {!templateLoading &&
-              templateTaskData.map((task) => (
+              templateTaskData?.map((task) => (
                 <option value={task._id} key={task._id}>
                   {task.name}
                 </option>

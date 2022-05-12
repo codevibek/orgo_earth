@@ -34,7 +34,7 @@ export function useGetCommunityTasks(communityId: string) {
       return getCommunityTasks(communityId)
     },
     {
-      enabled: communityId.length > 0,
+      enabled: communityId?.length > 0,
     }
   )
 }
