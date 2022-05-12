@@ -1,6 +1,6 @@
 import { Box, Button, Divider, Flex, HStack, VStack } from '@chakra-ui/react'
 import axios from 'axios'
-import { useRef, useState, useCallback, useMemo } from 'react'
+import { useRef, useState, useCallback, useMemo, useEffect } from 'react'
 import Webcam from 'react-webcam'
 import {
   cloudinaryCloudName,
@@ -47,12 +47,16 @@ export const Camera: React.FC<CameraProps> = ({
     uploadFileHandler(imageSrc)
   }, [webcamRef, urls, setUrls])
 
+  useEffect(() => {
+    const supported = navigator.mediaDevices.getSupportedConstraints()
+    console.log(supported.facingMode)
+  })
+
   const videoConstraints = useMemo(() => {
     return {
       width: 720,
       height: 460,
-      facingMode:
-        cameraSide === 'front' ? { exact: 'user' } : { exact: 'environment' },
+      facingMode: cameraSide === 'front' ? 'user' : { exact: 'environment' },
     }
   }, [cameraSide])
 
