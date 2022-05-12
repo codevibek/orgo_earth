@@ -83,7 +83,11 @@ export const TaskCard: React.FC<TaskCardProps> = ({
         <Text>Rewards: {rewards}</Text>
 
         <NextLink href={`/community/profile/${creatorUsername}`} passHref>
-          <Link fontSize="sm" color="gray.500">
+          <Link
+            onClick={(e) => e.stopPropagation()}
+            fontSize="sm"
+            color="gray.500"
+          >
             Task created by {creatorCommunityName}
           </Link>
         </NextLink>
