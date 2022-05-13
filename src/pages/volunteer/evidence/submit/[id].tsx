@@ -101,6 +101,7 @@ function EvidenceSubmitPage() {
         title={TaskDetails?.name}
         status={TaskDetails?.status}
         showStatus={false}
+        showDetails={false}
       />
       <Text mt="6" fontSize="xl" fontWeight="bold">
         Submission Requirements
