@@ -1,7 +1,16 @@
-import { Box, Button, Divider, Flex, HStack, VStack } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Divider,
+  Flex,
+  HStack,
+  IconButton,
+  VStack,
+} from '@chakra-ui/react'
 import axios from 'axios'
 import { useRef, useState, useCallback, useMemo, useEffect } from 'react'
 import Webcam from 'react-webcam'
+import { RiCameraSwitchLine } from 'react-icons/ri'
 import {
   cloudinaryCloudName,
   cloudinaryUploadPreset,
@@ -60,11 +69,28 @@ export const Camera: React.FC<CameraProps> = ({
     }
   }, [cameraSide])
 
+  const ref = useRef(null)
+
+  useEffect(() => {
+    ref.current
+      ? console.log('mounted buytton')
+      : console.log('unmounted button')
+
+    console.log(ref.current)
+  })
+
+  const handleEnableCamera = () => {
+    setCaptureEnable(!isCaptureEnable)
+    setTimeout(() => {
+      ref.current.scrollIntoView({ behavior: 'smooth' })
+    }, 0)
+  }
+
   return (
     <Box>
       <Flex my="2">
         {isCaptureEnable || (
-          <Button display="inline" onClick={() => setCaptureEnable(true)}>
+          <Button display="inline" onClick={handleEnableCamera}>
             Enable Camera
           </Button>
         )}
@@ -83,18 +109,17 @@ export const Camera: React.FC<CameraProps> = ({
             videoConstraints={videoConstraints}
           />
           <HStack spacing={4}>
-            <Button my="4" onClick={capture}>
+            <Button ref={ref} my="4" onClick={capture}>
               Capture Image
             </Button>
 
-            <Button
-              display="inline"
+            <IconButton
               onClick={() =>
                 setCameraSide((prev) => (prev === 'back' ? 'front' : 'back'))
               }
-            >
-              Toggle Camera Side
-            </Button>
+              aria-label="toggle camera side"
+              icon={<RiCameraSwitchLine size={25} />}
+            />
           </HStack>
         </>
       )}

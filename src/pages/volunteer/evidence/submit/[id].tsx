@@ -50,8 +50,6 @@ function EvidenceSubmitPage() {
   const [urls, setUrls] = useState<string[]>([])
   const [images, setImages] = useState<string[]>([])
 
-  // as soon as the image is captured it is uploaded to cloudinary and the url is stored in the state
-
   const uploadFileHandler = async (url) => {
     const formData = new FormData()
     formData.append('file', url)
@@ -109,19 +107,8 @@ function EvidenceSubmitPage() {
       </Text>
 
       <Text>{TaskDetails?.evidence}</Text>
-      {/* <Text fontWeight="extrabold" mt="6" fontSize="xl">
-        Submit your evidence for
-      </Text> */}
+
       <Skeleton isLoaded={!isLoading}>
-        {/* <Text fontWeight="bold" fontSize="lg" color="gray.400">
-          {TaskDetails?.name}
-        </Text>
-        <Flex alignItems="center" my="2">
-          <Text mr="2" color="gray.500">
-            Task Created By :
-          </Text>
-          <Badge> {TaskDetails?.creatorCommunityName}</Badge>
-        </Flex> */}
         <form onSubmit={formik.handleSubmit}>
           <Box>
             <CustomTextAreaInput
