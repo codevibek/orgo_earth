@@ -101,7 +101,7 @@ function EvidenceSubmitPage() {
         'Geolocation is not supported by this browser. Please use a modern browser'
       )
     }
-  }, [usersLocation])
+  }, [])
 
   useEffect(() => {
     if (usersLocation && usersLocation.latitude && usersLocation.longitude) {
