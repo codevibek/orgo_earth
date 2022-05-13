@@ -8,11 +8,15 @@ import {
   Avatar,
   HStack,
   FormLabel,
+  useToast,
+  Alert,
+  AlertIcon,
+  AlertTitle,
 } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useGetTaskDetails } from '../../../../data/hooks/query/useGetTaskDetails'
 import { CustomTextAreaInput } from '../../../../components/CustomInput'
 import { useSubmitEvidence } from '../../../../data/hooks/mutations/useSubmitEvidence'
@@ -30,7 +34,10 @@ import {
 import GoBack from '../../../../components/GoBack'
 import { TaskCard } from '../../../../components/TaskCard'
 
-// TODO: Ask for location and camera permission before submitting
+export interface UsersLocation {
+  latitude: string
+  longitude: string
+}
 function EvidenceSubmitPage() {
   const router = useRouter()
   const taskId = router.query.id as string
@@ -49,6 +56,8 @@ function EvidenceSubmitPage() {
     useGetUserByPartialUsername(debouncedUsername)
   const [urls, setUrls] = useState<string[]>([])
   const [images, setImages] = useState<string[]>([])
+  const [usersLocation, setUsersLocation] = useState<UsersLocation>(null)
+  const [usersLocationError, setUsersLocationError] = useState('')
 
   const uploadFileHandler = async (url) => {
     const formData = new FormData()
@@ -65,6 +74,43 @@ function EvidenceSubmitPage() {
       })
   }
 
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.permissions
+        .query({ name: 'geolocation' })
+        .then(function (result) {
+          if (result.state === 'granted') {
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                setUsersLocation({
+                  latitude: String(position.coords.latitude),
+                  longitude: String(position.coords.longitude),
+                })
+              },
+              (error) => {
+                setUsersLocationError(error.message)
+              }
+            )
+          } else {
+            setUsersLocationError('Please allow location permission')
+          }
+        })
+    } else {
+      console.log('Geolocation is not supported by this browser.')
+      setUsersLocationError(
+        'Geolocation is not supported by this browser. Please use a modern browser'
+      )
+    }
+  }, [usersLocation])
+
+  useEffect(() => {
+    if (usersLocation && usersLocation.latitude && usersLocation.longitude) {
+      setUsersLocationError('')
+    }
+  }, [usersLocation, usersLocationError])
+
+  const toast = useToast()
+
   const formik = useFormik({
     initialValues: {
       evidenceDetails: '',
@@ -78,19 +124,37 @@ function EvidenceSubmitPage() {
       for (const url of urls) {
         await uploadFileHandler(url)
       }
-      submitEvidence({
-        evidenceDetails: values.evidenceDetails,
-        evidenceImages: images,
-        taskId,
-        userId: userData._id,
-        tags: [...taggedVolunteers.map((volunteer) => volunteer._id)],
-      })
+
+      if (usersLocation.latitude && usersLocation.longitude) {
+        submitEvidence({
+          evidenceDetails: values.evidenceDetails,
+          evidenceImages: images,
+          taskId,
+          latitude: usersLocation?.latitude,
+          longitude: usersLocation?.longitude,
+          userId: userData._id,
+          tags: [...taggedVolunteers.map((volunteer) => volunteer._id)],
+        })
+      } else {
+        toast({
+          title: 'Please allow location permission to submit evidence',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        })
+      }
     },
   })
 
   return (
     <Box height="90vh" overflow="auto" pb="44">
       <GoBack />
+      {usersLocationError && (
+        <Alert status="error">
+          <AlertIcon />
+          <AlertTitle>{usersLocationError}</AlertTitle>
+        </Alert>
+      )}
       <TaskCard
         creatorUsername={TaskDetails?.creator.username}
         creatorCommunityName={TaskDetails?.creatorCommunityName}

@@ -6,12 +6,14 @@ import {
   Flex,
   HStack,
   Input,
+  Link,
   Skeleton,
   Text,
   useToast,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
+import NextLink from 'next/link'
 import { EvidenceCard } from '../../../../components/EvidenceCard'
 import GoBack from '../../../../components/GoBack'
 import { useApproveEvidence } from '../../../../data/hooks/mutations/useApproveEvidence'
@@ -82,6 +84,17 @@ function EvidenceDetails() {
         {data?.evidenceImages.map((image) => (
           <img key={image} src={image} />
         ))}
+      </Box>
+
+      <Box>
+        <NextLink
+          href={`https://maps.google.com/?q=${data?.latitude},${data?.longitude}`}
+          passHref
+        >
+          <Link target="_blank" textDecoration="underline">
+            This images were shot at this location
+          </Link>
+        </NextLink>
       </Box>
 
       <Button

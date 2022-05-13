@@ -28,6 +28,8 @@ export interface Evidence {
   createdAt: string
   updatedAt: string
   comments: Comment[]
+  latitude: string
+  longitude: string
 }
 
 function getCommunityEvidences(communityId: string): Promise<Evidence[]> {

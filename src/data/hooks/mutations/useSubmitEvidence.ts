@@ -11,6 +11,8 @@ export interface CreateEvidenceInput {
   evidenceDetails: string
   evidenceImages: string[]
   tags: string[]
+  latitude: string
+  longitude: string
 }
 
 function createEvidence(
