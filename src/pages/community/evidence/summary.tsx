@@ -29,7 +29,7 @@ function EvidenceReview() {
         fontSize={{ base: 'lg', sm: 'xl', lg: '2xl' }}
         fontWeight="extrabold"
       >
-        you can review them:
+        Review evidence for submitted tasks:
       </Text>
 
       <Box my="12">

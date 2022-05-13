@@ -4,12 +4,12 @@ import { apiBaseUrl } from '../../utils/constants'
 import { Evidence } from './useGetCommunityEvidences'
 
 function getEvidenceForVolunteer(userId: string): Promise<Evidence[]> {
-  const token = JSON.parse(localStorage.getItem('userData'))
+  const userData = JSON.parse(localStorage.getItem('userData'))
 
   return axios
-    .get(`${apiBaseUrl}/api/evidences/submit/${userId}`, {
+    .get(`${apiBaseUrl}/api/evidences/${userId}`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${userData.token}`,
       },
     })
     .then((res) => res.data)

@@ -19,16 +19,11 @@ function EvidenceReview() {
       <GoBack />
       <Text
         mt="4"
-        fontSize={{ base: 'xl', sm: '2xl', lg: '3xl' }}
-        fontWeight="extrabold"
-      >
-        These are the evidence that you submitted
-      </Text>
-      <Text
         fontSize={{ base: 'lg', sm: 'xl', lg: '2xl' }}
         fontWeight="extrabold"
       >
-        you can check the complete status of them by clicking on see details:
+        Here is the evidence you submitted. You can check the status by clicking
+        on the details below:
       </Text>
 
       <Box my="12">
