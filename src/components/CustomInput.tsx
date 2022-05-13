@@ -29,6 +29,7 @@ export const CustomTextInput: React.FC<CustomInputProps> = ({
   isTouched,
   isInvalid,
   errorMessage,
+  placeholder,
 }) => {
   return (
     <FormControl isInvalid={isInvalid && isTouched} my="3">
@@ -39,6 +40,7 @@ export const CustomTextInput: React.FC<CustomInputProps> = ({
         id={name}
         type={type}
         name={name}
+        placeholder={placeholder}
       />
       {helperText && !errorMessage && (
         <FormHelperText>{helperText}</FormHelperText>
