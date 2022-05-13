@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useQuery } from 'react-query'
 import { apiBaseUrl } from '../../utils/constants'
-import { Evidence } from './useGetCommunityEvidences'
+import { Evidence } from './useGetEvidenceByCommunityId'
 
 function getEvidenceForVolunteer(userId: string): Promise<Evidence[]> {
   const userData = JSON.parse(localStorage.getItem('userData'))
