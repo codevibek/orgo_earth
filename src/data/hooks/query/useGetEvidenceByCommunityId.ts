@@ -30,25 +30,19 @@ export interface Evidence {
   comments: Comment[]
 }
 
-function getCommunityEvidences(
-  communityId: string,
-  status = 'To be approved'
-): Promise<Evidence[]> {
+function getCommunityEvidences(communityId: string): Promise<Evidence[]> {
   const token = JSON.parse(localStorage.getItem('userData'))
 
   return axios
-    .get(
-      `${apiBaseUrl}/api/evidences/community/${communityId}?status=${status}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
+    .get(`${apiBaseUrl}/api/evidences/community/${communityId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     .then((res) => res.data)
 }
 
-export function useGetToBeReviewedCommunityEvidences(communityId: string) {
+export function useGetEvidenceByCommunityId(communityId: string) {
   return useQuery(['evidences', communityId], () => {
     return getCommunityEvidences(communityId)
   })

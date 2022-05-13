@@ -54,13 +54,15 @@ function EvidenceReview() {
               {underReview.map((evidence) => {
                 return (
                   <EvidenceCard
+                    rewards={evidence.taskId.rewards}
                     key={evidence?._id}
                     creatorCommunityName={evidence?.userId?.username}
                     id={evidence?._id}
                     title={evidence?.taskId?.name}
-                    status={evidence?.taskId?.status}
+                    status={evidence?.status}
                     priority={evidence?.taskId?.priority}
                     location={evidence?.taskId?.address}
+                    showPriority={false}
                   />
                 )
               })}
@@ -74,13 +76,15 @@ function EvidenceReview() {
                 {reviewed.map((evidence) => {
                   return (
                     <EvidenceCard
+                      rewards={evidence.taskId.rewards}
                       key={evidence?._id}
                       creatorCommunityName={evidence?.userId?.username}
                       id={evidence?._id}
                       title={evidence?.taskId?.name}
-                      status={evidence?.taskId?.status}
+                      status={evidence?.status}
                       priority={evidence?.taskId?.priority}
                       location={evidence?.taskId?.address}
+                      showPriority={false}
                     />
                   )
                 })}

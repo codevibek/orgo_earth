@@ -2,15 +2,13 @@ import { Box, Skeleton, Text } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { EvidenceCard } from '../../../components/EvidenceCard'
 import GoBack from '../../../components/GoBack'
-import { useGetToBeReviewedCommunityEvidences } from '../../../data/hooks/query/useGetCommunityEvidences'
+import { useGetEvidenceByCommunityId } from '../../../data/hooks/query/useGetEvidenceByCommunityId'
 import { useUserData } from '../../../data/hooks/useUserData'
 
 function EvidenceReview() {
   const userData = useUserData()
 
-  const { data, isLoading } = useGetToBeReviewedCommunityEvidences(
-    userData?._id
-  )
+  const { data, isLoading } = useGetEvidenceByCommunityId(userData?._id)
 
   const underReview = useMemo(() => {
     if (!isLoading && data && data.length > 0) {
@@ -55,13 +53,15 @@ function EvidenceReview() {
               {underReview.map((evidence) => {
                 return (
                   <EvidenceCard
+                    rewards={evidence.taskId.rewards}
                     key={evidence?._id}
                     creatorCommunityName={evidence?.userId?.username}
                     id={evidence?._id}
                     title={evidence?.taskId?.name}
-                    status={evidence?.taskId?.status}
+                    status={evidence?.status}
                     priority={evidence?.taskId?.priority}
                     location={evidence?.taskId?.address}
+                    showPriority={false}
                   />
                 )
               })}
@@ -75,13 +75,15 @@ function EvidenceReview() {
                 {reviewed.map((evidence) => {
                   return (
                     <EvidenceCard
+                      rewards={evidence.taskId.rewards}
                       key={evidence?._id}
                       creatorCommunityName={evidence?.userId?.username}
                       id={evidence?._id}
                       title={evidence?.taskId?.name}
-                      status={evidence?.taskId?.status}
+                      status={evidence?.status}
                       priority={evidence?.taskId?.priority}
                       location={evidence?.taskId?.address}
+                      showPriority={false}
                     />
                   )
                 })}
