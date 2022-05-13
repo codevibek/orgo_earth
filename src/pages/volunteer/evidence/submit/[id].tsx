@@ -77,10 +77,6 @@ function EvidenceSubmitPage() {
 
   useEffect(() => {
     if (navigator.geolocation) {
-      // navigator.permissions
-      //   .query({ name: 'geolocation' })
-      //   .then(function (result) {
-      //     if (result.state === 'granted') {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setUsersLocation({
@@ -93,13 +89,6 @@ function EvidenceSubmitPage() {
         }
       )
     }
-
-    // } else {
-    //   console.log('Geolocation is not supported by this browser.')
-    //   setUsersLocationError(
-    //     'Geolocation is not supported by this browser. Please use a modern browser'
-    //   )
-    // }
   }, [])
 
   useEffect(() => {
