@@ -7,7 +7,7 @@ import {
   IconButton,
   VStack,
 } from '@chakra-ui/react'
-import { useRef, useState, useCallback, useMemo, useEffect } from 'react'
+import { useRef, useState, useCallback, useMemo } from 'react'
 import Webcam from 'react-webcam'
 import { RiCameraSwitchLine } from 'react-icons/ri'
 import { useUploadEvidenceImage } from '../data/hooks/mutations/useUploadEvidenceImages'
@@ -37,7 +37,6 @@ export const Camera: React.FC<CameraProps> = ({
       uploadFileHandler(imageSrc, {
         onSuccess: (url) => {
           setUrls([...urls, imageSrc])
-
           setImages([...images, url])
         },
       })

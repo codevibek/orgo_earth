@@ -109,6 +109,13 @@ function EvidenceSubmitPage() {
       <Text>{TaskDetails?.evidence}</Text>
 
       <Skeleton isLoaded={!isLoading}>
+        <Text mt="6">Picture Evidence</Text>
+        <Camera
+          images={images}
+          setImages={setImages}
+          urls={urls}
+          setUrls={setUrls}
+        />
         <form onSubmit={formik.handleSubmit}>
           <Box>
             <CustomTextAreaInput
@@ -186,15 +193,6 @@ function EvidenceSubmitPage() {
                 </HStack>
               </Box>
             </Box>
-
-            <Text>Picture Evidence</Text>
-
-            <Camera
-              images={images}
-              setImages={setImages}
-              urls={urls}
-              setUrls={setUrls}
-            />
           </Box>
 
           <Box my="4">
