@@ -1,5 +1,5 @@
 import { Box, Skeleton, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { EvidenceCard } from '../../../components/EvidenceCard'
 import GoBack from '../../../components/GoBack'
 import { useGetToBeReviewedCommunityEvidences } from '../../../data/hooks/query/useGetCommunityEvidences'
@@ -11,6 +11,18 @@ function EvidenceReview() {
   const { data, isLoading } = useGetToBeReviewedCommunityEvidences(
     userData?._id
   )
+
+  const underReview = useMemo(() => {
+    if (!isLoading && data && data.length > 0) {
+      return data.filter((evidence) => evidence.status === 'To be approved')
+    }
+  }, [data, isLoading])
+
+  const reviewed = useMemo(() => {
+    if (!isLoading && data && data.length > 0) {
+      return data.filter((evidence) => evidence.status === 'approved')
+    }
+  }, [data, isLoading])
 
   if (isLoading) {
     return <Skeleton isLoaded={!isLoading} height="200px" />
@@ -33,23 +45,49 @@ function EvidenceReview() {
       </Text>
 
       <Box my="12">
-        <Text fontWeight="medium" fontSize="xl">
-          To Be Reviewed:
-        </Text>
         <Skeleton isLoaded={!isLoading}>
-          {data && data.length === 0 && <Text>No Evidence to Review </Text>}
-          {data &&
-            data.map((evidence) => (
-              <EvidenceCard
-                key={evidence._id}
-                creatorCommunityName={evidence.userId.username}
-                id={evidence._id}
-                title={evidence.taskId.name}
-                status={evidence.taskId.status}
-                priority={evidence.taskId.priority}
-                location={evidence.taskId.address}
-              />
-            ))}
+          {data && data.length === 0 && <Text>No evidence to review.</Text>}
+          {underReview && underReview.length > 0 && (
+            <Box>
+              <Text fontWeight="medium" fontSize="xl">
+                Under review:
+              </Text>
+              {underReview.map((evidence) => {
+                return (
+                  <EvidenceCard
+                    key={evidence?._id}
+                    creatorCommunityName={evidence?.userId?.username}
+                    id={evidence?._id}
+                    title={evidence?.taskId?.name}
+                    status={evidence?.taskId?.status}
+                    priority={evidence?.taskId?.priority}
+                    location={evidence?.taskId?.address}
+                  />
+                )
+              })}
+            </Box>
+          )}
+
+          {reviewed && reviewed.length > 0 && (
+            <Box>
+              <Text my="6" fontWeight="medium" fontSize="xl">
+                Reviewed:
+                {reviewed.map((evidence) => {
+                  return (
+                    <EvidenceCard
+                      key={evidence?._id}
+                      creatorCommunityName={evidence?.userId?.username}
+                      id={evidence?._id}
+                      title={evidence?.taskId?.name}
+                      status={evidence?.taskId?.status}
+                      priority={evidence?.taskId?.priority}
+                      location={evidence?.taskId?.address}
+                    />
+                  )
+                })}
+              </Text>
+            </Box>
+          )}
         </Skeleton>
       </Box>
     </Box>
