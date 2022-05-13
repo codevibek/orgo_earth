@@ -3,6 +3,7 @@ import axios from 'axios'
 import { apiBaseUrl } from '../../utils/constants'
 import { useRouter } from 'next/router'
 import { useToast } from '@chakra-ui/react'
+import { queryClient } from '../../../pages/_app'
 
 export interface CreateEvidenceInput {
   taskId: string
@@ -32,6 +33,7 @@ export function useSubmitEvidence() {
   return useMutation(createEvidence, {
     // TODO: redirect to the evidence status page instead of the dashboard
     onSuccess: () => {
+      queryClient.invalidateQueries('evidences')
       router.push('/volunteer/dashboard')
       toast({
         title: 'Evidence Submitted Successfully',

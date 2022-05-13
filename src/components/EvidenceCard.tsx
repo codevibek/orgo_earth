@@ -2,6 +2,7 @@ import { Badge, Box, Button, Flex, Text, Tooltip, Link } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import React from 'react'
+import { useUserData } from '../data/hooks/useUserData'
 
 export interface EvidenceCardProps {
   title: string
@@ -43,8 +44,16 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
   id,
 }) => {
   const router = useRouter()
+  const userData = useUserData()
   return (
-    <Box bg="gray.200" p="2" my="5" borderRadius="5px">
+    <Box
+      onClick={() => router.push(`/${userData?.type}/evidence/details/${id}`)}
+      bg="gray.200"
+      p="2"
+      cursor="pointer"
+      my="5"
+      borderRadius="5px"
+    >
       <Box mx="4">
         <Flex alignItems="center" my="1" justifyContent="space-between">
           <Text fontSize="lg" fontWeight="bold">
@@ -65,14 +74,21 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
         </Flex>
         <Text fontSize="sm">Location: {location}</Text>
 
-        <NextLink href={`/community/profile/${creatorCommunityName}`} passHref>
-          <Link fontSize="sm" color="gray.500">
+        <NextLink
+          href={`/${userData?.type}/profile/${creatorCommunityName}`}
+          passHref
+        >
+          <Link
+            onClick={(e) => e.stopPropagation()}
+            fontSize="sm"
+            color="gray.500"
+          >
             Evidence Created By {creatorCommunityName}
           </Link>
         </NextLink>
       </Box>
       <Button
-        onClick={() => router.push(`/community/evidence/details/${id}`)}
+        onClick={() => router.push(`/${userData?.type}/evidence/details/${id}`)}
         variant="ghost"
       >
         See evidence detail

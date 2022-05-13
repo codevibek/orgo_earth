@@ -40,13 +40,13 @@ function EvidenceReview() {
           {data &&
             data.map((evidence) => (
               <EvidenceCard
-                key={evidence._id}
-                creatorCommunityName={evidence.userId.username}
-                id={evidence._id}
-                title={evidence.taskId.name}
-                status={evidence.taskId.status}
-                priority={evidence.taskId.priority}
-                location={evidence.taskId.address}
+                key={evidence?._id}
+                creatorCommunityName={evidence?.userId?.username}
+                id={evidence?._id}
+                title={evidence?.taskId?.name}
+                status={evidence?.taskId?.status}
+                priority={evidence?.taskId?.priority}
+                location={evidence?.taskId?.address}
               />
             ))}
         </Skeleton>
