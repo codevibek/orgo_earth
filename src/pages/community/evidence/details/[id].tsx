@@ -100,7 +100,7 @@ function EvidenceDetails() {
       <Button
         colorScheme="green"
         isLoading={approvingEvidence}
-        disabled={isSuccess && data.status === 'approved'}
+        disabled={isSuccess || data.status === 'approved'}
         onClick={() => approveEvidence({ evidenceId })}
       >
         {data.status === 'approved' ? 'Already Approved' : 'Approve Evidence'}

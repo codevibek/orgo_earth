@@ -12,6 +12,7 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
+  AlertDescription,
 } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
@@ -76,31 +77,29 @@ function EvidenceSubmitPage() {
 
   useEffect(() => {
     if (navigator.geolocation) {
-      navigator.permissions
-        .query({ name: 'geolocation' })
-        .then(function (result) {
-          if (result.state === 'granted') {
-            navigator.geolocation.getCurrentPosition(
-              (position) => {
-                setUsersLocation({
-                  latitude: String(position.coords.latitude),
-                  longitude: String(position.coords.longitude),
-                })
-              },
-              (error) => {
-                setUsersLocationError(error.message)
-              }
-            )
-          } else {
-            setUsersLocationError('Please allow location permission')
-          }
-        })
-    } else {
-      console.log('Geolocation is not supported by this browser.')
-      setUsersLocationError(
-        'Geolocation is not supported by this browser. Please use a modern browser'
+      // navigator.permissions
+      //   .query({ name: 'geolocation' })
+      //   .then(function (result) {
+      //     if (result.state === 'granted') {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUsersLocation({
+            latitude: String(position.coords.latitude),
+            longitude: String(position.coords.longitude),
+          })
+        },
+        (error) => {
+          setUsersLocationError(error.message)
+        }
       )
     }
+
+    // } else {
+    //   console.log('Geolocation is not supported by this browser.')
+    //   setUsersLocationError(
+    //     'Geolocation is not supported by this browser. Please use a modern browser'
+    //   )
+    // }
   }, [])
 
   useEffect(() => {
@@ -150,9 +149,10 @@ function EvidenceSubmitPage() {
     <Box height="90vh" overflow="auto" pb="44">
       <GoBack />
       {usersLocationError && (
-        <Alert status="error">
+        <Alert my="6" status="error">
           <AlertIcon />
           <AlertTitle>{usersLocationError}</AlertTitle>
+          <AlertDescription>Please allow location permission</AlertDescription>
         </Alert>
       )}
       <TaskCard
