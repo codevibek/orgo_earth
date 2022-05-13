@@ -7,14 +7,10 @@ import {
   IconButton,
   VStack,
 } from '@chakra-ui/react'
-import axios from 'axios'
 import { useRef, useState, useCallback, useMemo, useEffect } from 'react'
 import Webcam from 'react-webcam'
 import { RiCameraSwitchLine } from 'react-icons/ri'
-import {
-  cloudinaryCloudName,
-  cloudinaryUploadPreset,
-} from '../data/utils/constants'
+import { useUploadEvidenceImage } from '../data/hooks/mutations/useUploadEvidenceImages'
 
 interface CameraProps {
   urls: string[]
@@ -33,33 +29,20 @@ export const Camera: React.FC<CameraProps> = ({
   const webcamRef = useRef<Webcam>(null)
   const [cameraSide, setCameraSide] = useState<'front' | 'back'>('front')
 
-  const uploadFileHandler = async (url) => {
-    const formData = new FormData()
-    formData.append('file', url)
-    formData.append('upload_preset', cloudinaryUploadPreset)
-
-    axios
-      .post(
-        `https://api.cloudinary.com/v1_1/${cloudinaryCloudName}/image/upload`,
-        formData
-      )
-      .then((res) => {
-        setImages([...images, res.data.url])
-      })
-  }
+  const { mutate: uploadFileHandler, isLoading } = useUploadEvidenceImage()
 
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current?.getScreenshot()
     if (imageSrc) {
-      setUrls([...urls, imageSrc])
-    }
-    uploadFileHandler(imageSrc)
-  }, [webcamRef, urls, setUrls])
+      uploadFileHandler(imageSrc, {
+        onSuccess: (url) => {
+          setUrls([...urls, imageSrc])
 
-  useEffect(() => {
-    const supported = navigator.mediaDevices.getSupportedConstraints()
-    console.log(supported.facingMode)
-  })
+          setImages([...images, url])
+        },
+      })
+    }
+  }, [webcamRef, urls, setUrls])
 
   const videoConstraints = useMemo(() => {
     return {
@@ -70,14 +53,6 @@ export const Camera: React.FC<CameraProps> = ({
   }, [cameraSide])
 
   const ref = useRef(null)
-
-  useEffect(() => {
-    ref.current
-      ? console.log('mounted buytton')
-      : console.log('unmounted button')
-
-    console.log(ref.current)
-  })
 
   const handleEnableCamera = () => {
     setCaptureEnable(!isCaptureEnable)
@@ -109,7 +84,7 @@ export const Camera: React.FC<CameraProps> = ({
             videoConstraints={videoConstraints}
           />
           <HStack spacing={4}>
-            <Button ref={ref} my="4" onClick={capture}>
+            <Button isLoading={isLoading} ref={ref} my="4" onClick={capture}>
               Capture Image
             </Button>
 
