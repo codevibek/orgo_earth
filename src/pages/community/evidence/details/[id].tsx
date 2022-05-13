@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
+import { EvidenceCard } from '../../../../components/EvidenceCard'
 import GoBack from '../../../../components/GoBack'
 import { useApproveEvidence } from '../../../../data/hooks/mutations/useApproveEvidence'
 import { useCommentOnEvidence } from '../../../../data/hooks/mutations/useCommentOnEvidence'
@@ -54,7 +55,18 @@ function EvidenceDetails() {
   return (
     <Box height="90vh" overflow="auto">
       <GoBack />
-      <Text fontWeight="bold">Evidence For:</Text>
+      <Text fontWeight="bold">Submission For</Text>
+      <EvidenceCard
+        creatorCommunityName={data.taskId.name}
+        id={data._id}
+        location={data.taskId.address}
+        priority={data.taskId.priority}
+        title={data.taskId.name}
+        status={data.status}
+        rewards={data.taskId.rewards}
+        showPriority={false}
+        showDetails={false}
+      />
       <Text mb="4" fontSize="2xl" fontWeight="extrabold">
         {data?.taskId.name}
       </Text>

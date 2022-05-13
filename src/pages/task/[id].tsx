@@ -25,6 +25,7 @@ const TaskDetail = () => {
           title={TaskDetails?.name}
           status={TaskDetails?.status}
           showStatus={isCommunity}
+          showDetails={false}
         />
 
         <Text my="2">{TaskDetails?.description}</Text>
@@ -34,35 +35,7 @@ const TaskDetail = () => {
         </Text>
 
         <Text>{TaskDetails?.evidence}</Text>
-
-        {/* <Box my="4">
-          <Text mb="2" fontWeight="semibold">
-            Location: {TaskDetails?.address}
-          </Text>
-        </Box> */}
       </Skeleton>
-
-      {/* <Box my="6">
-        <Text fontSize="xl" my="2">
-          Task Creator
-        </Text>
-        <Flex>
-          <Avatar
-            src={TaskDetails?.creator.avatar}
-            size="lg"
-            cursor="pointer"
-            name={TaskDetails?.creatorCommunityName}
-            onClick={() =>
-              router.push(
-                `/${TaskDetails?.creator.type}/profile/${TaskDetails?.creator.username}`
-              )
-            }
-          />
-          <Text fontWeight="semibold" mx="4" fontSize="lg">
-            {TaskDetails?.creatorCommunityName}
-          </Text>
-        </Flex>
-      </Box> */}
 
       <HStack spacing="5" my="5">
         {isCommunity ? (

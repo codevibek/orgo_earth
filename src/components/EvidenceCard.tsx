@@ -6,16 +6,20 @@ import { useUserData } from '../data/hooks/useUserData'
 
 export interface EvidenceCardProps {
   title: string
-  status: 'active' | 'inactive'
+  status: string
   priority: 'low' | 'medium' | 'high'
   location: string
   creatorCommunityName: string
   id: string
+  rewards: string
+  showPriority?: boolean
+  showDetails?: boolean
+  showStatus?: boolean
 }
 
 const EvidenceStatusToBGColor = {
-  active: 'green.300',
-  inactive: 'gray.300',
+  approved: 'green.300',
+  'To be approved': 'gray.300',
 }
 
 const EvidencePriorityToColor = {
@@ -25,8 +29,8 @@ const EvidencePriorityToColor = {
 }
 
 const EvidenceStatusToLabel = {
-  active: 'Active',
-  inactive: 'In Active',
+  'To be approved': 'Under review',
+  approved: 'Approved',
 }
 
 const EvidencePriorityToLabel = {
@@ -42,6 +46,10 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
   priority,
   creatorCommunityName,
   id,
+  rewards,
+  showPriority = true,
+  showDetails = true,
+  showStatus = true,
 }) => {
   const router = useRouter()
   const userData = useUserData()
@@ -60,19 +68,25 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
             {title}
           </Text>
           <Box>
-            <Tooltip label="Evidence Status">
-              <Badge mr="2" bg={EvidenceStatusToBGColor[status]}>
-                {EvidenceStatusToLabel[status]}
-              </Badge>
-            </Tooltip>
-            <Tooltip label="Evidence Priority">
-              <Badge bg={EvidencePriorityToColor[priority]}>
-                {EvidencePriorityToLabel[priority]}
-              </Badge>
-            </Tooltip>
+            {showStatus && (
+              <Tooltip label="Evidence Status">
+                <Badge mr="2" bg={EvidenceStatusToBGColor[status]}>
+                  {EvidenceStatusToLabel[status]}
+                </Badge>
+              </Tooltip>
+            )}
+
+            {showPriority && (
+              <Tooltip label="Evidence Priority">
+                <Badge bg={EvidencePriorityToColor[priority]}>
+                  {EvidencePriorityToLabel[priority]}
+                </Badge>
+              </Tooltip>
+            )}
           </Box>
         </Flex>
         <Text fontSize="sm">Location: {location}</Text>
+        <Text>Rewards: {rewards}</Text>
 
         <NextLink
           href={`/${userData?.type}/profile/${creatorCommunityName}`}
@@ -87,12 +101,16 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
           </Link>
         </NextLink>
       </Box>
-      <Button
-        onClick={() => router.push(`/${userData?.type}/evidence/details/${id}`)}
-        variant="ghost"
-      >
-        See evidence detail
-      </Button>
+      {showDetails && (
+        <Button
+          onClick={() =>
+            router.push(`/${userData?.type}/evidence/details/${id}`)
+          }
+          variant="ghost"
+        >
+          See evidence detail
+        </Button>
+      )}
     </Box>
   )
 }

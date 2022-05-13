@@ -13,6 +13,7 @@ export interface TaskCardProps {
   id: string
   rewards: string
   showStatus?: boolean
+  showDetails?: boolean
 }
 
 const TaskStatusToBGColor = {
@@ -46,6 +47,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   id,
   rewards,
   showStatus = true,
+  showDetails = true,
   creatorUsername,
 }) => {
   const router = useRouter()
@@ -92,9 +94,11 @@ export const TaskCard: React.FC<TaskCardProps> = ({
           </Link>
         </NextLink>
       </Box>
-      <Button onClick={() => router.push(`/task/${id}`)} variant="ghost">
-        See details
-      </Button>
+      {showDetails && (
+        <Button onClick={() => router.push(`/task/${id}`)} variant="ghost">
+          See details
+        </Button>
+      )}
     </Box>
   )
 }
