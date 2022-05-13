@@ -16,14 +16,12 @@ import GoBack from '../../../../components/GoBack'
 import { useApproveEvidence } from '../../../../data/hooks/mutations/useApproveEvidence'
 import { useCommentOnEvidence } from '../../../../data/hooks/mutations/useCommentOnEvidence'
 import { useGetEvidenceById } from '../../../../data/hooks/query/useGetEvidenceById'
-import { useUserData } from '../../../../data/hooks/useUserData'
 
 function EvidenceDetails() {
   const router = useRouter()
   const toast = useToast()
 
   const evidenceId = router.query.id as string
-  const userData = useUserData()
   const { data, isLoading } = useGetEvidenceById(evidenceId)
   const [comment, setComment] = useState('')
   const { mutate: commentOnEvidence, isLoading: commentAddLoading } =
@@ -78,9 +76,7 @@ function EvidenceDetails() {
         colorScheme="green"
         isLoading={approvingEvidence}
         disabled={isSuccess}
-        onClick={() =>
-          approveEvidence({ taskId: data?.taskId._id, userId: userData?._id })
-        }
+        onClick={() => approveEvidence({ evidenceId })}
       >
         Approve Evidence
       </Button>

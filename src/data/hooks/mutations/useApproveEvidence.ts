@@ -4,16 +4,15 @@ import { apiBaseUrl } from '../../utils/constants'
 import { useToast } from '@chakra-ui/react'
 
 export interface ApproveEvidenceInput {
-  taskId: string
-  userId: string
+  evidenceId: string
 }
 
-function approveEvidence({ taskId, userId }: ApproveEvidenceInput) {
+function approveEvidence({ evidenceId }: ApproveEvidenceInput) {
   const token = JSON.parse(localStorage.getItem('userData')).token
 
   return axios
     .post(
-      `${apiBaseUrl}/api/evidences/approve/${taskId}/${userId}`,
+      `${apiBaseUrl}/api/evidences/approve/${evidenceId}`,
       {},
       {
         headers: {
