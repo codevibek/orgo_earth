@@ -101,6 +101,7 @@ function Register() {
             isInvalid={!!formik.errors.email}
             errorMessage={formik.errors.email}
             name="email"
+            type="email"
             formik={formik}
             label="Email Address"
             helperText="Email address is case sensitive"

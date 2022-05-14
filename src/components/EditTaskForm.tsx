@@ -71,6 +71,7 @@ export const EditTaskForm = ({ taskId }: { taskId: string }) => {
           name="description"
           formik={formik}
           label="Description"
+          placeholder="Example: We’re planting trees at the memorial. Please bring gloves!"
         />
 
         <CustomSelectInput

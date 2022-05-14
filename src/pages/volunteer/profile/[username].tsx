@@ -24,6 +24,7 @@ import { EditProfileDrawer } from '../../../components/EditProfileDrawer'
 import { useGetUserProfile } from '../../../data/hooks/query/useGetUserProfile'
 import { useIsMe } from '../../../data/hooks/useIsMe'
 import { EditProfilePictureModal } from '../../../components/EditProfilePictureModal'
+import { useUserData } from '../../../data/hooks/useUserData'
 
 function Profile() {
   const { onOpen, isOpen, onClose } = useDisclosure()
@@ -38,6 +39,8 @@ function Profile() {
   const { isLoading, data } = useGetUserProfile(username)
 
   const isMe = useIsMe(username)
+
+  const userData = useUserData()
 
   if (isLoading) {
     return <Skeleton height="100px" isLoaded={!isLoading} />
@@ -116,14 +119,18 @@ function Profile() {
           <Text>{data.bio ? data.bio : 'No Bio Provided'}</Text>
 
           <Text fontWeight="bold" fontSize="lg" mt="2">
-            Address
+            City
           </Text>
-          <Text>{data.address ? data.address : 'No address provided'}</Text>
+          <Text>{data.city ? data.city : 'No city provided'}</Text>
 
-          <Text fontWeight="bold" fontSize="lg" mt="2">
-            Email Address
-          </Text>
-          <Text>{data.email}</Text>
+          {userData && userData?._id && (
+            <>
+              <Text fontWeight="bold" fontSize="lg" mt="2">
+                Email Address
+              </Text>
+              <Text>{data.email}</Text>
+            </>
+          )}
         </Box>
       </VStack>
     </Box>

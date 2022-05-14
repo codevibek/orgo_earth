@@ -24,6 +24,7 @@ import { EditProfileDrawer } from '../../../components/EditProfileDrawer'
 import { useGetUserProfile } from '../../../data/hooks/query/useGetUserProfile'
 import { useIsMe } from '../../../data/hooks/useIsMe'
 import { EditProfilePictureModal } from '../../../components/EditProfilePictureModal'
+import { useUserData } from '../../../data/hooks/useUserData'
 
 function Profile() {
   const { onOpen, isOpen, onClose } = useDisclosure()
@@ -35,6 +36,8 @@ function Profile() {
   const router = useRouter()
   const username = router.query.username as string
   const { isLoading, data } = useGetUserProfile(username)
+
+  const userData = useUserData()
 
   const isMe = useIsMe(username)
 
@@ -121,10 +124,15 @@ function Profile() {
             Address
           </Text>
           <Text>{data.address ? data.address : 'No address provided'}</Text>
-          <Text fontWeight="bold" fontSize="lg" mt="2">
-            Email Address
-          </Text>
-          <Text>{data.email}</Text>
+
+          {userData && userData?._id && (
+            <>
+              <Text fontWeight="bold" fontSize="lg" mt="2">
+                Email Address
+              </Text>
+              <Text>{data.email}</Text>
+            </>
+          )}
         </Box>
       </VStack>
     </Box>

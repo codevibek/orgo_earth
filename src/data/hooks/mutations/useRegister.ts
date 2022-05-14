@@ -18,6 +18,7 @@ export interface User {
   instagramLink?: string
   bio?: string
   avatar?: string
+  city?: string
 }
 
 export interface RegisterUserInput {

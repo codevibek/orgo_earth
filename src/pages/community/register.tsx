@@ -106,6 +106,7 @@ function Register() {
             name="email"
             formik={formik}
             label="Email Address"
+            type="email"
             helperText="Email address is case sensitive"
           />
           <CustomTextInput

@@ -119,6 +119,7 @@ export const CreateTaskForm = () => {
           name="description"
           formik={formik}
           label="Description"
+          placeholder="Example: We’re planting trees at the memorial. Please bring gloves!"
         />
 
         <CustomSelectInput

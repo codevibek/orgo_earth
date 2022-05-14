@@ -35,6 +35,8 @@ export const EditProfileDrawer: React.FC<EditProfileDrawer> = ({
       facebookLink: initialData?.facebookLink,
       instagramLink: initialData?.instagramLink,
       twitterLink: initialData?.twitterLink,
+      city: initialData?.city,
+      phone: initialData?.phone,
     },
     validationSchema: Yup.object({
       name: Yup.string()
@@ -45,6 +47,11 @@ export const EditProfileDrawer: React.FC<EditProfileDrawer> = ({
       facebookLink: Yup.string().url('Facebook URL is not valid'),
       instagramLink: Yup.string().url('Instagram URL is not valid'),
       twitterLink: Yup.string().url('Twitter URL is not valid'),
+      city: Yup.string(),
+      phone: Yup.string().min(
+        10,
+        'Phone number must be at least 10 characters long'
+      ),
     }),
     onSubmit: (value) => {
       editProfile(value)
@@ -90,6 +97,26 @@ export const EditProfileDrawer: React.FC<EditProfileDrawer> = ({
               name="address"
               formik={formik}
               label="Address"
+            />
+
+            <CustomTextInput
+              isTouched={formik.touched.city}
+              isInvalid={!!formik.errors.city}
+              errorMessage={formik.errors.city}
+              name="city"
+              formik={formik}
+              label="City"
+              helperText="Optional field"
+            />
+
+            <CustomTextInput
+              isTouched={formik.touched.phone}
+              isInvalid={!!formik.errors.phone}
+              errorMessage={formik.errors.phone}
+              name="phone"
+              formik={formik}
+              label="Phone Number"
+              helperText="Optional field"
             />
 
             <CustomTextInput

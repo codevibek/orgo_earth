@@ -57,6 +57,7 @@ function Login() {
             errorMessage={formik.errors.email}
             name="email"
             formik={formik}
+            type="email"
             label="Email Address"
             helperText="Email address is case sensitive"
           />
