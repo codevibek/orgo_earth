@@ -48,9 +48,7 @@ function Register() {
         })
       }
 
-      // if everything is ok, then submit the form
       mutate({
-        phone: Math.random(),
         email,
         name,
         password,
