@@ -17,14 +17,8 @@ interface UseUserProps {
   redirectTo: string
 }
 export function useUser({ redirectTo }: UseUserProps) {
-  // console.log(`useUser triggered: ${redirectTo}`)
   const router = useRouter()
-  // const userData = useMe()
-  // console.log(`useUser triggered: ${userData}`)
-  // if (!userData.isLoading && !userData.data) {
-  //   router.push(redirectTo)
-  // }
-  // return userData
+
   useEffect(() => {
     const userData = localStorage.getItem('userData')
     if (!userData) {

@@ -10,6 +10,7 @@ import {
   useDisclosure,
   VStack,
   Badge,
+  Link,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
@@ -24,7 +25,7 @@ import { EditProfileDrawer } from '../../../components/EditProfileDrawer'
 import { useGetUserProfile } from '../../../data/hooks/query/useGetUserProfile'
 import { useIsMe } from '../../../data/hooks/useIsMe'
 import { EditProfilePictureModal } from '../../../components/EditProfilePictureModal'
-import { useUserData } from '../../../data/hooks/useUserData'
+import { useShowContactInfo } from '../../../data/hooks/useShowContacInfo'
 
 function Profile() {
   const { onOpen, isOpen, onClose } = useDisclosure()
@@ -40,7 +41,7 @@ function Profile() {
 
   const isMe = useIsMe(username)
 
-  const userData = useUserData()
+  const showContactInfo = useShowContactInfo()
 
   if (isLoading) {
     return <Skeleton height="100px" isLoaded={!isLoading} />
@@ -123,12 +124,21 @@ function Profile() {
           </Text>
           <Text>{data.city ? data.city : 'No city provided'}</Text>
 
-          {userData && userData?._id && (
+          {showContactInfo && data?.email && (
             <>
               <Text fontWeight="bold" fontSize="lg" mt="2">
                 Email Address
               </Text>
               <Text>{data.email}</Text>
+            </>
+          )}
+
+          {showContactInfo && data?.phone && (
+            <>
+              <Text fontWeight="bold" fontSize="lg" mt="2">
+                Phone Number
+              </Text>
+              <Link href={`tel:${data?.phone}`}>{data.phone}</Link>
             </>
           )}
         </Box>

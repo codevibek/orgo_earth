@@ -6,6 +6,7 @@ import {
   Button,
   HStack,
   IconButton,
+  Link,
   Skeleton,
   Text,
   useDisclosure,
@@ -24,7 +25,7 @@ import { EditProfileDrawer } from '../../../components/EditProfileDrawer'
 import { useGetUserProfile } from '../../../data/hooks/query/useGetUserProfile'
 import { useIsMe } from '../../../data/hooks/useIsMe'
 import { EditProfilePictureModal } from '../../../components/EditProfilePictureModal'
-import { useUserData } from '../../../data/hooks/useUserData'
+import { useShowContactInfo } from '../../../data/hooks/useShowContacInfo'
 
 function Profile() {
   const { onOpen, isOpen, onClose } = useDisclosure()
@@ -37,7 +38,7 @@ function Profile() {
   const username = router.query.username as string
   const { isLoading, data } = useGetUserProfile(username)
 
-  const userData = useUserData()
+  const showContactInfo = useShowContactInfo()
 
   const isMe = useIsMe(username)
 
@@ -125,12 +126,21 @@ function Profile() {
           </Text>
           <Text>{data.address ? data.address : 'No address provided'}</Text>
 
-          {userData && userData?._id && (
+          {showContactInfo && data?.email && (
             <>
               <Text fontWeight="bold" fontSize="lg" mt="2">
                 Email Address
               </Text>
               <Text>{data.email}</Text>
+            </>
+          )}
+
+          {showContactInfo && data?.phone && (
+            <>
+              <Text fontWeight="bold" fontSize="lg" mt="2">
+                Phone Number
+              </Text>
+              <Link href={`tel:${data?.phone}`}>{data.phone}</Link>
             </>
           )}
         </Box>
