@@ -8,15 +8,20 @@ function About() {
   return (
     <Box>
       <Text textAlign="center" my="4" fontWeight="bold" fontSize="2xl">
-        About
+        About Us
       </Text>
       <Text>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non corrupti
-        beatae, voluptates excepturi dolorem assumenda dignissimos temporibus ab
-        nostrum doloribus ducimus distinctio sit, aspernatur et mollitia debitis
-        molestias in voluptate ex ipsam? Dolores assumenda ducimus excepturi
-        quod deserunt harum odio beatae blanditiis suscipit? Architecto
-        blanditiis voluptates consectetur tempore beatae similique?
+        Earth has lost its voice, and we're dedicated to giving it back. While
+        established community organizations are working hard to make a positive
+        environmental change, they often lack a simplified structure or system
+        for recruiting volunteers, collecting data, managing workflows, or
+        rewarding contributors. ORGO is on a mission to regenerate the planet by
+        gamifying land stewardship and enabling decentralized governance of
+        community assets. Through the ORGO app, volunteers can find community
+        organizations with pending assignments and earn rewards by completing
+        tasks. Additionally, participating community organizations gain insight
+        from the eco-data collected, progress tracking of tasks, and volunteer
+        hours worked.
       </Text>
 
       <Text textAlign="center" my="6" fontSize="xl">

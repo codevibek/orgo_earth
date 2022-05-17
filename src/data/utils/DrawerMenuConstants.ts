@@ -1,5 +1,5 @@
 import { CgProfile } from 'react-icons/cg'
-import { AiOutlinePlus } from 'react-icons/ai'
+import { AiOutlinePlus, AiOutlineCompass } from 'react-icons/ai'
 import { MdRateReview } from 'react-icons/md'
 import { IconType } from 'react-icons/lib'
 import { GiTeacher } from 'react-icons/gi'
@@ -17,6 +17,11 @@ export const AdminMenus: Menu[] = [
     name: 'My Profile',
     icon: CgProfile,
     path: '/profile',
+  },
+  {
+    name: 'Explore',
+    icon: AiOutlineCompass,
+    path: '/explore',
   },
   {
     name: 'Create New Task',
@@ -55,6 +60,11 @@ export const VolunteerMenus: Menu[] = [
     name: 'My Profile',
     icon: CgProfile,
     path: '/profile',
+  },
+  {
+    name: 'Explore',
+    icon: AiOutlineCompass,
+    path: '/explore',
   },
 
   {

@@ -4,6 +4,7 @@ import { apiBaseUrl } from '../../utils/constants'
 import { useRouter } from 'next/router'
 import { useToast } from '@chakra-ui/react'
 import { queryClient } from '../../../pages/_app'
+import { Evidence } from '../query/useGetEvidenceByCommunityId'
 
 export interface CreateEvidenceInput {
   taskId: string
@@ -15,9 +16,7 @@ export interface CreateEvidenceInput {
   longitude: string
 }
 
-function createEvidence(
-  input: CreateEvidenceInput
-): Promise<CreateEvidenceInput> {
+function createEvidence(input: CreateEvidenceInput): Promise<Evidence> {
   const token = JSON.parse(localStorage.getItem('userData')).token
   return axios
     .post(`${apiBaseUrl}/api/evidences/submit`, input, {
@@ -33,10 +32,9 @@ export function useSubmitEvidence() {
   const toast = useToast()
 
   return useMutation(createEvidence, {
-    // TODO: redirect to the evidence status page instead of the dashboard
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries('evidences')
-      router.push('/volunteer/dashboard')
+      router.push(`/volunteer/evidence/details/${data?._id}`)
       toast({
         title: 'Evidence Submitted Successfully',
         status: 'success',

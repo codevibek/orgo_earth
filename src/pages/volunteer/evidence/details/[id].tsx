@@ -81,7 +81,7 @@ function EvidenceDetails() {
           passHref
         >
           <Link target="_blank" textDecoration="underline">
-            This images were shot at this location
+            This image was shot at this location
           </Link>
         </NextLink>
       </Box>

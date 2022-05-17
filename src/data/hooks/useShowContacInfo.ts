@@ -7,15 +7,15 @@
 
 import { useRouter } from 'next/router'
 import { useIsMe } from './useIsMe'
-import { useUserData } from './useUserData'
+// import { useUserData } from './useUserData'
 
 export function useShowContactInfo() {
   const router = useRouter()
   const username = router.query.username as string
-  const userData = useUserData()
+  // const userData = useUserData()
   const isMe = useIsMe(username)
   if (isMe) return true
-  if (!userData) return false
-  if (userData.type === 'community') return true
+  // if (!userData) return false
+  // if (userData.type === 'community') return true
   return false
 }
