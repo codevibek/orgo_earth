@@ -1,4 +1,5 @@
 import { Box, Button, Skeleton, Text } from '@chakra-ui/react'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { TaskCard } from '../../components/TaskCard'
@@ -15,6 +16,9 @@ function Dashboard() {
 
   return (
     <Box height="90vh" overflow="auto">
+      <Head>
+        <title>Community Dashboard</title>
+      </Head>
       <Text fontSize={{ base: 'xl', sm: '2xl' }} fontWeight="bold">
         Welcome to Community Dashboard
       </Text>

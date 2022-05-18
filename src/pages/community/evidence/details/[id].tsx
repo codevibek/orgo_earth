@@ -19,6 +19,7 @@ import GoBack from '../../../../components/GoBack'
 import { useApproveEvidence } from '../../../../data/hooks/mutations/useApproveEvidence'
 import { useCommentOnEvidence } from '../../../../data/hooks/mutations/useCommentOnEvidence'
 import { useGetEvidenceById } from '../../../../data/hooks/query/useGetEvidenceById'
+import Head from 'next/head'
 
 function EvidenceDetails() {
   const router = useRouter()
@@ -56,6 +57,9 @@ function EvidenceDetails() {
 
   return (
     <Box height="90vh" overflow="auto">
+      <Head>
+        <title>Evidence Details</title>
+      </Head>
       <GoBack />
       <Text fontWeight="bold">Submission For</Text>
       <EvidenceCard

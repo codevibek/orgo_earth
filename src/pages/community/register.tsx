@@ -7,6 +7,7 @@ import { CustomTextInput } from '../../components/CustomInput'
 import { useRegister } from '../../data/hooks/mutations/useRegister'
 import { useRedirectToDashboard } from '../../data/hooks/useUser'
 import { SwitchButton } from '../../components/SwitchButton'
+import Head from 'next/head'
 
 function Register() {
   const { isLoading, mutate } = useRegister({
@@ -60,6 +61,9 @@ function Register() {
 
   return (
     <Box>
+      <Head>
+        <title>Community - Register</title>
+      </Head>
       <Box
         bg="gray.300"
         alignItems="center"

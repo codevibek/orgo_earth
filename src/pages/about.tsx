@@ -1,4 +1,5 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { VideoPlayer } from '../components/VideoPlayer'
@@ -7,6 +8,9 @@ function About() {
   const router = useRouter()
   return (
     <Box>
+      <Head>
+        <title>About Us</title>
+      </Head>
       <Text textAlign="center" my="4" fontWeight="bold" fontSize="2xl">
         About Us
       </Text>

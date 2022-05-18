@@ -26,6 +26,7 @@ import { useGetUserProfile } from '../../../data/hooks/query/useGetUserProfile'
 import { useIsMe } from '../../../data/hooks/useIsMe'
 import { EditProfilePictureModal } from '../../../components/EditProfilePictureModal'
 import { useShowContactInfo } from '../../../data/hooks/useShowContacInfo'
+import Head from 'next/head'
 
 function Profile() {
   const { onOpen, isOpen, onClose } = useDisclosure()
@@ -48,6 +49,9 @@ function Profile() {
   }
   return (
     <Box height="90vh" overflow="auto">
+      <Head>
+        <title>Volunteer - Profile</title>
+      </Head>
       <VStack spacing="4">
         <EditProfileDrawer
           initialData={data}

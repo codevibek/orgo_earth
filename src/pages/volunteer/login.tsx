@@ -7,6 +7,7 @@ import { useLogin } from '../../data/hooks/mutations/useLogin'
 import { useRedirectToDashboard } from '../../data/hooks/useUser'
 import { CustomTextInput } from '../../components/CustomInput'
 import { SwitchButton } from '../../components/SwitchButton'
+import Head from 'next/head'
 
 function Login() {
   const { isLoading, mutate } = useLogin({
@@ -32,6 +33,9 @@ function Login() {
   })
   return (
     <Box>
+      <Head>
+        <title>Volunteer - Login</title>
+      </Head>
       <Box
         bg="gray.300"
         alignItems="center"

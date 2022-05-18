@@ -34,6 +34,7 @@ import {
 } from '../../../../data/utils/constants'
 import GoBack from '../../../../components/GoBack'
 import { TaskCard } from '../../../../components/TaskCard'
+import Head from 'next/head'
 
 export interface UsersLocation {
   latitude: string
@@ -136,6 +137,9 @@ function EvidenceSubmitPage() {
 
   return (
     <Box height="90vh" overflow="auto" pb="44">
+      <Head>
+        <title>Submit Evidence</title>
+      </Head>
       <GoBack />
       {usersLocationError && (
         <Alert my="6" status="error">

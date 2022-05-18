@@ -11,6 +11,7 @@ import {
   Tabs,
   Skeleton,
 } from '@chakra-ui/react'
+import Head from 'next/head'
 import React, { useMemo, useState } from 'react'
 import { UserCard } from '../components/UserCard'
 import { User } from '../data/hooks/mutations/useRegister'
@@ -47,6 +48,9 @@ function Explore() {
 
   return (
     <Box>
+      <Head>
+        <title>Explore - Community and User profiles</title>
+      </Head>
       <InputGroup>
         <Input
           value={searchTerm}

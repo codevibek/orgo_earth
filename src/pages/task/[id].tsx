@@ -1,4 +1,5 @@
 import { Box, Button, HStack, Skeleton, Text } from '@chakra-ui/react'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import GoBack from '../../components/GoBack'
 import { TaskCard } from '../../components/TaskCard'
@@ -13,6 +14,9 @@ const TaskDetail = () => {
 
   return (
     <Box>
+      <Head>
+        <title>Task Details</title>
+      </Head>
       <GoBack />
       <Skeleton isLoaded={!isLoading}>
         <TaskCard

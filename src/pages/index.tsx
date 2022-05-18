@@ -1,4 +1,5 @@
 import { Box, Button, Flex } from '@chakra-ui/react'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useRedirectToDashboard } from '../data/hooks/useUser'
 
@@ -8,6 +9,9 @@ function Home() {
   const router = useRouter()
   return (
     <Box>
+      <Head>
+        <title>Orgo Earth</title>
+      </Head>
       <Flex
         mt="50px"
         height="80vh"

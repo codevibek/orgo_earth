@@ -7,6 +7,7 @@ import {
   Skeleton,
   Text,
 } from '@chakra-ui/react'
+import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import { TaskCard } from '../../components/TaskCard'
 import { useGetAllCommunityAccounts } from '../../data/hooks/query/useGetAllCommunityAccounts'
@@ -32,6 +33,9 @@ function Dashboard() {
     useGetAllCommunityAccounts()
   return (
     <Box height="90vh" overflow="auto" pb="44">
+      <Head>
+        <title>Available Tasks</title>
+      </Head>
       <Text fontSize={{ base: 'xl', sm: '2xl' }} fontWeight="bold">
         Welcome to Volunteer Dashboard
       </Text>

@@ -7,6 +7,7 @@ import { useRegister } from '../../data/hooks/mutations/useRegister'
 import { useRedirectToDashboard } from '../../data/hooks/useUser'
 import { CustomTextInput } from '../../components/CustomInput'
 import { SwitchButton } from '../../components/SwitchButton'
+import Head from 'next/head'
 
 function Register() {
   const { isLoading, mutate } = useRegister({
@@ -59,6 +60,9 @@ function Register() {
   })
   return (
     <Box>
+      <Head>
+        <title>Volunteer - Register</title>
+      </Head>
       <Box
         bg="gray.300"
         alignItems="center"

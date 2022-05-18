@@ -1,4 +1,5 @@
 import { Box, Skeleton, Text } from '@chakra-ui/react'
+import Head from 'next/head'
 import React, { useMemo } from 'react'
 import { EvidenceCard } from '../../../components/EvidenceCard'
 import GoBack from '../../../components/GoBack'
@@ -27,6 +28,9 @@ function EvidenceReview() {
   }
   return (
     <Box height="90vh" overflow="auto">
+      <Head>
+        <title>Evidence Submissions</title>
+      </Head>
       <GoBack />
       <Text
         mt="4"
