@@ -10,24 +10,34 @@ function about() {
         <title>Community - Tutorials</title>
       </Head>
       <Box my="16">
-        <Text textAlign="center" my="4" fontWeight="bold" fontSize="2xl">
-          Create Task
+        <Text textAlign="center" my="4" fontWeight="bold" fontSize="xl">
+          How Do I Create a New Task Listing For My Community?
         </Text>
-        <VideoPlayer videoId="7tQIJMXIG1Q" />
+        <VideoPlayer videoId="u9Iqd9PflNk" />
       </Box>
-
       <Box my="16">
-        <Text textAlign="center" my="4" fontWeight="bold" fontSize="2xl">
-          Review Evidence Submissions
+        <Text textAlign="center" my="4" fontWeight="bold" fontSize="xl">
+          How Do I Review Evidence Submitted to My Community?
         </Text>
-        <VideoPlayer videoId="7tQIJMXIG1Q" />
+        <VideoPlayer videoId="zzDQro7yLGY" />
       </Box>
-
       <Box my="16">
-        <Text textAlign="center" my="4" fontWeight="bold" fontSize="2xl">
-          View Post Submissions
+        <Text textAlign="center" my="4" fontWeight="bold" fontSize="xl">
+          How Do I Edit an Existing Task or Make a Task Inactive?
         </Text>
-        <VideoPlayer videoId="7tQIJMXIG1Q" />
+        <VideoPlayer videoId="ifF-j9lT40U" />
+      </Box>
+      <Box my="16">
+        <Text textAlign="center" my="4" fontWeight="bold" fontSize="xl">
+          How Do I Edit My Profile?
+        </Text>
+        <VideoPlayer videoId="dzURvzz1d7s" />
+      </Box>
+      <Box my="16">
+        <Text textAlign="center" my="4" fontWeight="bold" fontSize="xl">
+          How Do I Find Other Users on the ORGO App?
+        </Text>
+        <VideoPlayer videoId="9rnuHID6LjA" />
       </Box>
     </Box>
   )

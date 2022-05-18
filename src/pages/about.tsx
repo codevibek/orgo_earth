@@ -2,10 +2,11 @@ import { Box, Button, Flex, Text } from '@chakra-ui/react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { VideoPlayer } from '../components/VideoPlayer'
+import { useUserData } from '../data/hooks/useUserData'
 
 function About() {
   const router = useRouter()
+  const userData = useUserData()
   return (
     <Box>
       <Head>
@@ -28,29 +29,25 @@ function About() {
         hours worked.
       </Text>
 
-      <Text textAlign="center" my="6" fontSize="xl">
-        Watch the video tutorial
-      </Text>
-
-      <VideoPlayer videoId="7tQIJMXIG1Q" />
-
-      <Flex
-        my="6"
-        alignItems="center"
-        justifyContent="center"
-        flexDirection="column"
-      >
-        <Button
-          colorScheme="blue"
-          my="4"
-          onClick={() => router.push('/volunteer/register')}
+      {!userData && (
+        <Flex
+          my="6"
+          alignItems="center"
+          justifyContent="center"
+          flexDirection="column"
         >
-          Create volunteer account
-        </Button>
-        <Button onClick={() => router.push('/community/register')}>
-          Create community account
-        </Button>
-      </Flex>
+          <Button
+            colorScheme="blue"
+            my="4"
+            onClick={() => router.push('/volunteer/register')}
+          >
+            Create volunteer account
+          </Button>
+          <Button onClick={() => router.push('/community/register')}>
+            Create community account
+          </Button>
+        </Flex>
+      )}
     </Box>
   )
 }

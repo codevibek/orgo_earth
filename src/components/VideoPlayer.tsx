@@ -26,6 +26,6 @@ import LiteYouTubeEmbed from 'react-lite-youtube-embed'
 
 export const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoId }) => (
   <div>
-    <LiteYouTubeEmbed id={videoId} title="ADVANCED REACT" />
+    <LiteYouTubeEmbed id={videoId} title="Tutorials" />
   </div>
 )
