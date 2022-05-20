@@ -10,8 +10,8 @@ import {
 import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import { TaskCard } from '../../components/TaskCard'
+import { useGetActiveCommunityTasks } from '../../data/hooks/query/useGetActiveCommunityTasks'
 import { useGetAllCommunityAccounts } from '../../data/hooks/query/useGetAllCommunityAccounts'
-import { useGetCommunityTasks } from '../../data/hooks/query/useGetCommunityTasks'
 import { useUser } from '../../data/hooks/useUser'
 
 function Dashboard() {
@@ -22,7 +22,8 @@ function Dashboard() {
   }, [])
 
   const [selectedCommunityId, setSelectedCommunityId] = useState('')
-  const { isLoading, data: Tasks } = useGetCommunityTasks(selectedCommunityId)
+  const { isLoading, data: Tasks } =
+    useGetActiveCommunityTasks(selectedCommunityId)
 
   const handleCommunityChange = (e) => {
     setSelectedCommunityId(e.target.value)
