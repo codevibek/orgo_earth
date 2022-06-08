@@ -118,6 +118,9 @@ function EvidenceDetails() {
             size="lg"
             cursor="pointer"
             src={data.userId.avatar}
+            onClick={() =>
+              router.push(`/${data.userId.type}/${data.userId.username}`)
+            }
           />
           <Text mx="4" fontWeight="semibold">
             {data?.userId.username}
@@ -133,7 +136,9 @@ function EvidenceDetails() {
                 cursor="pointer"
                 key={helper._id}
                 onClick={() =>
-                  router.push(`/volunteer/profile/${helper.id.username}`)
+                  router.push(
+                    `/${data.userId.type}/profile/${helper.id.username}`
+                  )
                 }
                 name={helper.id.name}
                 src={helper.id.avatar}
