@@ -16,6 +16,9 @@ function getUserData(token: string): Promise<User> {
 interface UseUserProps {
   redirectTo: string
 }
+
+// Gets the user from the localstorage
+// if user is not found then redirects to given page
 export function useUser({ redirectTo }: UseUserProps) {
   const router = useRouter()
 
@@ -27,6 +30,8 @@ export function useUser({ redirectTo }: UseUserProps) {
   }, [redirectTo, router])
 }
 
+// Gets the token from the localstorage
+// if token is not found then returns null else makes the request to get the user with the token
 export function useMe() {
   return useQuery('me', () => {
     const userData = localStorage.getItem('userData')
